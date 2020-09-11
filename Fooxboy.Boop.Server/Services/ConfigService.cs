@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Fooxboy.Boop.Server.Services
 {
@@ -19,10 +20,14 @@ namespace Fooxboy.Boop.Server.Services
             try
             {
                 var configString = File.ReadAllText("config.json");
+                var config = JsonConvert.DeserializeObject<Config>(configString);
+                return config;
             } catch (Exception e)
             {
+                _logger.Error("Возникла ошибка при чтении конфигурационного файла", e);
+            }
 
-            }   
+            return null;
 
         }
     }
