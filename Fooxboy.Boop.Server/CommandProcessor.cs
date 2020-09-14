@@ -12,10 +12,10 @@ namespace Fooxboy.Boop.Server
 {
     public class CommandProcessor
     {
-        private readonly LoggerService _logger;
+        private readonly ILoggerService _logger;
         private readonly Socket _socket;
 
-        public CommandProcessor(LoggerService logger, Socket socket)
+        public CommandProcessor(ILoggerService logger, Socket socket)
         {
             _logger = logger;
             _socket = socket;
@@ -62,7 +62,6 @@ namespace Fooxboy.Boop.Server
                         data = 2;
                         response.TypeData = "error";
                         _logger.Debug("Пользователь указал неверный токен.");
-
                     }
                     else
                     {
@@ -78,8 +77,6 @@ namespace Fooxboy.Boop.Server
                 _socket.Send(bytes);
                 _logger.Debug("Команда выполнена.");
             });
-            
-            
         }
     }
 }

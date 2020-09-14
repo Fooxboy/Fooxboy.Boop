@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using DryIoc;
+using Fooxboy.Boop.Server.Database;
 using Fooxboy.Boop.Server.Models;
 using Fooxboy.Boop.Server.Services;
 
@@ -13,15 +14,18 @@ namespace Fooxboy.Boop.Server
     {
         public static List<ICommand> Commands { get; private set; }
         private IContainer _container;
-        private LoggerService _logger;
+        private ILoggerService _logger;
         public static bool IsRun = false;
+        public static List<User> OnlineUsers { get; private set; } 
         public Startup()
         {
             IContainer container = new Container();
             container.Register<LoggerService>(Reuse.Singleton);
             container.Register<ConfigService>(Reuse.Singleton);
             container.Register<ConnectService>(Reuse.Singleton);
+            
             Commands = new List<ICommand>();
+            OnlineUsers = new List<User>();
             
             _container = container;
             _logger = _container.Resolve<LoggerService>();

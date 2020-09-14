@@ -9,7 +9,7 @@ namespace Fooxboy.Boop.Server.Commands
         public string Command => "error";
         public int Id => 0;
         
-        public ResponseCommand Execute(object data, User user, LoggerService logger)
+        public ResponseCommand Execute(object data, User user, ILoggerService logger)
         {
             return new ResponseCommand()
             {

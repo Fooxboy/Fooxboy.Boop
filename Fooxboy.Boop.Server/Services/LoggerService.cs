@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Fooxboy.Boop.Server.Models;
 
 namespace Fooxboy.Boop.Server.Services
 {
-    public class LoggerService
+    public class LoggerService:ILoggerService
     {
-        public bool IsDebug = true;
+        public bool IsDebug { get; set; } = true;
+
         public void Trace(object msg, [CallerMemberName]string method = null)
         {
             Write($"[{method}] {msg}");

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fooxboy.Boop.Client.Console
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fooxboy.Boop.Server.ConsoleShell", "Fooxboy.Boop.Server.ConsoleShell\Fooxboy.Boop.Server.ConsoleShell.csproj", "{98805E36-9109-412E-9CF1-983954FEC50D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fooxboy.Boop.Shared", "Fooxboy.Boop.Shared\Fooxboy.Boop.Shared.csproj", "{CFF4E45C-B48C-4254-9009-B3D6D25A08C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{98805E36-9109-412E-9CF1-983954FEC50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98805E36-9109-412E-9CF1-983954FEC50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98805E36-9109-412E-9CF1-983954FEC50D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF4E45C-B48C-4254-9009-B3D6D25A08C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF4E45C-B48C-4254-9009-B3D6D25A08C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF4E45C-B48C-4254-9009-B3D6D25A08C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF4E45C-B48C-4254-9009-B3D6D25A08C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

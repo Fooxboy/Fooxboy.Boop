@@ -9,6 +9,6 @@ namespace Fooxboy.Boop.Server.Models
     {
          string Command { get; }
          int Id { get; }
-         ResponseCommand Execute(object data, User user, LoggerService logger);
+         ResponseCommand Execute(object data, User user, ILoggerService logger);
     }
 }
