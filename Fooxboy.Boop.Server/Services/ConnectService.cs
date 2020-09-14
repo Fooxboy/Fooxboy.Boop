@@ -1,6 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
+using Fooxboy.Boop.Server.Helpers;
 
 namespace Fooxboy.Boop.Server.Services
 {
@@ -23,13 +26,15 @@ namespace Fooxboy.Boop.Server.Services
                 var userIp = ((IPEndPoint)handler.RemoteEndPoint).Address;
                 _logger.Debug($"Подключен клиент с IP: {userIp}");
                 Task.Run(() => NewConnect(handler));
-
             }
         }
         
         public void NewConnect(Socket socket)
         {
-            _logger.Debug("ауф");
+            _logger.Debug("Creating proccessor...");
+            var msg = socket.DecodeReceiveToBytes();
+            var processor = new CommandProcessor(_logger, socket);
+            Task.Run(() => processor.Process(msg));
         }
     }
 }

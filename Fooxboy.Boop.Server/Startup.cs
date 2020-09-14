@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using DryIoc;
+using Fooxboy.Boop.Server.Models;
 using Fooxboy.Boop.Server.Services;
 
 namespace Fooxboy.Boop.Server
 {
     public class Startup
     {
+        public static List<ICommand> Commands { get; private set; }
         private IContainer _container;
         private LoggerService _logger;
         public static bool IsRun = false;
@@ -20,14 +21,12 @@ namespace Fooxboy.Boop.Server
             container.Register<LoggerService>(Reuse.Singleton);
             container.Register<ConfigService>(Reuse.Singleton);
             container.Register<ConnectService>(Reuse.Singleton);
-            
+            Commands = new List<ICommand>();
             
             _container = container;
             _logger = _container.Resolve<LoggerService>();
         }
         
-        
-
         public void Run()
         {
             IsRun = true;

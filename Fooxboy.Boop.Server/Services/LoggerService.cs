@@ -38,7 +38,7 @@ namespace Fooxboy.Boop.Server.Services
         private void Write(string msg)
         {
             var text = $"({DateTime.Now.Hour}:{DateTime.Now.Minute})=> {msg}";
-            Console.Write(text);
+            Console.WriteLine(text);
             Console.ResetColor();
         }
     }
