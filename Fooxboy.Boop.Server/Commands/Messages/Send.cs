@@ -30,6 +30,8 @@ namespace Fooxboy.Boop.Server.Commands.Messages
                 {
                     try
                     {
+                        //Проверка есть ли такой пользователь вообще.
+
                         if (db.Users.Any(u => u.UserId == msg.ChatId))
                         {
                             //Пользователь есть
@@ -53,8 +55,10 @@ namespace Fooxboy.Boop.Server.Commands.Messages
                             db.SaveChanges();
                             var rsp = new SendResponse();
                             rsp.MsgId = msgObj.MsgId;
-                            
-                            
+
+                            response.Data = rsp;
+                            response.TypeData = "msg.snd";
+                            return response;
                             //Todo: сделать оповещение юзера.
                         }
                         else
@@ -72,9 +76,12 @@ namespace Fooxboy.Boop.Server.Commands.Messages
                         response.TypeData = "exception";
                         return response;
                     }
-                    //Проверка есть ли такой пользователь вообще.
                     
                 }
+            }
+            else
+            {
+                return null;
             }
         }
     }
