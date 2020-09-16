@@ -35,23 +35,65 @@ namespace Fooxboy.Boop.Server.Commands.Messages
                         if (db.Users.Any(u => u.UserId == msg.ChatId))
                         {
                             //Пользователь есть
+                            var usr = db.Users.Single(u => u.UserId == msg.ChatId);
+                            
+                            //Проверяем есть ли чат с этим пользователем.
+                            if(db.UsersChats.Any(c=> c.Owner == user.UserId && c.ChatId == usr.UserId))
+                            {
+                                //ничего не делаем
+                            }else
+                            {
+                                //Создавать чат для отправителя.
+                                
+                                var usrChat = new UsersChat();
+                                usrChat.Messages = "";
+                                usrChat.Owner = user.UserId;
+                                usrChat.ChatId = usr.UserId;
+                                usrChat.LastMessage = 0;
+                                usrChat.LocalId = db.UsersChats.Count() + 1;
+                                db.UsersChats.Add(usrChat);
+
+                                db.SaveChanges();
+                                
+                                
+                                //Создание чата для принимающего.
+                                
+                                var usrChat2 = new UsersChat();
+                                usrChat2.Messages = "";
+                                usrChat2.Owner = usr.UserId;
+                                usrChat2.LastMessage = 0;
+                                usrChat2.ChatId = user.UserId;
+                                usrChat2.LocalId = db.UsersChats.Count() + 1;
+                                db.UsersChats.Add(usrChat2);
+                            }
+
 
                             //Отправляем ему сообщение
 
-                            var usr = db.Users.Single(u => u.UserId == msg.ChatId);
-                            var msgObj = new Message()
+                            var msgObj = new Database.Message()
                             {
                                 MsgId = db.Messages.Count() + 1,
                                 ChatId = 0,
                                 RecieverId = usr.UserId,
                                 SenderId = user.UserId,
                                 Text = msg.Text,
-                                Time = DateTime.Now.ToString()
+                                Time = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                             };
                             
                             //Добавление сообщения в бд
                             db.Messages.Add(msgObj);
-                            usr.Chats += $",{user.UserId}";
+                            
+                            //Добавление id сообщения в список.
+
+                            var chats1 = db.UsersChats.Single(c => c.Owner == user.UserId && c.ChatId == usr.UserId);
+                            chats1.Messages += $",{msgObj}";
+                            chats1.LastMessage = msgObj.Time;
+
+                            var chats2 = db.UsersChats.Single(c => c.Owner == usr.UserId && c.ChatId == user.UserId);
+                            chats2.Messages += $",{msgObj}";
+                            chats2.LastMessage = msgObj.Time;
+
+                            
                             db.SaveChanges();
                             var rsp = new SendResponse();
                             rsp.MsgId = msgObj.MsgId;

@@ -8,6 +8,7 @@
 6 - Ошибка авторизации (Не найден пользователь с таким Nickname)
 7 - Ошибка авторизации (Пароли не совпадают)
 8 - Ошибка отправки сообщения (Пользователя с таким Id не существует)
+9 - Ошибка получения чата (Такого чата не существует или нет доступа.)
 
 
 TYPE DATA = exception
@@ -29,4 +30,11 @@ TYPE DATA = msg.snd
 Запрос - Shared.Models.Messages.Send
 Ответ - Shared.Models.Messages.SendResponse
 
+TYPE DATA = msg.get
+Запрос - Shared.Models.Messages.Get
+Ответ - Shared.Models.Messages.GetResponseProxy
+
+TYPE DATA = msg.getChat
+Запрос - Shared.Models.Messages.GetChat
+Ответ - Shared.Models.Messages.GetChatResponse
 
