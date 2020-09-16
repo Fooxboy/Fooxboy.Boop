@@ -12,5 +12,7 @@ namespace Fooxboy.Boop.Server.Database
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PasswordHash { get; set; }
+        public string PathProfilePic { get; set; }
+        public string Chats { get; set; }
     }
 }

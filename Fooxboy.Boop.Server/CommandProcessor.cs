@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Fooxboy.Boop.Server.Helpers;
 using Fooxboy.Boop.Server.Models;
 using System.Linq;
@@ -44,7 +45,8 @@ namespace Fooxboy.Boop.Server
                 response.Command = request.Command;
                 response.TypeData = request.TypeData;
                 object data = null;
-                if (request.Token is null)
+                
+                if (request.Token is null && (request.Command != "reg" || request.Command != "log"))
                 {
                     data = 1;
                     response.TypeData = "error";
@@ -57,7 +59,8 @@ namespace Fooxboy.Boop.Server
                     {
                         user = db.Users.FirstOrDefault(u => u.Token == request.Token);
                     }
-                    if (user is null)
+
+                    if (user is null & (request.Command != "reg" || request.Command != "log")) 
                     {
                         data = 2;
                         response.TypeData = "error";
@@ -65,6 +68,19 @@ namespace Fooxboy.Boop.Server
                     }
                     else
                     {
+                        //Проверка на онлайн
+                        if (Startup.ConnectedUsers.Any(c => c.User.UserId != user?.UserId))
+                        {
+                            //Пользователя нет в сети.
+                            Startup.ConnectedUsers.Add(new ConnectUser()
+                            {
+                                LastCheck =  DateTime.Now,
+                                Socket =  _socket,
+                                User = user
+                            });
+                        }
+                        
+                        
                         var  resp = command.Execute(request.Data, user, _logger);
 
                         if (resp.TypeData is null) resp.TypeData = request.TypeData;
@@ -74,8 +90,16 @@ namespace Fooxboy.Boop.Server
                 }
                 response.Data = data;
                 var bytes = response.Serialize();
-                _socket.Send(bytes);
-                _logger.Debug("Команда выполнена.");
+                try
+                {
+                    _socket.Send(bytes);
+                    _logger.Debug("Команда выполнена.");
+                }
+                catch (Exception e)
+                {
+                    _logger.Error("Произошла ошибка при отправке ответа.", e);
+                }
+               
             });
         }
     }

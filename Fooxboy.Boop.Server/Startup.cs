@@ -15,20 +15,24 @@ namespace Fooxboy.Boop.Server
         public static List<ICommand> Commands { get; private set; }
         private IContainer _container;
         private ILoggerService _logger;
+        private ConnectedCheckerService _checker;
         public static bool IsRun = false;
-        public static List<User> OnlineUsers { get; private set; } 
+        public static List<ConnectUser> ConnectedUsers { get; private set; } 
         public Startup()
         {
             IContainer container = new Container();
             container.Register<LoggerService>(Reuse.Singleton);
             container.Register<ConfigService>(Reuse.Singleton);
             container.Register<ConnectService>(Reuse.Singleton);
+            container.Register<ConnectedCheckerService>(Reuse.Singleton);
+            
             
             Commands = new List<ICommand>();
-            OnlineUsers = new List<User>();
+            ConnectedUsers = new List<ConnectUser>();
             
             _container = container;
             _logger = _container.Resolve<LoggerService>();
+            _checker = _container.Resolve<ConnectedCheckerService>();
         }
         
         public void Run()
@@ -48,13 +52,16 @@ namespace Fooxboy.Boop.Server
                 var ipAddress = IPAddress.Parse(config.Connect.Ip);
                 var ipEndPoint = new IPEndPoint(ipAddress, config.Connect.Port);
                 var listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                
-                
                 var connectService = _container.Resolve<ConnectService>();
                 Task.Run(() =>
                 {
                     connectService.StartCheckConnect(listener, ipEndPoint);
                 });
+
+                Task.Run((() =>
+                {
+                    _checker.StartService();
+                }));
             }
             catch (Exception e)
             {

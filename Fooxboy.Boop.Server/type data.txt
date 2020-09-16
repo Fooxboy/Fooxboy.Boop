@@ -7,6 +7,7 @@
 5 - Ошибка типа объекта (Вы отправили неправильный объект)
 6 - Ошибка авторизации (Не найден пользователь с таким Nickname)
 7 - Ошибка авторизации (Пароли не совпадают)
+8 - Ошибка отправки сообщения (Пользователя с таким Id не существует)
 
 
 TYPE DATA = exception
@@ -19,5 +20,13 @@ TYPE DATA = reg
 TYPE DATA = log
 Запрос - Shared.Models.Login
 Ответ - Shared.Models.LoginResponse
+
+TYPE DATA = chk
+Запрос - 1 (long)
+Ответ - необязательно
+
+TYPE DATA = msg.snd
+Запрос - Shared.Models.Messages.Send
+Ответ - Shared.Models.Messages.SendResponse
 
 
