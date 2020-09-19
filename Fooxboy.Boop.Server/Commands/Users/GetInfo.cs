@@ -30,8 +30,6 @@ namespace Fooxboy.Boop.Server.Commands.Users
                     response.TypeData = "error";
                     return response;
                 }
-                
-                
             }
         }
     }
