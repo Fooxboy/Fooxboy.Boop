@@ -1,12 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <LangVersion>8</LangVersion>
-        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="protobuf-net" Version="3.0.29" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fooxboy.Boop.Shared\Fooxboy.Boop.Shared.csproj" />
     </ItemGroup>
 
 </Project>

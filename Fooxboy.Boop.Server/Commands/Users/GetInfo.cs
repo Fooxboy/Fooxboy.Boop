@@ -30,7 +30,23 @@ namespace Fooxboy.Boop.Server.Commands.Users
                     response.TypeData = "error";
                     return response;
                 }
+
+
+                var usrModel = new Shared.Models.Users.User();
+
+                usrModel.Nickname = usr.Nickname;
+                usrModel.Number = usr.Number;
+                usrModel.FirstName = usr.FirstName;
+                usrModel.LastName = usr.LastName;
+                usrModel.UserId = usr.UserId;
+                usrModel.PathProfilePic = usr.PathProfilePic;
+
+                response.Data = usrModel;
+                response.TypeData = "usr.info";
+                
             }
+
+            return response;
         }
     }
 }

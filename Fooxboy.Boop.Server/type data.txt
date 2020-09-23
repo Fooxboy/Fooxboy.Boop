@@ -15,27 +15,31 @@
 TYPE DATA = exception
 В data передается Exception.Message (string) 
 
-TYPE DATA = reg
+TYPE DATA = reg | Command = reg
 Запрос - Shared.Models.Register
 Ответ - Shared.Models.RegisterResponse
 
-TYPE DATA = log
+TYPE DATA = log | Command = log
 Запрос - Shared.Models.Login
 Ответ - Shared.Models.LoginResponse
 
-TYPE DATA = chk
+TYPE DATA = chk | 
 Запрос - 1 (long)
 Ответ - необязательно
 
-TYPE DATA = msg.snd
+TYPE DATA = msg.snd | Command = msg.send
 Запрос - Shared.Models.Messages.Send
 Ответ - Shared.Models.Messages.SendResponse
 
-TYPE DATA = msg.get
+TYPE DATA = msg.get | Command = msg.get
 Запрос - Shared.Models.Messages.Get
 Ответ - Shared.Models.Messages.GetResponseProxy
 
-TYPE DATA = msg.getChat
+TYPE DATA = msg.getChat | Command = msg.getChat
 Запрос - Shared.Models.Messages.GetChat
 Ответ - Shared.Models.Messages.GetChatResponse
+
+TYPE DATA = usr.info | Command = usr.info
+Запрос - Shared.Models.Users.GetInfo
+Ответ - Shared.Models.Users.User
 

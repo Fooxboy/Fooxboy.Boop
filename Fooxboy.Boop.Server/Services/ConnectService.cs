@@ -32,9 +32,14 @@ namespace Fooxboy.Boop.Server.Services
         public void NewConnect(Socket socket)
         {
             _logger.Debug("Creating proccessor...");
+            
+            //todo: сделать постоянный прием запросов от этого пользователя..
+            
             var msg = socket.DecodeReceiveToBytes();
             var processor = new CommandProcessor(_logger, socket);
             Task.Run(() => processor.Process(msg));
         }
+        
+        
     }
 }
