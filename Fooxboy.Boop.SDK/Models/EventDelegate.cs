@@ -1,4 +1,4 @@
 ﻿namespace Fooxboy.Boop.SDK.Models
 {
-    public delegate SocketRequest EventDelegate();
+    public delegate void EventDelegate<T>(T data);
 }

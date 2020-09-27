@@ -1,8 +1,14 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.SDK.Methods;
 using Fooxboy.Boop.SDK.Models;
+using Fooxboy.Boop.Shared.Models;
+using Fooxboy.Boop.Shared.Models.Messages;
+using Fooxboy.Boop.Shared.Models.Users;
+using Login = Fooxboy.Boop.SDK.Methods.Login;
+using Register = Fooxboy.Boop.SDK.Methods.Register;
 
 namespace Fooxboy.Boop.SDK
 {
@@ -11,6 +17,8 @@ namespace Fooxboy.Boop.SDK
         private string _ipString;
         private int _port;
         private string _token;
+        private TcpClient _client;
+        private NetworkStream _stream;
 
         public Api(string ipString, int port, string token)
         {
@@ -37,12 +45,14 @@ namespace Fooxboy.Boop.SDK
         {
             var ipAddress = IPAddress.Parse(_ipString);
             var endPoint = new IPEndPoint(ipAddress, 2020);
+
+            var client = new TcpClient();
+            client.Connect(ipAddress, _port);
             
-            var socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect(endPoint);
+            _client = client;
+            _stream = client.GetStream();
             
-            SenderHelper.Init(socket, _token);
-            
+            SenderHelper.Init(client, _token);
         }
 
         public void SetNewToken(string token)
@@ -51,18 +61,46 @@ namespace Fooxboy.Boop.SDK
             SenderHelper.GetHelper().SetNewToken(token);
         }
 
-        private void CommandManager(Socket socket)
+        private void StartCommandProccessor()
         {
             while (true)
             {
-                var bytes = new byte[1024];
+                var data = new byte[1024];
+                int bytes = 0;
+                do
+                {    
+                    bytes = _stream.Read(data, 0, data.Length);
+                } while (_stream.DataAvailable);
 
-                var res = socket.Receive(bytes);
-
-                var response = bytes.Deserialize<SocketRequest>();
+                var model = data.Deserialize<SocketRequest>();
                 
-                //todo: обработка комманд
+                
+                //Много плохого кода простите, но мне лень, потом перепишу когда нибудь.
 
+                switch (model.TypeData)
+                {
+                    case "reg":
+                        Register.Invoke((RegisterResponse)model.Data);
+                        break;
+                    case "log":
+                        Login.Invoke((LoginResponse)model.Data);
+                        break;
+                    case "msg.snd":
+                        Messages.InvokeSend((SendResponse)model.Data);
+                        break;
+                    case "msg.getChat":
+                         Messages.InvokeGetChat((GetChatResponse) model.Data);
+                        break;
+                    case "msg.get":
+                        Messages.InvokeGet((GetResponseProxy)model.Data);
+                        break;
+                    case "usr.info":
+                        Users.InvokeInfo((User)model.Data);
+                        break;
+                    default: new Exception("default");
+                        break;
+                }
+                
             }
         }
         

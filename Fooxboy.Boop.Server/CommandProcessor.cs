@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.IO;
 using Fooxboy.Boop.Server.Helpers;
 using Fooxboy.Boop.Server.Models;
 using System.Linq;
@@ -14,12 +15,31 @@ namespace Fooxboy.Boop.Server
     public class CommandProcessor
     {
         private readonly ILoggerService _logger;
-        private readonly Socket _socket;
+        private readonly TcpClient _client;
+        private NetworkStream _stream;
+        public bool IsOnline = false;
 
-        public CommandProcessor(ILoggerService logger, Socket socket)
+        public CommandProcessor(ILoggerService logger, TcpClient clinet)
         {
             _logger = logger;
-            _socket = socket;
+            _client = clinet;
+        }
+
+
+        public void CreateSession()
+        {
+            _stream = _client.GetStream();
+            while (IsOnline)
+            {
+                var data = new byte[1024];
+                int bytes = 0;
+                do
+                {
+                    bytes = _stream.Read(data, 0, data.Length);
+                } while (_stream.DataAvailable);
+                
+                Process(data);
+            }
         }
         
         public void Process(byte[] data)
@@ -75,8 +95,9 @@ namespace Fooxboy.Boop.Server
                             Startup.ConnectedUsers.Add(new ConnectUser()
                             {
                                 LastCheck =  DateTime.Now,
-                                Socket =  _socket,
-                                User = user
+                                Client =  _client,
+                                User = user,
+                                Session =  this
                             });
                         }
                         
@@ -92,7 +113,7 @@ namespace Fooxboy.Boop.Server
                 var bytes = response.Serialize();
                 try
                 {
-                    _socket.Send(bytes);
+                    _stream.Write(bytes, 0, bytes.Length);
                     _logger.Debug("Команда выполнена.");
                 }
                 catch (Exception e)

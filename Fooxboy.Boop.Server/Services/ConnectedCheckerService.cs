@@ -27,7 +27,7 @@ namespace Fooxboy.Boop.Server.Services
                     request.Data = 1;
                     request.TypeData = "chk";
                     var bytes = request.Serialize();
-                    connectUser.Socket.Send(bytes);
+                    connectUser.Client.GetStream().Write(bytes, 0 , bytes.Length);
                 }
                 catch (Exception e)
                 {

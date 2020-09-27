@@ -1,11 +1,12 @@
 ﻿using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.SDK.Models;
+using Fooxboy.Boop.Shared.Models;
 
 namespace Fooxboy.Boop.SDK.Methods
 {
     public class Register
     {
-        public event EventDelegate RegEvent;
+        public event EventDelegate<RegisterResponse> RegEvent;
         
         public void Reg(string nickname, string number, string password, string firstName, string lastName)
         {
@@ -17,6 +18,11 @@ namespace Fooxboy.Boop.SDK.Methods
             model.LastName = lastName;
             
             SenderHelper.GetHelper().Send("reg", model, "reg");
+        }
+
+        public void Invoke(RegisterResponse response)
+        {
+            RegEvent?.Invoke(response);
         }
     }
 }

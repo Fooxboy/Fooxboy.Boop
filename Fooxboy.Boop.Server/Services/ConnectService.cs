@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Fooxboy.Boop.Server.Helpers;
+using Fooxboy.Boop.Server.Models;
 
 namespace Fooxboy.Boop.Server.Services
 {
@@ -15,29 +16,25 @@ namespace Fooxboy.Boop.Server.Services
             _logger = logger;
         }
 
-        public void StartCheckConnect(Socket listener, IPEndPoint ipPoint)
+        public void StartCheckConnect(TcpListener listener)
         {
-            listener.Bind(ipPoint);
-            listener.Listen(10);
+            listener.Start();
+            
             while (Startup.IsRun)
             {
                 _logger.Debug("Ожидание подключения...");
-                var handler = listener.Accept();
-                var userIp = ((IPEndPoint)handler.RemoteEndPoint).Address;
+                var client = listener.AcceptTcpClient();
+                var userIp = ((IPEndPoint)client.Client.RemoteEndPoint).Address;
                 _logger.Debug($"Подключен клиент с IP: {userIp}");
-                Task.Run(() => NewConnect(handler));
+                Task.Run(() => NewConnect(client));
             }
         }
         
-        public void NewConnect(Socket socket)
+        public void NewConnect(TcpClient client)
         {
             _logger.Debug("Creating proccessor...");
-            
-            //todo: сделать постоянный прием запросов от этого пользователя..
-            
-            var msg = socket.DecodeReceiveToBytes();
-            var processor = new CommandProcessor(_logger, socket);
-            Task.Run(() => processor.Process(msg));
+            var processor = new CommandProcessor(_logger, client);
+            Task.Run(() => processor.CreateSession());
         }
         
         

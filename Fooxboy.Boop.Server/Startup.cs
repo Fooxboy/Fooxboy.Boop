@@ -4,6 +4,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using DryIoc;
+using Fooxboy.Boop.Server.Commands;
+using Fooxboy.Boop.Server.Commands.Messages;
+using Fooxboy.Boop.Server.Commands.Users;
 using Fooxboy.Boop.Server.Database;
 using Fooxboy.Boop.Server.Models;
 using Fooxboy.Boop.Server.Services;
@@ -37,6 +40,14 @@ namespace Fooxboy.Boop.Server
         
         public void Run()
         {
+            Commands.Add(new Get());
+            Commands.Add(new Send());
+            Commands.Add(new GetChat());
+            Commands.Add(new GetInfo());
+            Commands.Add(new LoginCommand());
+            Commands.Add(new RegisterCommand());
+            Commands.Add(new ErrorCommand());
+            
             IsRun = true;
             var config = _container.Resolve<ConfigService>().GetConfig();
             if (config is null)
@@ -50,12 +61,11 @@ namespace Fooxboy.Boop.Server
             try
             {
                 var ipAddress = IPAddress.Parse(config.Connect.Ip);
-                var ipEndPoint = new IPEndPoint(ipAddress, config.Connect.Port);
-                var listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                var listener = new TcpListener(ipAddress, config.Connect.Port);
                 var connectService = _container.Resolve<ConnectService>();
                 Task.Run(() =>
                 {
-                    connectService.StartCheckConnect(listener, ipEndPoint);
+                    connectService.StartCheckConnect(listener);
                 });
 
                 Task.Run((() =>

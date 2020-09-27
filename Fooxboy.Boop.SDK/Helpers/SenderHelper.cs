@@ -5,21 +5,23 @@ namespace Fooxboy.Boop.SDK.Helpers
 {
     public class SenderHelper
     {
-        private Socket _socket;
+        private TcpClient _client;
         private string _token;
+        private readonly NetworkStream _stream;
 
         private static SenderHelper _helper;
         public static SenderHelper GetHelper()=> _helper;
 
-        public static void Init(Socket socket, string token)
+        public static void Init(TcpClient client, string token)
         {
-            _helper = new SenderHelper(socket, token);
+            _helper = new SenderHelper(client, token);
         }
         
-        private SenderHelper(Socket socket, string token)
+        private SenderHelper(TcpClient client, string token)
         {
-            _socket = socket;
+            _client = client;
             _token = token;
+            _stream = client.GetStream();
         }
 
         public void SetNewToken(string token)
@@ -36,8 +38,9 @@ namespace Fooxboy.Boop.SDK.Helpers
             request.TypeData = typedata;
 
             var bytes = request.Serialize();
+            
+            _stream.Write(bytes, 0, bytes.Length);
 
-            _socket.Send(bytes);
         }
     }
 }
