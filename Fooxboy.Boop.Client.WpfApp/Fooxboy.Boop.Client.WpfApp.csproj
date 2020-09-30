@@ -6,4 +6,34 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\Fonts\GoogleSans-Bold.ttf" />
+      <None Remove="Resources\Fonts\GoogleSans-Medium.ttf" />
+      <None Remove="Resources\Fonts\GoogleSans-Regular.ttf" />
+      <None Remove="Resources\Images\Icons\go.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentWPF" Version="0.8.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fooxboy.Boop.SDK\Fooxboy.Boop.SDK.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Resources\Fonts\GoogleSans-Bold.ttf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Fonts\GoogleSans-Medium.ttf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Fonts\GoogleSans-Regular.ttf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Images\Icons\go.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
 </Project>

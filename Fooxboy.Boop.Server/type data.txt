@@ -12,8 +12,13 @@
 10 - Ошибка получения информации о пользователе (Пользователя с таким Id не существует)
 
 
+#################################
+Приходит в случае exception на сервере
+
 TYPE DATA = exception
 В data передается Exception.Message (string) 
+
+################################
 
 TYPE DATA = reg | Command = reg
 Запрос - Shared.Models.Register

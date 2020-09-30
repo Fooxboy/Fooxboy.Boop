@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,19 +11,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Fooxboy.Boop.Client.WpfApp
+namespace Fooxboy.Boop.Client.WpfApp.Views.LoginsView
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для RegisterView.xaml
     /// </summary>
-    public partial class MainWindow 
+    public partial class RegisterView : Page
     {
-        public MainWindow()
+        public RegisterView()
         {
             InitializeComponent();
-
-            Services.NavigationService.GetService(MainFrame).GoTo("Views/WelcomeView.xaml");
-
         }
     }
 }

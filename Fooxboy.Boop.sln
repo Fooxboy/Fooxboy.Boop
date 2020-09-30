@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fooxboy.Boop.Shared", "Foox
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fooxboy.Boop.SDK", "Fooxboy.Boop.SDK\Fooxboy.Boop.SDK.csproj", "{83C16192-205B-4474-AB2F-AEE109D429E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fooxboy.Boop.Client.WpfApp", "Fooxboy.Boop.Client.WpfApp\Fooxboy.Boop.Client.WpfApp.csproj", "{FAA9A3B7-CD53-40B0-A652-E8D74C680104}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{83C16192-205B-4474-AB2F-AEE109D429E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83C16192-205B-4474-AB2F-AEE109D429E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83C16192-205B-4474-AB2F-AEE109D429E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA9A3B7-CD53-40B0-A652-E8D74C680104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA9A3B7-CD53-40B0-A652-E8D74C680104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA9A3B7-CD53-40B0-A652-E8D74C680104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA9A3B7-CD53-40B0-A652-E8D74C680104}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
