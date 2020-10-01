@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.SDK.Methods;
 using Fooxboy.Boop.SDK.Models;
@@ -19,6 +20,8 @@ namespace Fooxboy.Boop.SDK
         private string _token;
         private TcpClient _client;
         private NetworkStream _stream;
+
+        public EventDelegate<int> ErrorEvent;
 
         public Api(string ipString, int port, string token)
         {
@@ -53,6 +56,8 @@ namespace Fooxboy.Boop.SDK
             _stream = client.GetStream();
             
             SenderHelper.Init(client, _token);
+
+            Task.Run(StartCommandProccessor);
         }
 
         public void SetNewToken(string token)
@@ -97,6 +102,10 @@ namespace Fooxboy.Boop.SDK
                     case "usr.info":
                         Users.InvokeInfo((User)model.Data);
                         break;
+                    case "error":
+                        this.ErrorEvent?.Invoke((int)model.Data);
+                        break;
+
                     default: new Exception("default");
                         break;
                 }
