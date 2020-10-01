@@ -10,7 +10,7 @@
       Title="RegisterView">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel x:Name="panle" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontFamily="{StaticResource GoogleSansBold}" FontSize="30" Text="Зарегестрируйтесь в Boop прямо сейчас!"/>
             <TextBlock Margin="105 50 0 0" Text="Ваш никнейм" FontFamily="{StaticResource GoogleSansRegular}"/>
             <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text=""/>
@@ -28,7 +28,15 @@
                     Margin="0 20 0 0"
                     Height="30"
                     Width="200" 
+                    Click="ButtonBase_OnClick"
                     Style="{StaticResource ButtonRevealStyle}" Content="Зарегестрироваться"/>
         </StackPanel>
+
+        <Grid x:Name="grid" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <TextBlock FontFamily="{StaticResource GoogleSansBold}" FontSize="20"  Text="Подождите, мы пытаемся создать вам новую личность..."/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

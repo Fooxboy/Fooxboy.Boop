@@ -65,6 +65,8 @@ namespace Fooxboy.Boop.Client.WpfApp.Views.LoginsView
 
             if (PasswordBox.Password != "Ваш пароль" || LoginBox.Text != "Ваш никнейм")
             {
+                grid.Visibility = Visibility.Visible;
+                panel.Visibility = Visibility.Collapsed;
                 LoginViewModel.GetViewModel().StartAuth();
             }
 

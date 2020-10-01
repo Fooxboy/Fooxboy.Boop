@@ -10,7 +10,12 @@
       Title="LoginView">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <StackPanel x:Name="panel" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center"
+                       FontFamily="{StaticResource GoogleSansBold}"
+                       Foreground="Red" 
+                       Visibility="{Binding VisibilityError}" Text="{Binding ErrorString}"/>
             <TextBlock HorizontalAlignment="Center"
                        Text="Войти в аккаунт Boop"
                        FontSize="23"
@@ -53,7 +58,16 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+
+
         </StackPanel>
+
+        <Grid x:Name="grid" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                
+                <TextBlock FontFamily="{StaticResource GoogleSansBold}" FontSize="20"  Text="Подождите, мы пытаемся найти Ваш аккаунт..."/>
+            </StackPanel>
+        </Grid>
         
     </Grid>
 </Page>

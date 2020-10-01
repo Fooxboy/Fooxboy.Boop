@@ -22,5 +22,10 @@ namespace Fooxboy.Boop.Client.WpfApp.Views.LoginsView
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

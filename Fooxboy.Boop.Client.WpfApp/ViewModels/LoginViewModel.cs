@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using Fooxboy.Boop.Client.WpfApp.Services;
 
@@ -10,12 +11,15 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
     {
         public string Login { get; set; }
         public string Password { get; set; }
+        public string ErrorString { get; set; }
+        public Visibility VisibilityError { get; set; }
 
         private static LoginViewModel _model;
 
         private LoginViewModel()
         {
             Login = "Ваш никнейм";
+            VisibilityError = Visibility.Collapsed;
         }
 
         public static LoginViewModel GetViewModel()
