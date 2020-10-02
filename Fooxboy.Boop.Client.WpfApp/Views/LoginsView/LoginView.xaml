@@ -11,7 +11,7 @@
 
     <Grid>
 
-        <StackPanel x:Name="panel" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Visibility="{Binding VisibilityPanel}" x:Name="panel" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center"
                        FontFamily="{StaticResource GoogleSansBold}"
                        Foreground="Red" 
@@ -62,7 +62,7 @@
 
         </StackPanel>
 
-        <Grid x:Name="grid" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="grid" Visibility="{Binding VisibilityGrid}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 
                 <TextBlock FontFamily="{StaticResource GoogleSansBold}" FontSize="20"  Text="Подождите, мы пытаемся найти Ваш аккаунт..."/>

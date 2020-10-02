@@ -10,24 +10,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Fooxboy.Boop.Client.WpfApp.ViewModels;
 
 namespace Fooxboy.Boop.Client.WpfApp.Views.LoginsView
 {
     /// <summary>
-    /// Логика взаимодействия для RegisterView.xaml
+    /// Логика взаимодействия для RootPage.xaml
     /// </summary>
-    public partial class RegisterView : Page
+    public partial class RootPage : Page
     {
-        public RegisterView()
+        public RootPage()
         {
             InitializeComponent();
-            DataContext = RegisterViewModel.GetViewModel();
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            RegisterViewModel.GetViewModel().Register();
         }
     }
 }

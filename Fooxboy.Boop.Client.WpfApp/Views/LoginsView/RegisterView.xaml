@@ -13,15 +13,15 @@
         <StackPanel x:Name="panle" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontFamily="{StaticResource GoogleSansBold}" FontSize="30" Text="Зарегестрируйтесь в Boop прямо сейчас!"/>
             <TextBlock Margin="105 50 0 0" Text="Ваш никнейм" FontFamily="{StaticResource GoogleSansRegular}"/>
-            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text=""/>
+            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text="{Binding Nickname, Mode=TwoWay}"/>
             <TextBlock Margin="105 10 0 0" Text="Ваше имя" FontFamily="{StaticResource GoogleSansRegular}"/>
-            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text=""/>
+            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text="{Binding FirstName, Mode=TwoWay}"/>
             <TextBlock Margin="105 10 0 0" Text="Ваша фамилия" FontFamily="{StaticResource GoogleSansRegular}"/>
-            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text=""/>
+            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text="{Binding LastName, Mode=TwoWay}"/>
             <TextBlock Margin="105 10 0 0" Text="Ваш номер телефона" FontFamily="{StaticResource GoogleSansRegular}"/>
-            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text=""/>
+            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text="{Binding Number, Mode=TwoWay}"/>
             <TextBlock Margin="105 10 0 0" Text="Ваш пароль" FontFamily="{StaticResource GoogleSansRegular}"/>
-            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text=""/>
+            <TextBox Width="400" Style="{StaticResource TextBoxRevealStyle}" Text="{Binding Password, Mode=TwoWay}"/>
 
             <Button fluentWpf:RevealElement.BorderRadius="5" 
                     FontFamily="{StaticResource GoogleSansMedium}"

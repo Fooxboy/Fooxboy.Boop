@@ -13,6 +13,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public string Password { get; set; }
         public string ErrorString { get; set; }
         public Visibility VisibilityError { get; set; }
+        public Visibility VisibilityGrid { get; set; }
+        public Visibility VisibilityPanel { get; set; }
 
         private static LoginViewModel _model;
 
@@ -20,6 +22,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         {
             Login = "Ваш никнейм";
             VisibilityError = Visibility.Collapsed;
+            VisibilityGrid = Visibility.Collapsed;
+            VisibilityPanel = Visibility.Visible;
         }
 
         public static LoginViewModel GetViewModel()
@@ -40,9 +44,11 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             
         }
 
-        public void ErrorAuth()
+        public void ErrorAuth(string message)
         {
-
+            VisibilityError = Visibility.Visible;
+            VisibilityGrid = Visibility.Collapsed;
+            VisibilityPanel = Visibility.Visible;
         }
 
         public void EditPassword(string password)
