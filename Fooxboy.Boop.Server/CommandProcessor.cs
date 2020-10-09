@@ -59,8 +59,6 @@ namespace Fooxboy.Boop.Server
             return command.FirstOrDefault();
         }
 
-
-
         private void ExcecuteCommand(Models.ICommand command, SocketRequest<object> request)
         {
             _logger.Debug($"Выполнение команды {request.Command}...");
