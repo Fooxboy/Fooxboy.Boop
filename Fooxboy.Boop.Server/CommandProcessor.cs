@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Fooxboy.Boop.Server.Commands;
 using Fooxboy.Boop.Server.Database;
 using Fooxboy.Boop.Server.Services;
+using Fooxboy.Boop.Shared.Models;
+using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Server
 {
@@ -28,6 +30,7 @@ namespace Fooxboy.Boop.Server
 
         public void CreateSession()
         {
+            IsOnline = true;
             _stream = _client.GetStream();
             while (IsOnline)
             {
@@ -44,7 +47,7 @@ namespace Fooxboy.Boop.Server
         
         public void Process(byte[] data)
         {
-            var request = data.Deserialize<SocketRequest>();
+            var request = (SocketRequest<object>)data.Deserialize();
             var command = FindCommand(request.Command);
             ExcecuteCommand(command ?? new ErrorCommand(), request);
         }
@@ -56,20 +59,25 @@ namespace Fooxboy.Boop.Server
             return command.FirstOrDefault();
         }
 
-        private void ExcecuteCommand(Models.ICommand command, SocketRequest request)
+
+
+        private void ExcecuteCommand(Models.ICommand command, SocketRequest<object> request)
         {
             _logger.Debug($"Выполнение команды {request.Command}...");
+
             Task.Run(() =>
             {
-                var response = new SocketRequest();
-                response.Command = request.Command;
-                response.TypeData = request.TypeData;
-                object data = null;
-                
+                byte[] bytes;
+
                 if (request.Token is null && (request.Command != "reg" || request.Command != "log"))
                 {
-                    data = 1;
+                    var response = new SocketRequest<long>();
+                    response.Command = request.Command;
                     response.TypeData = "error";
+                    response.Data = 1;
+
+                    bytes = response.Serialize();
+
                     _logger.Debug("Пользователь не указал токен.");
                 }
                 else
@@ -80,47 +88,91 @@ namespace Fooxboy.Boop.Server
                         user = db.Users.FirstOrDefault(u => u.Token == request.Token);
                     }
 
-                    if (user is null & (request.Command != "reg" || request.Command != "log")) 
+                    
+                    if (user is null && (request.Command != "reg" || request.Command != "log"))
                     {
-                        data = 2;
-                        response.TypeData = "error";
-                        _logger.Debug("Пользователь указал неверный токен.");
+                        //todo: проверка на правильный токен..
+                        _logger.Debug("f");
                     }
-                    else
-                    {
-                        //Проверка на онлайн
-                        if (Startup.ConnectedUsers.Any(c => c.User.UserId != user?.UserId))
-                        {
-                            //Пользователя нет в сети.
-                            Startup.ConnectedUsers.Add(new ConnectUser()
-                            {
-                                LastCheck =  DateTime.Now,
-                                Client =  _client,
-                                User = user,
-                                Session =  this
-                            });
-                        }
-                        
-                        
-                        var  resp = command.Execute(request.Data, user, _logger);
 
-                        if (resp.TypeData is null) resp.TypeData = request.TypeData;
-                        response.TypeData = resp.TypeData;
-                        data = resp.Data;
+                    //Проверка на онлайн
+                    if (Startup.ConnectedUsers.Any(c => c.User.UserId != user?.UserId))
+                    {
+                        //Пользователя нет в сети.
+                        Startup.ConnectedUsers.Add(new ConnectUser()
+                        {
+                            LastCheck = DateTime.Now,
+                            Client = _client,
+                            User = user,
+                            Session = this
+                        });
                     }
+
+                    var resp = command.Execute(request.Data, user, _logger);
+
+                    switch (resp.TypeData)
+                    {
+                        case "reg":
+                           var response = new SocketRequest<RegisterResponse>();
+                           response.TypeData = resp.TypeData;
+                           response.Token = request.Token;
+                           response.Data = (RegisterResponse) resp.Data;
+                           bytes = response.Serialize();
+                            break;
+                        case "log":
+                            var response1 = new SocketRequest<LoginResponse>();
+                            response1.TypeData = resp.TypeData;
+                            response1.Token = request.Token;
+                            response1.Data = (LoginResponse)resp.Data;
+                            bytes = response1.Serialize();
+                            break;
+                        case "msg.snd":
+                            var response2 = new SocketRequest<SendResponse>();
+                            response2.TypeData = resp.TypeData;
+                            response2.Token = request.Token;
+                            response2.Data = (SendResponse)resp.Data;
+                            bytes = response2.Serialize();
+                            break;
+                        case "msg.getChat":
+                            var response3 = new SocketRequest<GetChatResponse>();
+                            response3.TypeData = resp.TypeData;
+                            response3.Token = request.Token;
+                            response3.Data = (GetChatResponse)resp.Data;
+                            bytes = response3.Serialize();
+                            break;
+                        case "msg.get":
+                            var response4 = new SocketRequest<GetResponseProxy>();
+                            response4.TypeData = resp.TypeData;
+                            response4.Token = request.Token;
+                            response4.Data = (GetResponseProxy)resp.Data;
+                            bytes = response4.Serialize();
+                            break;
+                        case "usr.info":
+                            var response5 = new SocketRequest<User>();
+                            response5.TypeData = resp.TypeData;
+                            response5.Token = request.Token;
+                            response5.Data = (User)resp.Data;
+                            bytes = response5.Serialize();
+                            break;
+                        case "error":
+                            var response6 = new SocketRequest<int>();
+                            response6.TypeData = resp.TypeData;
+                            response6.Token = request.Token;
+                            response6.Data = (int)resp.Data;
+                            bytes = response6.Serialize();
+                            break;
+
+                        default:
+                            new Exception("default");
+                            bytes = null;
+                            break;
+                    }
+
+
                 }
-                response.Data = data;
-                var bytes = response.Serialize();
-                try
-                {
-                    _stream.Write(bytes, 0, bytes.Length);
-                    _logger.Debug("Команда выполнена.");
-                }
-                catch (Exception e)
-                {
-                    _logger.Error("Произошла ошибка при отправке ответа.", e);
-                }
-               
+
+                _stream.Write(bytes, 0, bytes.Length);
+                _logger.Debug("Команда выполнена.");
             });
         }
     }

@@ -29,9 +29,11 @@ namespace Fooxboy.Boop.SDK.Helpers
             _token = token;
         }
         
-        public void Send(string typedata, object data, string command)
+        public void Send<T>(string typedata, T data, string command)
         {
-            var request = new SocketRequest();
+
+            var request = new SocketRequest<T>();
+
             request.Command = command;
             request.Data = data;
             request.Token = _token;

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Fooxboy.Boop.SDK.Models;
 using ProtoBuf;
 
 namespace Fooxboy.Boop.SDK.Helpers
@@ -17,7 +18,7 @@ namespace Fooxboy.Boop.SDK.Helpers
             return obj;
         }
         
-        public static byte[] Serialize(this object obj)
+        public static byte[] Serialize<T>(this SocketRequest<T> obj)
         {
             byte[] data;
 

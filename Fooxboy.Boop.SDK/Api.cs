@@ -77,7 +77,7 @@ namespace Fooxboy.Boop.SDK
                     bytes = _stream.Read(data, 0, data.Length);
                 } while (_stream.DataAvailable);
 
-                var model = data.Deserialize<SocketRequest>();
+                var model = data.Deserialize<SocketRequest<object>>();
                 
                 
                 //Много плохого кода простите, но мне лень, потом перепишу когда нибудь.

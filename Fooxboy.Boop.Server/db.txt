@@ -1,0 +1,2 @@
+dotnet ef dotnet ef migrations add -s C:\Users\Fooxb\RiderProjects\Fooxboy.Boop\Fooxboy.Boop.Server.ConsoleShell
+dotnet ef database update -s C:\Users\Fooxb\RiderProjects\Fooxboy.Boop\Fooxboy.Boop.Server.ConsoleShell

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using Fooxboy.Boop.Client.WpfApp.Services;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
@@ -31,7 +32,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
         private void Register_RegEvent(Shared.Models.RegisterResponse data)
         {
-            //todo: успешная регистрация.
+            MessageBox.Show("Ты пидорас", "Ты зарегистрировава");
         }
     }
 }

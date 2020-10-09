@@ -8,7 +8,7 @@ namespace Fooxboy.Boop.Server.Services
     public class ConnectedCheckerService
     {
         private ILoggerService _logger;
-        public ConnectedCheckerService(ILoggerService logger)
+        public ConnectedCheckerService(LoggerService logger)
         {
             this._logger = logger;
         }
@@ -22,7 +22,7 @@ namespace Fooxboy.Boop.Server.Services
             {
                 try
                 {
-                    var request = new SocketRequest();
+                    var request = new SocketRequest<int>();
                     request.Command = "check";
                     request.Data = 1;
                     request.TypeData = "chk";

@@ -3,7 +3,7 @@
 namespace Fooxboy.Boop.Server.Models
 {
     [ProtoContract]
-    public class SocketRequest
+    public class SocketRequest<T>
     {
         [ProtoMember(1)]
         public string Command { get; set; }
@@ -12,7 +12,7 @@ namespace Fooxboy.Boop.Server.Models
         public string Token { get; set; }
 
         [ProtoMember(3)]
-        public object Data { get; set; }
+        public T Data { get; set; }
         
         [ProtoMember(4)]
         public string TypeData { get; set; }
