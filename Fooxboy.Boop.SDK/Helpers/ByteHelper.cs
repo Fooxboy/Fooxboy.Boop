@@ -57,9 +57,10 @@ namespace Fooxboy.Boop.SDK.Helpers
 
             using (var stream = new MemoryStream())
             {
-                var typedata = System.Text.ASCIIEncoding.ASCII.GetBytes(obj.TypeData);
+                var typedata = ASCIIEncoding.ASCII.GetBytes(obj.TypeData);
+                var seporator = ASCIIEncoding.ASCII.GetBytes("|");
                 stream.Write(typedata, 0, typedata.Length);
-
+                stream.Write(seporator, 0, seporator.Length);
 
                 Serializer.Serialize(stream, obj);
                 data = stream.ToArray();

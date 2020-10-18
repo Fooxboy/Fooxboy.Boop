@@ -15,20 +15,25 @@ namespace Fooxboy.Boop.Server.Helpers
         public static object Deserialize(this byte[] data)
         {
             var st = new StringBuilder();
+            var countBytes = 0;
             using (var str = new MemoryStream(data))
             {
                 while (true)
                 {
                     var currentChar = (char)str.ReadByte();
+                    countBytes++;
                     if (currentChar == '|')
                     {
                         break;
                     }
-
                     st.Append(currentChar);
                 }
 
                 string typedata = st.ToString();
+
+               str.Seek(countBytes, SeekOrigin.Begin);
+
+                var array = str.ToArray();
 
                 switch (typedata)
                 {
@@ -58,9 +63,10 @@ namespace Fooxboy.Boop.Server.Helpers
 
             using (var stream = new MemoryStream())
             {
-                var typedata = System.Text.ASCIIEncoding.ASCII.GetBytes(obj.TypeData);
+                var typedata = ASCIIEncoding.ASCII.GetBytes(obj.TypeData);
+                var seporator = ASCIIEncoding.ASCII.GetBytes("|");
                 stream.Write(typedata, 0, typedata.Length);
-
+                stream.Write(seporator, 0, seporator.Length);
 
                 Serializer.Serialize(stream, obj);
                 data = stream.ToArray();
