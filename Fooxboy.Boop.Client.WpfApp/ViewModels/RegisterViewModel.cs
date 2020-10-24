@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using Fooxboy.Boop.Client.WpfApp.Services;
+using Fooxboy.Boop.SDK.Exceptions;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 {
@@ -21,18 +22,20 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             return _model ??= new RegisterViewModel();
         }
 
-        public void Register()
+        public async void Register()
         {
-            var api = ApiService.GetApi();
+            var api = ApiService.Get();
+            try
+            {
+                var result = await api.Register.StartAsync(Nickname, Password, FirstName, LastName, Number);
+                MessageBox.Show($"Ваш Id: {result.UserId}, Token: {result.Token}");
 
-            api.Register.Reg(Nickname, Number, Password, FirstName, LastName);
-
-            api.Register.RegEvent += Register_RegEvent;
+            }
+            catch (BoopRootException e)
+            {
+                MessageBox.Show($"{e.Code}. {e.Message}");
+            }
         }
 
-        private void Register_RegEvent(Shared.Models.RegisterResponse data)
-        {
-            MessageBox.Show("Ты пидорас", "Ты зарегистрировава");
-        }
     }
 }

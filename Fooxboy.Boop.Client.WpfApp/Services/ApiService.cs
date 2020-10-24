@@ -8,17 +8,14 @@ namespace Fooxboy.Boop.Client.WpfApp.Services
     public class ApiService
     {
         private static Api _api;
-        public static Api GetApi()
-        {
-            _api ??= new Api("127.0.0.1", 2020, null);
 
-            _api.Connect();
-            return _api;
+        public static void Init(string address, string token)
+        {
+            _api = new Api(address, token);
         }
 
-        public static void ResetApi(Api api)
-        {
-            _api = api;
-        }
+        public static void ChangeToken(string token) => _api.ChangeToken(token);
+        public static void ChangeAddress(string address) => _api.ChangeToken(address);
+        public static Api Get() => _api;
     }
 }

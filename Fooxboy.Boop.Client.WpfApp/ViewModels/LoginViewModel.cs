@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Fooxboy.Boop.Client.WpfApp.Services;
+using Fooxboy.Boop.SDK.Exceptions;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 {
@@ -31,21 +32,20 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             return _model ??= new LoginViewModel();
         }
 
-        public void StartAuth()
+        public async void StartAuth()
         {
-            ApiService.GetApi().Login.Logn(Login, Password, false);
-            ApiService.GetApi().ErrorEvent += Error;
-            ApiService.GetApi().Login.LognEvent += Login_LognEvent;
+            var api = ApiService.Get();
+            try
+            {
+                var resut = await api.Login.StartAsync(Login, Password);
+            }
+            catch (BoopRootException e)
+            {
+                Error(e.Code);
+            }
         }
 
-        private void Login_LognEvent(Shared.Models.LoginResponse data)
-        {
-            //todo: ответ пришел.
-
-            MessageBox.Show($"{data.UserId}", "пидорасина");
-
-        }
-
+        
         private void Error(int code)
         {
             if(code == 6) ErrorAuth("Не найден пользователь с таким никнеймом");
