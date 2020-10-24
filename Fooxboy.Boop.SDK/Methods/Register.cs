@@ -1,28 +1,47 @@
-﻿using Fooxboy.Boop.SDK.Helpers;
-using Fooxboy.Boop.SDK.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Fooxboy.Boop.SDK.Exceptions;
+using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.Shared.Models;
 
 namespace Fooxboy.Boop.SDK.Methods
 {
     public class Register
     {
-        public event EventDelegate<RegisterResponse> RegEvent;
-        
-        public void Reg(string nickname, string number, string password, string firstName, string lastName)
-        {
-            var model = new Shared.Models.Register();
-            model.Nickname = nickname;
-            model.Number = number;
-            model.Password = password;
-            model.FirstName = firstName;
-            model.LastName = lastName;
-            
-            SenderHelper.GetHelper().Send("reg", model, "reg");
-        }
+        private HttpHelper _httpHelper;
 
-        public void Invoke(RegisterResponse response)
+        public Register(HttpHelper helper)
         {
-            RegEvent?.Invoke(response);
+            _httpHelper = helper;
+        }
+        public Shared.Models.Register Start(string login, string password, string firstName, string lastName, string number)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("login", login);
+            parameters.Add("password", password);
+            parameters.Add("name", firstName);
+            parameters.Add("lastName", lastName);
+            parameters.Add("number", number);
+
+            var result = _httpHelper.GetRequest("register", parameters);
+
+            if (result.Status) return (Shared.Models.Register) result.Data;
+            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+        }
+        
+        public async Task<Shared.Models.Register> StartAsync(string login, string password, string firstName, string lastName, string number)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("login", login);
+            parameters.Add("password", password);
+            parameters.Add("name", firstName);
+            parameters.Add("lastName", lastName);
+            parameters.Add("number", number);
+
+            var result = await _httpHelper.GetRequestAsync("register", parameters);
+
+            if (result.Status) return (Shared.Models.Register) result.Data;
+            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
         }
     }
 }

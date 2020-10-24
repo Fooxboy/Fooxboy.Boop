@@ -12,7 +12,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
 {
     [Route("api/msg.[controller]")]
     [ApiController]
-    public class Get : ControllerBase
+    public class Get: ControllerBase
     {
         [HttpGet]
         public Result GetMethod(int count, bool onlyUnread, int offset, string token)

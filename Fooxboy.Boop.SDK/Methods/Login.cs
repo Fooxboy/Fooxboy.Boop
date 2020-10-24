@@ -1,23 +1,45 @@
-﻿using Fooxboy.Boop.SDK.Helpers;
-using Fooxboy.Boop.SDK.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Fooxboy.Boop.SDK.Exceptions;
+using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.Shared.Models;
 
 namespace Fooxboy.Boop.SDK.Methods
 {
     public class Login
     {
-        public event EventDelegate<LoginResponse> LognEvent;
         
-        public void Logn(string login, string password, bool reset)
+        private HttpHelper _httpHelper;
+
+        public Login(HttpHelper helper)
         {
-            var model = new Shared.Models.Login();
-            model.Nickname = login;
-            model.Password = password;
-            model.ResetAuth = reset;
-            
-            SenderHelper.GetHelper().Send("log", model, "log");
+            _httpHelper = helper;
         }
 
-        public void Invoke(LoginResponse data) => LognEvent?.Invoke(data);
+        public Shared.Models.Login Start(string login, string password, bool resetAuth = false)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("login", login);
+            parameters.Add("password", password);
+            parameters.Add("resetAuth", resetAuth.ToString());
+
+            var result = _httpHelper.GetRequest("login", parameters);
+            
+            if (result.Status) return (Shared.Models.Login) result.Data;
+            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+        }
+        
+        public async Task<Shared.Models.Login> StartAsync(string login, string password, bool resetAuth = false)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("login", login);
+            parameters.Add("password", password);
+            parameters.Add("resetAuth", resetAuth.ToString());
+
+            var result = await _httpHelper.GetRequestAsync("login", parameters);
+            
+            if (result.Status) return (Shared.Models.Login) result.Data;
+            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+        }
     }
 }

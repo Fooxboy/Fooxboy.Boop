@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Fooxboy.Boop.BackendServer.Controllers.User
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/users.[controller]")]
     [ApiController]
     public class GetInfo : Controller
     {
