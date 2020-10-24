@@ -34,6 +34,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public void StartAuth()
         {
             ApiService.GetApi().Login.Logn(Login, Password, false);
+            ApiService.GetApi().ErrorEvent += Error;
             ApiService.GetApi().Login.LognEvent += Login_LognEvent;
         }
 
@@ -41,7 +42,14 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         {
             //todo: ответ пришел.
 
-            
+            MessageBox.Show($"{data.UserId}", "пидорасина");
+
+        }
+
+        private void Error(int code)
+        {
+            if(code == 6) ErrorAuth("Не найден пользователь с таким никнеймом");
+            else if(code == 7) ErrorAuth("Пароли не совпадают");
         }
 
         public void ErrorAuth(string message)
@@ -49,6 +57,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             VisibilityError = Visibility.Visible;
             VisibilityGrid = Visibility.Collapsed;
             VisibilityPanel = Visibility.Visible;
+            MessageBox.Show(message, "Ошибка авторизации");
         }
 
         public void EditPassword(string password)

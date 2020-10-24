@@ -1,7 +1,14 @@
-﻿namespace Fooxboy.Boop.Shared.Models.Messages
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Fooxboy.Boop.BackendServer.Database
 {
     public class Message
     {
+        [Key]
         public long MsgId { get; set; }
         public long SenderId { get; set; }
         public long RecieverId { get; set; }

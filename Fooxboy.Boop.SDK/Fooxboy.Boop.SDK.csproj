@@ -5,10 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="protobuf-net" Version="3.0.29" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Fooxboy.Boop.Shared\Fooxboy.Boop.Shared.csproj" />
     </ItemGroup>
 

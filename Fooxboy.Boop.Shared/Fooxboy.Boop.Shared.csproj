@@ -5,8 +5,4 @@
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="protobuf-net" Version="3.0.29" />
-    </ItemGroup>
-
 </Project>
