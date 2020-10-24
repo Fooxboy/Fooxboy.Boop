@@ -1,11 +1,29 @@
-﻿namespace Fooxboy.Boop.SDK
+﻿using Fooxboy.Boop.SDK.Helpers;
+using Fooxboy.Boop.SDK.Methods;
+using Register = Fooxboy.Boop.Shared.Models.Register;
+
+namespace Fooxboy.Boop.SDK
 {
     public class Api
     {
-        public static string Address { get; set; }
         public string Token { get; set; }
+        private HttpHelper _httpHelper;
         
-        
-        
+        public Methods.Register Register { get; set; }
+        public Users Users { get; }
+        public Login Login { get; }
+        public Messages Messages { get; }
+
+        public Api(string address, string token = "")
+        {
+            _httpHelper = new HttpHelper(address, token);
+            this.Register = new Methods.Register(_httpHelper);
+            this.Users = new Users(_httpHelper);
+            this.Login = new Login(_httpHelper);
+            this.Messages =new Messages(_httpHelper);
+        }
+
+        public void ChangeAddress(string address) => _httpHelper.ChangeAddress(address);
+        public void ChangeToken(string token) => _httpHelper.ChangeToken(token);
     }
 }

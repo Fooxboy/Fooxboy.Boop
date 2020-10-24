@@ -19,6 +19,9 @@ namespace Fooxboy.Boop.SDK.Helpers
             _token = token;
         }
 
+        public void ChangeToken(string token) => _token = token;
+        public void ChangeAddress(string address) => _address = address;
+
         public Result GetRequest(string method, Dictionary<string,string> parameters, string root= "api")
         {
             string parametersString = "";
