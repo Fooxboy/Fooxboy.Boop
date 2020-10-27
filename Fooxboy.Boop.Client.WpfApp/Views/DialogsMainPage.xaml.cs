@@ -14,20 +14,13 @@ using System.Windows.Shapes;
 namespace Fooxboy.Boop.Client.WpfApp.Views
 {
     /// <summary>
-    /// Логика взаимодействия для SelectServer.xaml
+    /// Логика взаимодействия для DialogsMainPage.xaml
     /// </summary>
-    public partial class SelectServer : Page
+    public partial class DialogsMainPage : Page
     {
-        public SelectServer()
+        public DialogsMainPage()
         {
             InitializeComponent();
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            Services.ApiService.ChangeAddress(AddressServer.Text+ ":2020");
-            Services.NavigationService.GetService().GoTo("Views/LoginsView/SelectView.xaml");
-
         }
     }
 }
