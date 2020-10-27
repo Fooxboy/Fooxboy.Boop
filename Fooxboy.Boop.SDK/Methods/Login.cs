@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.Shared.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Fooxboy.Boop.SDK.Methods
 {
@@ -24,9 +25,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("resetAuth", resetAuth.ToString());
 
             var result = _httpHelper.GetRequest("login", parameters);
-            
-            if (result.Status) return (Shared.Models.Login) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Login>();
+            else throw new BoopRootException((data.ToObject<Error>()).Message, (data.ToObject<Error>()).Code);
         }
         
         public async Task<Shared.Models.Login> StartAsync(string login, string password, bool resetAuth = false)
@@ -37,9 +40,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("resetAuth", resetAuth.ToString());
 
             var result = await _httpHelper.GetRequestAsync("login", parameters);
-            
-            if (result.Status) return (Shared.Models.Login) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject) result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Login>();
+            else throw new BoopRootException((data.ToObject<Error>()).Message,(data.ToObject<Error>()).Code);
         }
     }
 }

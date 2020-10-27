@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.Shared.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Fooxboy.Boop.SDK.Methods
 {
@@ -25,8 +26,10 @@ namespace Fooxboy.Boop.SDK.Methods
 
             var result = _httpHelper.GetRequest("register", parameters);
 
-            if (result.Status) return (Shared.Models.Register) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Register>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
         
         public async Task<Shared.Models.Register> StartAsync(string login, string password, string firstName, string lastName, string number)
@@ -40,8 +43,10 @@ namespace Fooxboy.Boop.SDK.Methods
 
             var result = await _httpHelper.GetRequestAsync("register", parameters);
 
-            if (result.Status) return (Shared.Models.Register) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+            var data = (JObject) result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Register>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message,(data?.ToObject<Error>()).Code);
         }
     }
 }

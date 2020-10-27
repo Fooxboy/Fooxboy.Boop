@@ -4,6 +4,7 @@ using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.Shared.Models;
 using Fooxboy.Boop.Shared.Models.Messages;
+using Newtonsoft.Json.Linq;
 
 namespace Fooxboy.Boop.SDK.Methods
 {
@@ -24,9 +25,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("onlyUnread", onlyUnread.ToString());
 
             var result = _httpHelper.GetRequest("msg.get", parameters);
-            
-            if (result.Status) return (Get) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Get>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
         
         public async Task<Get> GetAsync(long count, bool onlyUnread = false, int offset = 0)
@@ -37,9 +40,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("onlyUnread", onlyUnread.ToString());
 
             var result = await _httpHelper.GetRequestAsync("msg.get", parameters);
-            
-            if (result.Status) return (Get) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Get>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
 
         public GetChat GetChat(long chatId, long count, long offset = 0)
@@ -50,9 +55,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("chatId", chatId.ToString());
             
             var result =  _httpHelper.GetRequest("msg.getChat", parameters);
-            
-            if (result.Status) return (GetChat) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<GetChat>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
         
         public async Task<GetChat> GetChatAsync(long chatId, long count, long offset = 0)
@@ -63,9 +70,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("chatId", chatId.ToString());
             
             var result = await _httpHelper.GetRequestAsync("msg.getChat", parameters);
-            
-            if (result.Status) return (GetChat) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<GetChat>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
 
         public Send Send(string text, long chatId)
@@ -74,9 +83,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("text", text);
             parameters.Add("chatId", chatId.ToString());
             var result = _httpHelper.GetRequest("msg.send", parameters);
-            
-            if (result.Status) return (Send) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Send>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
         
         public async Task<Send> SendAsync(string text, long chatId)
@@ -85,9 +96,11 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("text", text);
             parameters.Add("chatId", chatId.ToString());
             var result = await _httpHelper.GetRequestAsync("msg.send", parameters);
-            
-            if (result.Status) return (Send) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Send>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
     }
 }

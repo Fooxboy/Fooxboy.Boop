@@ -22,5 +22,12 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Services.ApiService.ChangeAddress(AddressServer.Text);
+            Services.NavigationService.GetService().GoTo("Views/LoginsView/SelectView.xaml");
+
+        }
     }
 }

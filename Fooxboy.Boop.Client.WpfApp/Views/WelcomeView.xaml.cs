@@ -25,7 +25,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Services.NavigationService.GetService().GoTo("Views/LoginsView/SelectView.xaml");
+            Services.NavigationService.GetService().GoTo("Views/SelectServer.xaml");
         }
     }
 }

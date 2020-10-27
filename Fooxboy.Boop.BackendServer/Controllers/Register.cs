@@ -21,7 +21,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
             var result = new Result();
             using (var db = new DatabaseContext())
             {
-                if (db.Users.Any(u => u.Nickname == login))
+                if (db.Users.Any(u => u.Nickname.ToLower() == login.ToLower()))
                 {
                     //Такой пользователь уже зарегестрирован
                     var error = new Error();
@@ -40,9 +40,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     result.Data = error;
                     result.Status = false;
                 }
-
-
-
+                
                 //Регистрация
 
                 try

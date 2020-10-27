@@ -37,7 +37,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             var api = ApiService.Get();
             try
             {
-                var resut = await api.Login.StartAsync(Login, Password);
+                var result = await api.Login.StartAsync(Login, Password);
+                MessageBox.Show($"ауф. Token: {result.Token}, Id {result.UserId}");
             }
             catch (BoopRootException e)
             {

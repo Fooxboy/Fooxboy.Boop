@@ -4,11 +4,30 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
+      xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SelectServer">
 
     <Grid>
-        
+        <TextBlock FontFamily="{StaticResource GoogleSansBold}"
+                   HorizontalAlignment="Center"
+                   FontSize="20"
+                   Margin="0 50 0 0" 
+                   Text="Укажите адрес сервера, к которому Вы хотите подключиться"/>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="AddressServer" Width="300" Style="{StaticResource TextBoxRevealStyle}"/>
+                <Button fluentWpf:RevealElement.BorderRadius="2"
+                        Margin="5 0 0 0"
+                        Width="70"
+                        FontFamily="{StaticResource GoogleSansRegular}"
+                        Style="{StaticResource ButtonAccentRevealStyle}"
+                        Click="ButtonBase_OnClick"
+                        Content="Поехали"/>
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </Page>

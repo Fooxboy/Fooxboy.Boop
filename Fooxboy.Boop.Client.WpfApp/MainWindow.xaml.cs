@@ -27,7 +27,7 @@ namespace Fooxboy.Boop.Client.WpfApp
             Services.NavigationService.GetService(MainFrame).GoTo("Views/WelcomeView.xaml");
 
             //todo: проверка есть ли уже авторизация.
-            Services.ApiService.Init("127.0.0.1", "token");
+            Services.ApiService.Init("https://localhost:2020", "token");
         }
     }
 }

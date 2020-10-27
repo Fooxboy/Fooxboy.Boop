@@ -29,7 +29,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 var result = await api.Register.StartAsync(Nickname, Password, FirstName, LastName, Number);
                 MessageBox.Show($"Ваш Id: {result.UserId}, Token: {result.Token}");
-
+                
             }
             catch (BoopRootException e)
             {

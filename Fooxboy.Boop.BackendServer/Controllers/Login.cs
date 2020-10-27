@@ -23,7 +23,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
             {
                 if (db.Users.Any(u => u.Nickname.ToLower() == login.ToLower()))
                 {
-                    var user = db.Users.Single(u => u.Nickname == login);
+                    var user = db.Users.Single(u => u.Nickname.ToLower() == login.ToLower());
 
                     var hashPassword = password.GetSHA256();
 

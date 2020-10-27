@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.Shared.Models;
+using Fooxboy.Boop.Shared.Models.Messages;
 using Fooxboy.Boop.Shared.Models.Users;
+using Newtonsoft.Json.Linq;
 
 namespace Fooxboy.Boop.SDK.Methods
 {
@@ -22,9 +24,11 @@ namespace Fooxboy.Boop.SDK.Methods
              parameters.Add("userId", userId.ToString());
 
              var result = _httpHelper.GetRequest("users.GetInfo", parameters);
-             
-             if (result.Status) return (User) result.Data;
-             else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<User>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
         
         public async Task<User> GetInfoAsync(long userId)
@@ -33,9 +37,10 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("userId", userId.ToString());
 
             var result = await _httpHelper.GetRequestAsync("users.GetInfo", parameters);
-             
-            if (result.Status) return (User) result.Data;
-            else throw new BoopRootException(((Error)result.Data).Message,((Error)result.Data).Code);
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<User>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
         
     }
