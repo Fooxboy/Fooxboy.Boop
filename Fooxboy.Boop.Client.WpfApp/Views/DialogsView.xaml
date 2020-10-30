@@ -1,0 +1,31 @@
+﻿<Page x:Class="Fooxboy.Boop.Client.WpfApp.Views.DialogsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
+      xmlns:controls="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DialogsView">
+
+    <Grid>
+        <Grid HorizontalAlignment="Center" Visibility="{Binding NoChats}" VerticalAlignment="Center" x:Name="NoDialogs">
+           <StackPanel>
+                <TextBlock FontFamily="{StaticResource GoogleSansBold}" FontSize="17" Text="Кажется, тут ничего нет :с"/>
+           </StackPanel>
+        </Grid>
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Dialogs">
+
+            <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                     ScrollViewer.CanContentScroll="True" 
+                     Background="Transparent"
+                     Focusable="False" 
+                     ItemsSource="{Binding Dialogs}"
+                     BorderThickness="0"
+                     VerticalAlignment="Stretch" 
+                     HorizontalAlignment="Stretch"/>
+        </Grid>
+    </Grid>
+</Page>

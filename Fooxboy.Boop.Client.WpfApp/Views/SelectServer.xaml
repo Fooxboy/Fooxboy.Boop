@@ -10,14 +10,17 @@
       Title="SelectServer">
 
     <Grid>
-        <TextBlock FontFamily="{StaticResource GoogleSansBold}"
-                   HorizontalAlignment="Center"
-                   FontSize="20"
-                   Margin="0 50 0 0" 
-                   Text="Укажите адрес сервера, к которому Вы хотите подключиться"/>
+       
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Center" Margin="0 0 0 0">
+
+            <TextBlock FontFamily="{StaticResource GoogleSansBold}"
+                       HorizontalAlignment="Center"
+                       FontSize="20"
+                       Margin="0 50 0 0" 
+                       Text="Укажите адрес сервера, к которому Вы хотите подключиться"/>
+
+            <StackPanel HorizontalAlignment="Center" Margin="0 30 0 0" Orientation="Horizontal">
                 <TextBox x:Name="AddressServer" Width="300" Style="{StaticResource TextBoxRevealStyle}"/>
                 <Button fluentWpf:RevealElement.BorderRadius="2"
                         Margin="5 0 0 0"
@@ -27,6 +30,12 @@
                         Click="ButtonBase_OnClick"
                         Content="Поехали"/>
             </StackPanel>
+
+            <TextBlock FontFamily="{StaticResource GoogleSansRegular}"
+                       HorizontalAlignment="Center"
+                       FontSize="15"
+                       Margin="0 50 0 0" 
+                       Text="Сервера, к которым вы подлючались недавно"/>
 
         </StackPanel>
     </Grid>

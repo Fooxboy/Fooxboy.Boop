@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Client.WpfApp.Controls
 {
@@ -21,6 +22,21 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         public DialogUserControl()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty DialogProperty =
+            DependencyProperty.Register("Dialog", typeof(GetResponse), typeof(DialogUserControl));
+
+        public GetResponse Dialog
+        {
+            get => (GetResponse)GetValue(DialogProperty);
+            set => SetValue(DialogProperty, value);
+        }
+
+        private void DialogUserControl_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            TitleChat.Text = Dialog.ChatTitle;
+            LastMessage.Text = Dialog.LastMessageText;
         }
     }
 }

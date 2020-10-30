@@ -10,7 +10,9 @@
                   NoiseOpacity="0.05"
                   xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
                   mc:Ignorable="d"
-                  Title="" Height="450" Width="800">
+                  MinHeight="300"
+                  MinWidth="1000"
+                  Title="Boop Messenger" Height="600" Width="1000">
     <Grid>
         <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame"/>
     </Grid>

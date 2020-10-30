@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Fooxboy.Boop.Client.WpfApp.Services;
+using Fooxboy.Boop.SDK;
 using Fooxboy.Boop.SDK.Exceptions;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
@@ -38,7 +39,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             try
             {
                 var result = await api.Login.StartAsync(Login, Password);
-                MessageBox.Show($"ауф. Token: {result.Token}, Id {result.UserId}");
+                ApiService.ChangeToken(result.Token);
+                Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
             }
             catch (BoopRootException e)
             {

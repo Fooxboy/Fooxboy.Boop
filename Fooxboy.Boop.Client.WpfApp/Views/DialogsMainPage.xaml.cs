@@ -21,6 +21,15 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         public DialogsMainPage()
         {
             InitializeComponent();
+
+        }
+
+        private void DialogsMainPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Services.NavigationService.GetService().InitChatsFrame(DialogsFrame, ChatFrame);
+            Services.NavigationService.GetService().GoToChat("Views/NoSelectChat.xaml");
+
+            Services.NavigationService.GetService().GoToDialogsFrame("Views/DialogsView.xaml");
         }
     }
 }
