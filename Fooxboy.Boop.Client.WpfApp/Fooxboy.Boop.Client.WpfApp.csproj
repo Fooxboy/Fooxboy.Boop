@@ -11,8 +11,16 @@
       <None Remove="Resources\Fonts\GoogleSans-Bold.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Medium.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Regular.ttf" />
+      <None Remove="Resources\Images\friends.png" />
       <None Remove="Resources\Images\Icons\go.png" />
+      <None Remove="Resources\Images\message.png" />
+      <None Remove="Resources\Images\settings.png" />
       <None Remove="Resources\Images\user.jpg" />
+      <None Remove="Resources\Images\user.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Resources\Images\friends.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,9 +45,10 @@
       <Resource Include="Resources\Images\Icons\go.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\Images\user.jpg">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
+      <Resource Include="Resources\Images\message.png" />
+      <Resource Include="Resources\Images\settings.png" />
+      <Resource Include="Resources\Images\user.jpg" />
+      <Resource Include="Resources\Images\user.png" />
     </ItemGroup>
 
 </Project>

@@ -19,12 +19,43 @@
         <Frame Grid.Column="1" NavigationUIVisibility="Hidden" x:Name="ChatFrame"/>
 
         <StackPanel Height="50" Orientation="Horizontal" VerticalAlignment="Bottom">
-            <StackPanel>
-                <Image/>
-                <TextBlock Text="Чаты"/>
+
+            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+                <Image Height="25" Width="25">
+                    <Image.Source>
+                        <BitmapImage UriSource="../Resources/Images/message.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Чаты"/>
             </StackPanel>
-            <Button Height="50" Width="50"/>
-            <Button Height="50" Width="50"/>
+
+            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+                <Image Height="25" Width="25">
+                    <Image.Source>
+                        <BitmapImage UriSource="../Resources/Images/friends.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Друзья"/>
+            </StackPanel>
+
+            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+                <Image Height="25" Width="25">
+                    <Image.Source>
+                        <BitmapImage UriSource="../Resources/Images/user.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Вы"/>
+            </StackPanel>
+
+            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+                <Image Height="25" Width="25">
+                    <Image.Source>
+                        <BitmapImage UriSource="../Resources/Images/settings.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Настройки"/>
+            </StackPanel>
+           
         </StackPanel>
     </Grid>
 </Page>
