@@ -14,6 +14,8 @@
       <None Remove="Resources\Images\friends.png" />
       <None Remove="Resources\Images\Icons\go.png" />
       <None Remove="Resources\Images\message.png" />
+      <None Remove="Resources\Images\more.png" />
+      <None Remove="Resources\Images\send.png" />
       <None Remove="Resources\Images\settings.png" />
       <None Remove="Resources\Images\user.jpg" />
       <None Remove="Resources\Images\user.png" />
@@ -46,6 +48,8 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\Images\message.png" />
+      <Resource Include="Resources\Images\more.png" />
+      <Resource Include="Resources\Images\send.png" />
       <Resource Include="Resources\Images\settings.png" />
       <Resource Include="Resources\Images\user.jpg" />
       <Resource Include="Resources\Images\user.png" />

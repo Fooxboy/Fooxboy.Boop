@@ -4,11 +4,69 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
+      xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Background="White"
+      d:DesignHeight="750" d:DesignWidth="800"
       Title="ChatView">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel Margin="20 0 0 0" Orientation="Horizontal">
+                <Ellipse Width="34" Height="34">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="photoUser" ImageSource="../Resources/Images/user.jpg" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Margin="10 0 0 0" FontSize="15" FontFamily="{StaticResource GoogleSansBold}" VerticalAlignment="Center" Text="Имя пользователя"/>
+
+            </StackPanel>
+
+            <Button Background="Transparent" HorizontalAlignment="Right" Height="45" Width="45">
+                <Button.Content>
+                    <Image Height="20" Width="20">
+                        <Image.Source>
+                            <BitmapImage UriSource="../Resources/Images/more.png" DecodePixelHeight="25" DecodePixelWidth="25"/>
+                        </Image.Source>
+                    </Image>
+                </Button.Content>
+            </Button>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBlock x:Name="NoMessages" FontFamily="{StaticResource GoogleSansMedium}"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"
+                       FontSize="20" 
+                       Text="Сообщений пока что нет. Попробуйте написать первым!"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox MaxLines="1"
+                     fluentWpf:RevealElement.BorderRadius="5"
+                     FontFamily="{StaticResource GoogleSansRegular}"
+                     Style="{StaticResource TextBoxRevealStyle}" />
+
+            <Button Background="Transparent" Height="35" Width="35" Grid.Column="1">
+                <Button.Content>
+                    <Image Height="20" Width="20">
+                        <Image.Source>
+                            <BitmapImage UriSource="../Resources/Images/send.png" DecodePixelHeight="25" DecodePixelWidth="25"/>
+                        </Image.Source>
+                    </Image>
+                </Button.Content>
+            </Button>
+        </Grid>
     </Grid>
+
 </Page>
