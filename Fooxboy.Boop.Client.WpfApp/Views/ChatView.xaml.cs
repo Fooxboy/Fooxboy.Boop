@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Models;
+using Fooxboy.Boop.Client.WpfApp.ViewModels;
 
 namespace Fooxboy.Boop.Client.WpfApp.Views
 {
@@ -18,9 +20,13 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
     /// </summary>
     public partial class ChatView : Page
     {
-        public ChatView()
+        private ChatViewModel _vm;
+        public ChatView(ChatInfo info, long chatId)
         {
             InitializeComponent();
+            _vm = new ChatViewModel(chatId, info);
         }
+
+
     }
 }

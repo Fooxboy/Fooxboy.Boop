@@ -24,7 +24,9 @@
                         <ImageBrush x:Name="photoUser" ImageSource="../Resources/Images/user.jpg" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
-                <TextBlock Margin="10 0 0 0" FontSize="15" FontFamily="{StaticResource GoogleSansBold}" VerticalAlignment="Center" Text="Имя пользователя"/>
+                <TextBlock Margin="10 0 0 0" 
+                           FontSize="15" FontFamily="{StaticResource GoogleSansBold}"
+                           VerticalAlignment="Center" Text="{Binding Info.Title}"/>
 
             </StackPanel>
 
@@ -43,6 +45,7 @@
             <TextBlock x:Name="NoMessages" FontFamily="{StaticResource GoogleSansMedium}"
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center"
+                       Visibility="{Binding NoMessages}"
                        FontSize="20" 
                        Text="Сообщений пока что нет. Попробуйте написать первым!"/>
         </Grid>
