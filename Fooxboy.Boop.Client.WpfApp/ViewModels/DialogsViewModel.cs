@@ -14,9 +14,10 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public ObservableCollection<GetResponse> Dialogs { get; set; }
         public Visibility NoChats { get; set; }
 
-        public async void GetDialogs()
+        public async Task GetDialogs()
         {
-            NoChats = Visibility.Collapsed;
+            NoChats = Visibility.Hidden;
+            Changed("NoChats");
             var api = ApiService.Get();
             var dialogs = await api.Messages.GetAsync(10);
 

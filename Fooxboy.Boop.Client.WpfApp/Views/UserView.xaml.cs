@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.ViewModels;
 
 namespace Fooxboy.Boop.Client.WpfApp.Views
 {
@@ -18,9 +19,21 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
     /// </summary>
     public partial class UserView : Page
     {
-        public UserView()
+        private long _userId;
+        private UserViewModel _vm;
+        public UserView(long userId)
         {
             InitializeComponent();
+            _userId = userId;
+            _vm = new UserViewModel();
+            DataContext = _vm;
+        }
+
+
+        private async void UserView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            
+            await _vm.LoadUserInfo(_userId);
         }
     }
 }

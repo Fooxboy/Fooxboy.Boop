@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Fooxboy.Boop.BackendServer.Database;
 using Fooxboy.Boop.BackendServer.Helpers;
+using Fooxboy.Boop.BackendServer.Services;
 using Fooxboy.Boop.Shared.Models;
 
 namespace Fooxboy.Boop.BackendServer.Controllers
@@ -15,9 +16,15 @@ namespace Fooxboy.Boop.BackendServer.Controllers
     [ApiController]
     public class Register : ControllerBase
     {
+        private Logger _logger;
+        public Register(Logger logger)
+        {
+            _logger = logger;
+        }
         [HttpGet]
         public Result Get(string login, string password, string name, string lastName, string number)
         {
+            _logger.Info("Запрос на регистрацию.");
             var result = new Result();
             using (var db = new DatabaseContext())
             {
@@ -63,20 +70,18 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     response.UserId = user.UserId;
                     result.Data = response;
                     result.Status = true;
+                    
+                    _logger.Info($"Зарегистрирован новый пользователь {user.Nickname}");
                 }
                 catch (Exception e)
                 {
+                    _logger.Error("Register", e);
                     var error = new Error();
                     error.Code = 1;
                     error.Message = "Неизвестная ошибка";
-
                 }
-
-
             }
-
             return result;
-
         }
     }
 }

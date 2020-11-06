@@ -4,16 +4,64 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
+      xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
       mc:Ignorable="d" 
+      Loaded="UserView_OnLoaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UserView">
 
     <Grid>
-        <StackPanel>
-            <TextBlock/>
-            <TextBlock/>
-            <TextBlock/>
-            <TextBlock/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalAlignment="Stretch" Grid.Row="0">
+            <Image Height="300" HorizontalAlignment="Stretch" Stretch="UniformToFill" StretchDirection="UpOnly"  Source="../Resources/Images/user.jpg">
+                <Image.Effect>
+                    <BlurEffect Radius="90" KernelType="Gaussian" RenderingBias="Performance"/>
+                </Image.Effect>
+            </Image>
+
+            <Grid HorizontalAlignment="Left" Margin="30 0 0 0">
+                <Ellipse Width="150" Height="150">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="photoUser" ImageSource="../Resources/Images/user.jpg" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+
+                    <Ellipse.Effect>
+                        <DropShadowEffect BlurRadius="40" Color="Black" Opacity="0.3" Direction="180" RenderingBias="Performance"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+
+                
+            </Grid>
+
+            <StackPanel VerticalAlignment="Center" Margin="230 0 0 0" HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Name}" FontSize="32" FontFamily="{StaticResource GoogleSansBold}"/>
+                <TextBlock Text="{Binding User.Nickname}" FontSize="22" Foreground="#474747" FontFamily="{StaticResource GoogleSansMedium}"/>
+            </StackPanel>
+
+            <Grid Margin="0 190 20 0" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Button Height="30" Width="250" 
+                            fluentWpf:RevealElement.BorderRadius="5" 
+                            Style="{StaticResource ButtonRevealStyle}"
+                            FontFamily="{StaticResource GoogleSansMedium}" 
+                            Content="Написать сообщение"/>
+                    <Button Height="30" Width="250" 
+                            Margin="50 0 0 0"
+                            fluentWpf:RevealElement.BorderRadius="5" 
+                            Style="{StaticResource ButtonRevealStyle}"
+                            FontFamily="{StaticResource GoogleSansMedium}" 
+                            Content="Добавить в друзья"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="White" HorizontalAlignment="Stretch">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Text="Блять а че нахуй тут делать"/>
+        </Grid>
+
     </Grid>
 </Page>

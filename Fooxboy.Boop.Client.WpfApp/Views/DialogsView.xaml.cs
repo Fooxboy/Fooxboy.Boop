@@ -19,10 +19,17 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
     /// </summary>
     public partial class DialogsView : Page
     {
+        private DialogsViewModel _vm;
         public DialogsView()
         {
             InitializeComponent();
-            DataContext = new DialogsViewModel();
+            _vm = new DialogsViewModel();
+            DataContext = _vm;
+        }
+
+        private async void DialogsView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+           await _vm.GetDialogs();
         }
     }
 }

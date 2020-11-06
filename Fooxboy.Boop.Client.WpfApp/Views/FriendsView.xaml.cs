@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.ViewModels;
 
 namespace Fooxboy.Boop.Client.WpfApp.Views
 {
@@ -18,9 +19,18 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
     /// </summary>
     public partial class FriendsView : Page
     {
+        private FriendsViewModel _vm;
         public FriendsView()
         {
             InitializeComponent();
+            _vm = new FriendsViewModel();
+            DataContext = _vm;
+
+        }
+
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            await _vm.GetUser();
         }
     }
 }

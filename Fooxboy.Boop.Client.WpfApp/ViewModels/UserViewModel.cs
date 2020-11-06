@@ -2,16 +2,35 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Fooxboy.Boop.Client.WpfApp.Services;
+using Fooxboy.Boop.SDK.Exceptions;
+using Fooxboy.Boop.Shared.Models.Users;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 {
     public class UserViewModel:BaseViewModel
     {
+
+        public User User { get; set; }
+        public string Name { get; set; }
+
         public async Task LoadUserInfo(long userId)
         {
             var api = ApiService.Get();
-            var user = await api.Users.GetInfoAsync(userId);
+            try
+            {
+                var user = await api.Users.GetInfoAsync(userId);
+                User = user;
+                Name = $"{user.FirstName} {user.LastName}";
+                Changed("Name");
+                Changed("User");
+
+            }
+            catch (BoopRootException e)
+            {
+                MessageBox.Show($"Код ошибки: {e.Code}. Сообщение: {e.Message}");
+            }
         }
     }
 }

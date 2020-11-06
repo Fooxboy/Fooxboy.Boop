@@ -42,6 +42,24 @@ namespace Fooxboy.Boop.SDK.Methods
             if (result.Status) return data.ToObject<User>();
             else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
+
+        public async Task<long> GetIdAsync(string nickname)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("nickname", nickname);
+
+            var result = await _httpHelper.GetRequestAsync("users.getId", parameters);
+            
+            try
+            {
+                var data = (long)result.Data;
+                return data;
+            }catch
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
         
     }
 }

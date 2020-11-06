@@ -24,13 +24,14 @@
                          x:Name="LoginBox"
                          Foreground="Gray"
                          MaxLength="50"
-                         Text="Укажите никнейм"
+                         Text="{Binding Nickname, Mode=TwoWay}"
                          fluentWpf:RevealElement.BorderRadius="5"
                          FontFamily="{StaticResource GoogleSansRegular}"
                          Style="{StaticResource TextBoxRevealStyle}" />
 
                 <Button Height="30" fluentWpf:RevealElement.BorderRadius="2"
                         Width="85" Margin="5 0 5 0"
+                        Click="ButtonBase_OnClick"
                         Style="{StaticResource ButtonRevealStyle}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">

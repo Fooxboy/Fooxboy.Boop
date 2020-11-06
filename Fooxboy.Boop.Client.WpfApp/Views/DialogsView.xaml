@@ -6,11 +6,12 @@
       xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
       xmlns:controls="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
       mc:Ignorable="d" 
+      Loaded="DialogsView_OnLoaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DialogsView">
 
     <Grid>
-        <Grid HorizontalAlignment="Center" Visibility="{Binding NoChats}" VerticalAlignment="Center" x:Name="NoDialogs">
+        <Grid HorizontalAlignment="Center" Visibility="{Binding NoChats, Mode=TwoWay}" VerticalAlignment="Center" x:Name="NoDialogs">
            <StackPanel>
                 <TextBlock FontFamily="{StaticResource GoogleSansBold}" FontSize="17" Text="Кажется, тут ничего нет :с"/>
            </StackPanel>
@@ -25,7 +26,13 @@
                      ItemsSource="{Binding Dialogs}"
                      BorderThickness="0"
                      VerticalAlignment="Stretch" 
-                     HorizontalAlignment="Stretch"/>
+                     HorizontalAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:DialogUserControl HorizontalAlignment="Stretch" Dialog="{Binding}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Page>

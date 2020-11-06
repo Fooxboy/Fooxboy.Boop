@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fooxboy.Boop.BackendServer.Database;
+using Fooxboy.Boop.BackendServer.Services;
 using Fooxboy.Boop.Shared.Models;
 using Fooxboy.Boop.Shared.Models.Messages;
 using Microsoft.AspNetCore.Http;
@@ -14,13 +15,22 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
     [ApiController]
     public class Get: ControllerBase
     {
+        private Logger _logger;
+        public Get(Logger logger)
+        {
+            _logger = logger;
+        }
+        
         [HttpGet]
         public Result GetMethod(int count, bool onlyUnread, int offset, string token)
         {
+            
+            _logger.Debug($"msg.get?count={count}&onlyUnread={onlyUnread}&offset={offset}&token={token}");
             var result = new Result();
             
             if (Helpers.CheckerTokenHelper.GetUser(token) is null)
             {
+                _logger.Debug("Пользователь указал не верный токен");
                 var error = new Error();
                 error.Code = 2;
                 error.Message = "Неверный токен.";
@@ -33,15 +43,22 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
 
             using (var db = new DatabaseContext())
             {
+                _logger.Debug("Поиск пользователя...");
                 var user = db.Users.Single(u => u.Token == token);
-
+                _logger.Debug($"Найден пользователь {user.Nickname}");
+                _logger.Debug($"Загрузка диалогов..");
                 var chats = db.UsersChats.Where(c => c.Owner == user.UserId).OrderBy(c => c.LastMessage).ToList();
-                
+                _logger.Debug($"Загружено {chats.Count} штук.");
                 var response = new Shared.Models.Messages.Get();
                 response.Chats = new List<GetResponse>();
+
+                var countLoadingDialogs = count < chats.Count ? count : chats.Count;
                 
-                for (int i = offset; i < count; i++)
+                _logger.Debug($"обрабатываем {countLoadingDialogs} диалогов");
+                
+                for (int i = offset; i < countLoadingDialogs; i++)
                 {
+                    _logger.Debug($"i = {i}");
                     var chat = chats[i];
                     var msgResponse = new GetResponse();
                     msgResponse.ChatId = chat.ChatId;
@@ -50,6 +67,8 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                     {
                         var usr = db.Users.Single(u => u.UserId == msgResponse.ChatId);
                         msgResponse.ChatTitle = usr.FirstName + " " + usr.LastName;
+                        
+                        _logger.Debug($"Chat Title: {msgResponse.ChatTitle}");
 
                         var lastMsgId = long.Parse(chat.Messages.Split(",").Last());
                         var msg = db.Messages.Single(m => m.MsgId == lastMsgId);

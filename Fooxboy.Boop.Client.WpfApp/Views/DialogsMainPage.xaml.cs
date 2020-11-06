@@ -31,5 +31,40 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
             Services.NavigationService.GetService().GoToDialogsFrame("Views/DialogsView.xaml");
         }
+
+        private void Chats_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextChat.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4169E1"));
+            TextFriends.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextSettings.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextUser.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            Services.NavigationService.GetService().GoToDialogsFrame("Views/DialogsView.xaml");
+        }
+
+        private void Friends_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextChat.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextFriends.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4169E1"));
+            TextSettings.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextUser.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+
+            Services.NavigationService.GetService().GoToDialogsFrame("Views/FriendsView.xaml");
+        }
+
+        private void User_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextChat.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextFriends.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextSettings.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextUser.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4169E1"));
+        }
+
+        private void Settings_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextChat.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextFriends.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+            TextSettings.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4169E1"));
+            TextUser.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+        }
     }
 }

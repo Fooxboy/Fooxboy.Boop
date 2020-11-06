@@ -25,18 +25,36 @@ namespace Fooxboy.Boop.Client.WpfApp.Services
         {
             _frame.Navigate(new Uri(path, UriKind.Relative), data);
         }
+        public void GoTo(object page, object data = null)
+        {
+            _frame.Navigate(page, data);
+        }
 
         private Frame _dialogsFrame;
         private Frame _chatFrame;
         public void GoToChat(string path, object data = null)
         {
+
             _chatFrame.Navigate(new Uri(path, UriKind.Relative), data);
+
+        }
+
+        public void GoToChat(object page, object data = null)
+        {
+
+            _chatFrame.Navigate(page, data);
 
         }
 
         public void GoToDialogsFrame(string path, object data = null)
         {
             _dialogsFrame.Navigate(new Uri(path, UriKind.Relative), data);
+
+        }
+
+        public void GoToDialogsFrame(object page, object data = null)
+        {
+            _dialogsFrame.Navigate(page, data);
 
         }
 

@@ -18,42 +18,41 @@
         <Frame Grid.Column="0" NavigationUIVisibility="Hidden" x:Name="DialogsFrame"/>
         <Frame Grid.Column="1" NavigationUIVisibility="Hidden" x:Name="ChatFrame"/>
 
-        <StackPanel Height="50" Orientation="Horizontal" VerticalAlignment="Bottom">
-
-            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+        <StackPanel Height="40" Orientation="Horizontal" Margin="0 0 0 2" VerticalAlignment="Bottom">
+            <StackPanel x:Name="Chats" MouseLeftButtonDown="Chats_OnMouseLeftButtonDown" Height="40" Width="60" Margin="10 0 10 0">
                 <Image Height="25" Width="25">
                     <Image.Source>
                         <BitmapImage UriSource="../Resources/Images/message.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
                     </Image.Source>
                 </Image>
-                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Чаты"/>
+                <TextBlock x:Name="TextChat" Foreground="#4169E1" HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Чаты"/>
             </StackPanel>
 
-            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+            <StackPanel x:Name="Friends" MouseLeftButtonDown="Friends_OnMouseLeftButtonDown" Height="40" Width="60" Margin="10 0 10 0">
                 <Image Height="25" Width="25">
                     <Image.Source>
                         <BitmapImage UriSource="../Resources/Images/friends.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
                     </Image.Source>
                 </Image>
-                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Друзья"/>
+                <TextBlock x:Name="TextFriends" Foreground="#6b6b6b" HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Друзья"/>
             </StackPanel>
 
-            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+            <StackPanel x:Name="User" MouseLeftButtonDown="User_OnMouseLeftButtonDown" Height="40" Width="60" Margin="10 0 10 0">
                 <Image Height="25" Width="25">
                     <Image.Source>
                         <BitmapImage UriSource="../Resources/Images/user.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
                     </Image.Source>
                 </Image>
-                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Вы"/>
+                <TextBlock x:Name="TextUser" Foreground="#6b6b6b" HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Вы"/>
             </StackPanel>
 
-            <StackPanel Height="40" Width="60" Margin="10 0 10 0">
+            <StackPanel x:Name="Settings" MouseLeftButtonDown="Settings_OnMouseLeftButtonDown" Height="40" Width="60" Margin="10 0 10 0">
                 <Image Height="25" Width="25">
                     <Image.Source>
                         <BitmapImage UriSource="../Resources/Images/settings.png" DecodePixelHeight="40" DecodePixelWidth="40"/>
                     </Image.Source>
                 </Image>
-                <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Настройки"/>
+                <TextBlock x:Name="TextSettings" Foreground="#6b6b6b" HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Text="Настройки"/>
             </StackPanel>
            
         </StackPanel>

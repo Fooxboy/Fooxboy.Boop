@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fooxboy.Boop.BackendServer.Database;
 using Fooxboy.Boop.BackendServer.Helpers;
+using Fooxboy.Boop.BackendServer.Services;
 using Fooxboy.Boop.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,17 @@ namespace Fooxboy.Boop.BackendServer.Controllers
     [ApiController]
     public class Login : ControllerBase
     {
+        private Logger _logger;
+
+        public Login(Logger logger)
+        {
+            _logger = logger;
+        }
+        
         [HttpGet]
         public Result Get(string login, string password, bool resetAuth = false)
         {
+            _logger.Info("Запрос на авторизацию.");
             var result = new Result();
             using (var db = new DatabaseContext())
             {
@@ -39,6 +48,8 @@ namespace Fooxboy.Boop.BackendServer.Controllers
 
                         result.Status = true;
                         result.Data = loginObject;
+
+                        _logger.Info($"Авторизован пользователь {user.Nickname}");
 
                     }
                     else

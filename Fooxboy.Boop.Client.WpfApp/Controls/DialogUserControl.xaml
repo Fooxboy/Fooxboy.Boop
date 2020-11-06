@@ -8,10 +8,6 @@
              Loaded="DialogUserControl_OnLoaded"
              d:DesignHeight="200" d:DesignWidth="500">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="30"/>
-        </Grid.ColumnDefinitions>
         <StackPanel Height="66" VerticalAlignment="Center" Orientation="Horizontal">
             <Grid>
                 <Ellipse Width="60" Height="60">
@@ -27,12 +23,12 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock FontSize="15" x:Name="TitleChat" FontFamily="{StaticResource GoogleSansBold}" Grid.Row="0" VerticalAlignment="Center" Text="Имя пользователя"/>
-                    <TextBlock Foreground="#dedede" x:Name="LastMessage" FontFamily="{StaticResource GoogleSansRegular}" Grid.Row="1" VerticalAlignment="Center" Text="Последнее сообщения блять нахуя"/>
+                    <TextBlock Foreground="#4f4f4f" x:Name="LastMessage" FontFamily="{StaticResource GoogleSansRegular}" Grid.Row="1" VerticalAlignment="Center" Text="Последнее сообщения блять нахуя"/>
                 </Grid>
             </StackPanel>
         </StackPanel>
-        <Grid Grid.Column="1">
-            <TextBlock Foreground="#dedede" FontFamily="{StaticResource GoogleSansRegular}" VerticalAlignment="Center" Text="4:20"/>
+        <Grid Margin="280 0 0 0"  HorizontalAlignment="Right">
+            <TextBlock Foreground="#4f4f4f" FontFamily="{StaticResource GoogleSansRegular}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="4:20"/>
         </Grid>
     </Grid>
 </UserControl>
