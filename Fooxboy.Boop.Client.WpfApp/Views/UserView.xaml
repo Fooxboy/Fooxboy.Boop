@@ -48,6 +48,7 @@
                             fluentWpf:RevealElement.BorderRadius="5" 
                             Style="{StaticResource ButtonRevealStyle}"
                             FontFamily="{StaticResource GoogleSansMedium}" 
+                            Click="ButtonBase_OnClick"
                             Content="Написать сообщение"/>
                     <Button Height="30" Width="250" 
                             Margin="50 0 0 0"

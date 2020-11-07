@@ -21,6 +21,8 @@
 
             <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                      ScrollViewer.CanContentScroll="True" 
+                     SelectionChanged="Selector_OnSelected"
+                     SelectedItem="{Binding SelectItem, Mode=TwoWay}"
                      Background="Transparent"
                      Focusable="False" 
                      ItemsSource="{Binding Dialogs}"

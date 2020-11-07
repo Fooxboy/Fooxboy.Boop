@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Client.WpfApp.Controls
 {
@@ -21,6 +22,21 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         public MessageControl()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty MessageProperty =
+            DependencyProperty.Register("Message", typeof(Message), typeof(MessageControl));
+
+        public Message Message
+        {
+            get => (Message) GetValue(MessageProperty);
+            set => SetValue(MessageProperty, value);
+        }
+
+        private void MessageControl_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            TextMessage.Text = Message.Text;
+            Time.Text = TimeSpan.FromSeconds(Message.Time).ToString(@"hh\:mm\:ss");
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.ViewModels;
 
 namespace Fooxboy.Boop.Client.WpfApp.Views
@@ -34,6 +35,11 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         {
             
             await _vm.LoadUserInfo(_userId);
+        }
+
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            await _vm.GoToChatUser();
         }
     }
 }

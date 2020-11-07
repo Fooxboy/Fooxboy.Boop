@@ -25,8 +25,13 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         {
             InitializeComponent();
             _vm = new ChatViewModel(chatId, info);
+            this.DataContext = _vm;
         }
 
 
+        private async void ChatView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            await _vm.GetDialogs();
+        }
     }
 }

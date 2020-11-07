@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
              mc:Ignorable="d" 
+             Loaded="MessageControl_OnLoaded"
              d:DesignHeight="200" d:DesignWidth="500">
-    <Grid>
+    <Grid Margin="0 4 0 4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Margin="0 5 0 0" VerticalAlignment="Top">
+        <Grid VerticalAlignment="Top">
             <Ellipse Width="50" Height="50">
                 <Ellipse.Fill>
                     <ImageBrush x:Name="photoUser" ImageSource="/Controls/user.jpg" Stretch="UniformToFill"/>
@@ -26,13 +27,15 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="5 5 0 0"  Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center" FontSize="15" FontFamily="{StaticResource GoogleSansBold}" Text="Имя пользователя"/>
-                <TextBlock VerticalAlignment="Center" FontSize="10" FontFamily="{StaticResource GoogleSansRegular}" Margin="5 0 0 0" Foreground="#404040" Text="4:20"/>
+            <StackPanel Margin="5 0 0 0"  Orientation="Horizontal">
+                <TextBlock x:Name="NameUser"  VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource GoogleSansBold}" Text="Имя пользователя"/>
+                <TextBlock x:Name="Time" VerticalAlignment="Center" FontSize="10" FontFamily="{StaticResource GoogleSansRegular}" Margin="5 2 0 0" Foreground="#404040" Text="4:20"/>
             </StackPanel>
 
             <TextBlock Grid.Row="1" Margin="5 0 0 0" 
                        TextWrapping="Wrap" 
+                       FontSize="14"
+                       x:Name="TextMessage"
                        FontFamily="{StaticResource GoogleSansRegular}"
                        Text="Текст сообщения типа ну и такое все ну вы поняли да пидорасы!"/>
         </Grid>

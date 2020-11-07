@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
+using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
@@ -13,6 +15,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
     {
         public ObservableCollection<GetResponse> Dialogs { get; set; }
         public Visibility NoChats { get; set; }
+
+        public GetResponse SelectItem { get; set; }
 
         public async Task GetDialogs()
         {
@@ -36,6 +40,17 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             }
 
             Changed("Dialogs");
+        }
+
+        public void OpenDialog()
+        {
+            var info = new ChatInfo();
+            info.Image = "null";
+            info.Title = SelectItem.ChatTitle;
+
+            var navigation = Services.NavigationService.GetService();
+
+            navigation.GoToChat(new ChatView(info, SelectItem.ChatId));
         }
     }
 }

@@ -31,5 +31,10 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         {
            await _vm.GetDialogs();
         }
+
+        private void Selector_OnSelected(object sender, RoutedEventArgs e)
+        {
+            _vm.OpenDialog();
+        }
     }
 }

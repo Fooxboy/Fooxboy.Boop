@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
+using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Users;
 
@@ -31,6 +33,16 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 MessageBox.Show($"Код ошибки: {e.Code}. Сообщение: {e.Message}");
             }
+        }
+
+        public async Task GoToChatUser()
+        {
+            var nav = Services.NavigationService.GetService();
+            var chatInfo = new ChatInfo();
+            chatInfo.Image = User.PathProfilePic;
+            chatInfo.Title = User.FirstName + " " + User.LastName;
+
+            nav.GoToChat(new ChatView(chatInfo, User.UserId));
         }
     }
 }

@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fooxboy.Boop.Shared.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Fooxboy.Boop.BackendServer.Controllers.Messages
 {
+    [Route("api/msg.[controller]")]
+    [ApiController]
     public class CreateChat : Controller
     {
-        // GET
-        public IActionResult Index()
+        [HttpGet]
+        public Result Create()
         {
-            return View();
+            return null;
         }
     }
 }

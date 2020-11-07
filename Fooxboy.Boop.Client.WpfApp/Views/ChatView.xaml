@@ -5,7 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
       xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+      xmlns:controls="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
       mc:Ignorable="d" 
+      Loaded="ChatView_OnLoaded"
       Background="White"
       d:DesignHeight="750" d:DesignWidth="800"
       Title="ChatView">
@@ -45,9 +47,30 @@
             <TextBlock x:Name="NoMessages" FontFamily="{StaticResource GoogleSansMedium}"
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center"
-                       Visibility="{Binding NoMessages}"
+                       Visibility="{Binding NoMessages1, Mode=TwoWay}"
                        FontSize="20" 
                        Text="Сообщений пока что нет. Попробуйте написать первым!"/>
+
+            <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     HorizontalAlignment="Stretch" 
+                     VerticalAlignment="Stretch"
+                     ItemsSource="{Binding Messages}"
+                     Focusable="False" 
+                     BorderThickness="0" ScrollViewer.CanContentScroll="True" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel VerticalAlignment="Bottom"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:MessageControl HorizontalAlignment="Stretch" Message="{Binding}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

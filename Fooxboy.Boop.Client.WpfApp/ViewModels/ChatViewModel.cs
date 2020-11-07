@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 using Fooxboy.Boop.Client.WpfApp.Models;
+using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
@@ -13,34 +15,43 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
     {
         private long _chatId;
         public ObservableCollection<Message> Messages { get; set; }
-        public Visibility NoMessages { get; set; } 
+        public Visibility NoMessages1 { get; set; } 
         public ChatInfo Info { get; set; }
 
         public ChatViewModel(long chatId, ChatInfo info)
         {
             _chatId = chatId;
             Messages = new ObservableCollection<Message>();
-            NoMessages = Visibility.Visible;
+            NoMessages1 = Visibility.Visible;
             Info = info;
         }
         public async Task GetDialogs(long count=20, long offset=0)
         {
             var api = Services.ApiService.Get();
 
-            var dialogs = await api.Messages.GetChatAsync(_chatId, count, offset);
-
-            if (dialogs.Messages.Count > 0)
+            try
             {
-                NoMessages = Visibility.Visible;
-                Changed("NoMessages");
-            }
+                var dialogs = await api.Messages.GetChatAsync(_chatId, count, offset);
 
-            foreach (var msg in dialogs.Messages)
+                if (dialogs.Messages.Count > 0)
+                {
+                    NoMessages1 = Visibility.Hidden;
+                    Changed("NoMessages1");
+                }
+
+                foreach (var msg in dialogs.Messages)
+                {
+                    Messages.Add(msg);
+                }
+
+                Changed("Messages");
+            }
+            catch (BoopRootException e)
             {
-                Messages.Add(msg);
+                if(e.Code == 9) return;
+                MessageBox.Show($"Код ошибки: {e.Code}. Сообщение: {e.Message}");
             }
-
-            Changed("Messages");
+            
         }
     }
 }

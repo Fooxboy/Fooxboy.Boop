@@ -22,8 +22,12 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock FontSize="15" x:Name="TitleChat" FontFamily="{StaticResource GoogleSansBold}" Grid.Row="0" VerticalAlignment="Center" Text="Имя пользователя"/>
-                    <TextBlock Foreground="#4f4f4f" x:Name="LastMessage" FontFamily="{StaticResource GoogleSansRegular}" Grid.Row="1" VerticalAlignment="Center" Text="Последнее сообщения блять нахуя"/>
+                    <TextBlock FontSize="15" x:Name="TitleChat"
+                               FontFamily="{StaticResource GoogleSansBold}" 
+                               Grid.Row="0" VerticalAlignment="Center"
+                               Text="Имя пользователя"/>
+                    <TextBlock Foreground="#4f4f4f" 
+                               x:Name="LastMessage" FontFamily="{StaticResource GoogleSansRegular}" Grid.Row="1" VerticalAlignment="Center" Text="Последнее сообщения блять нахуя"/>
                 </Grid>
             </StackPanel>
         </StackPanel>
