@@ -4,6 +4,8 @@
     {
         public long MsgId { get; set; }
         public long SenderId { get; set; }
+        public string NameSender { get; set; }
+        public string ImageSender { get; set; }
         public long RecieverId { get; set; }
         public long ChatId { get; set; }
         public string Text { get; set; }

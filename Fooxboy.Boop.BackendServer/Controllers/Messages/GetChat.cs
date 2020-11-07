@@ -75,6 +75,8 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         msg.MsgId = msgDb.MsgId;
                         msg.RecieverId = msgDb.RecieverId;
                         msg.SenderId = msgDb.SenderId;
+                        msg.ImageSender = msgDb.ImageSender;
+                        msg.NameSender = msgDb.NameSender;
                         msg.UsersReaded = msgDb.UsersReaded;
 
                         chatModel.Messages.Add(msg);

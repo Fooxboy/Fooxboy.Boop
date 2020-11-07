@@ -14,6 +14,8 @@ namespace Fooxboy.Boop.BackendServer.Database
         public long RecieverId { get; set; }
         public long ChatId { get; set; }
         public string Text { get; set; }
+        public string ImageSender { get; set; }
+        public string NameSender { get; set; } 
         public long Time { get; set; }
         public string UsersReaded { get; set; }
     }

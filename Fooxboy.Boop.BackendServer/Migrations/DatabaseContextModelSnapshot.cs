@@ -24,6 +24,12 @@ namespace Fooxboy.Boop.BackendServer.Migrations
                     b.Property<long>("ChatId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ImageSender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameSender")
+                        .HasColumnType("TEXT");
+
                     b.Property<long>("RecieverId")
                         .HasColumnType("INTEGER");
 

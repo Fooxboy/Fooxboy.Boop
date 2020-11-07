@@ -36,7 +36,8 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         private void MessageControl_OnLoaded(object sender, RoutedEventArgs e)
         {
             TextMessage.Text = Message.Text;
-            Time.Text = TimeSpan.FromSeconds(Message.Time).ToString(@"hh\:mm\:ss");
+            Time.Text = TimeSpan.FromSeconds(Message.Time).ToString(@"hh\:mm");
+            NameUser.Text = Message.NameSender;
         }
     }
 }

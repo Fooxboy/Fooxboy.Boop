@@ -81,6 +81,8 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                                 ChatId = 0,
                                 RecieverId = usr.UserId,
                                 SenderId = user.UserId,
+                                ImageSender = user.PathProfilePic,
+                                NameSender =  user.FirstName + " " + user.LastName,
                                 Text = text,
                                 Time = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                             };
