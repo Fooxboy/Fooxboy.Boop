@@ -58,6 +58,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
 
                 _logger.Debug("Поиск сообщений...");
                 var chatMsgs = chat.Messages.Split(",").ToList();
+                _logger.Debug($"db: {chat.Messages}");
                 var chatModel = new Shared.Models.Messages.GetChat();
                 chatModel.Messages = new List<Message>();
 
@@ -66,8 +67,13 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                     for (var i = offset; i < count; i++)
                     {
                         var msgId = chatMsgs[Convert.ToInt32(i)];
-                        var msgDb = db.Messages.Single(m => m.MsgId == long.Parse(msgId));
-
+                        _logger.Debug($"db id msg: {msgId}");
+                        if (msgId == "")
+                        {
+                            goto blep;
+                        }
+                        var id = long.Parse(msgId);
+                        var msgDb = db.Messages.SingleOrDefault(m => m.MsgId == id);
                         var msg = new Shared.Models.Messages.Message();
                         msg.Text = msgDb.Text;
                         msg.Time = msgDb.Time;
@@ -80,11 +86,15 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         msg.UsersReaded = msgDb.UsersReaded;
 
                         chatModel.Messages.Add(msg);
+                        
+                        blep:
+                        _logger.Debug("Пропуск числа.");
+                        
                     }
                 }
                 catch (Exception e)
                 {
-                    //todo: ...
+                    _logger.Error("GetChat", e);
                 }
                 
                 _logger.Debug($"Отправка {chatModel.Messages.Count} сообщений.");

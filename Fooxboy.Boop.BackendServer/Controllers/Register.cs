@@ -59,7 +59,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     user.Number = number;
                     user.PasswordHash = password.GetSHA256();
                     user.UserId = db.Users.Count() + 1;
-                    user.Token = user.PasswordHash.GetSHA256();
+                    user.Token = user.PasswordHash.GetSHA256() + new Random().Next(1, 999999999) ;
 
                     db.Users.Add(user);
                     db.SaveChanges();

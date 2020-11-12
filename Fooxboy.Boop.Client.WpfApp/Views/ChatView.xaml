@@ -79,11 +79,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBox MaxLines="1"
+                     Text="{Binding TextMessage}"
                      fluentWpf:RevealElement.BorderRadius="5"
                      FontFamily="{StaticResource GoogleSansRegular}"
                      Style="{StaticResource TextBoxRevealStyle}" />
 
-            <Button Background="Transparent" Height="35" Width="35" Grid.Column="1">
+            <Button Background="Transparent" Height="35" Click="ButtonBase_OnClick" Width="35" Grid.Column="1">
                 <Button.Content>
                     <Image Height="20" Width="20">
                         <Image.Source>

@@ -17,6 +17,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public ObservableCollection<Message> Messages { get; set; }
         public Visibility NoMessages1 { get; set; } 
         public ChatInfo Info { get; set; }
+        public string TextMessage { get; set; }
 
         public ChatViewModel(long chatId, ChatInfo info)
         {
@@ -52,6 +53,39 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 MessageBox.Show($"Код ошибки: {e.Code}. Сообщение: {e.Message}");
             }
             
+        }
+
+        public async Task SendMessage()
+        {
+            var api = Services.ApiService.Get();
+
+            if (TextMessage != null || TextMessage != string.Empty)
+            {
+                try
+                {
+                    var result = await api.Messages.SendAsync(TextMessage, _chatId);
+                    Messages.Add(new Message()
+                    {
+                        ChatId = _chatId,
+                        ImageSender =  "null",
+                        MsgId =  result.MsgId,
+                        NameSender = "Вы",
+                        RecieverId = _chatId,
+                        SenderId = 1,
+                        Text = TextMessage,
+                        Time = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds,
+                        UsersReaded = ""
+
+                    });
+
+                    Changed("Messages");
+
+                }
+                catch (BoopRootException e)
+                {
+                    MessageBox.Show($"Ошибка при отправке сообщения. Код: {e.Code}. Сообщение: {e.Message}");
+                }
+            }
         }
     }
 }

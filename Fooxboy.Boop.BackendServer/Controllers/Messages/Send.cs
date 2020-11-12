@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Fooxboy.Boop.BackendServer.Database;
+using Fooxboy.Boop.BackendServer.Services;
 using Fooxboy.Boop.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
@@ -11,9 +12,16 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
     [ApiController]
     public class Send : ControllerBase
     {
+        private Logger _logger;
+
+        public Send(Logger logger)
+        {
+            _logger = logger;
+        }
         [HttpGet]
         public Result Get(string text, long chatId, string token)
         {
+            _logger.Debug($"msg.send?text={text}&chatId={chatId}&token={token}");
             var result = new Result();
             var user = Helpers.CheckerTokenHelper.GetUser(token);
             if (user is null)
@@ -31,10 +39,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
 
             using (var db = new DatabaseContext())
             {
-                try
-                {
-                    
-                    if (chatId > 0)
+                 if (chatId > 0)
                     {
                         //Проверка есть ли такой пользователь.
                         if (db.Users.Any(u => u.UserId == chatId))
@@ -93,12 +98,15 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                             //Добавление id сообщения в список.
 
                             var chats1 = db.UsersChats.Single(c => c.Owner == user.UserId && c.ChatId == usr.UserId);
-                            chats1.Messages += $",{msgObj}";
+                            chats1.Messages += $",{msgObj.MsgId}";
                             chats1.LastMessage = msgObj.Time;
 
                             var chats2 = db.UsersChats.Single(c => c.Owner == usr.UserId && c.ChatId == user.UserId);
-                            chats2.Messages += $",{msgObj}";
+                            chats2.Messages += $",{msgObj.MsgId}";
                             chats2.LastMessage = msgObj.Time;
+
+                            var update = db.UnreadMessages.SingleOrDefault(u => u.UserId == usr.UserId);
+                            update.Messages += $",{msgObj.MsgId}";
 
                             db.SaveChanges();
 
@@ -110,18 +118,6 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         }
                     }
                     return result;
-                }
-                catch (Exception e)
-                {
-                    var error = new Error();
-                    error.Code = 0;
-                    error.Message = e.Message;
-
-                    result.Data = error;
-                    result.Status = false;
-
-                    return result;
-                }
             }
             
             
