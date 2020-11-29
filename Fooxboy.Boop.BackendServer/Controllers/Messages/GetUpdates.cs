@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Fooxboy.Boop.BackendServer.Database;
 using Fooxboy.Boop.BackendServer.Helpers;
 using Fooxboy.Boop.BackendServer.Services;
@@ -26,6 +27,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
         // GET
         public Result Index(string token)
         {
+            //проверка на пользоватлея
             _logger.Debug($"msg.GetUpdates?token={token}");
             
             var result = new Result();
@@ -42,9 +44,11 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                 return result;
             }
 
-            
+            int i = 10;
+            //сама обработка событий
             using (var db = new DatabaseContext())
             {
+                select:
                 var userMessages = db.UnreadMessages.SingleOrDefault(u => u.UserId == user.UserId);
 
                 var msgs = userMessages?.Messages.Split(",");
@@ -66,8 +70,15 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                     }
                     catch (Exception e)
                     {
-                        _logger.Error("[GetUpdates]", e);
+                        _logger.Error("GetUpdates", e);
                     }
+                }
+
+                if (data.Messages.Count == 0 && i > 0)
+                {
+                    i -= 1;
+                    Thread.Sleep(1000);
+                    goto select;
                 }
 
                 result.Data = data;
