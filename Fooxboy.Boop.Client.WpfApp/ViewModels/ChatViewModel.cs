@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using Fooxboy.Boop.Client.WpfApp.Models;
+using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Messages;
 
@@ -52,7 +53,31 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 if(e.Code == 9) return;
                 MessageBox.Show($"Код ошибки: {e.Code}. Сообщение: {e.Message}");
             }
+
+
+
             
+        }
+
+
+        public void StartCheckerMessages()
+        {
+            var api = ApiService.Get();
+            var serivce = api.Messages.GetLongPollService();
+
+            serivce.NewMessageEvent += Serivce_NewMessageEvent;
+        }
+
+        private void Serivce_NewMessageEvent(List<Message> msgs)
+        {
+            foreach (var message in msgs)
+            {
+                if (message.ChatId == _chatId)
+                {
+                    Messages.Add(message);
+                    Changed("Messages");
+                }
+            }
         }
 
         public async Task SendMessage()

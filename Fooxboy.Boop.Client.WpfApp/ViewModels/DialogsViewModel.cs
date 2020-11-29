@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,6 +41,44 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             }
 
             Changed("Dialogs");
+
+
+            StartLongPoll();
+        }
+
+
+        public void StartLongPoll()
+        {
+            var longPollService = ApiService.Get().Messages.GetLongPollService();
+
+            longPollService.StartService();
+
+            longPollService.NewMessageEvent += LongPollServiceOnNewMessageEvent;
+        }
+
+        private void LongPollServiceOnNewMessageEvent(List<Message> msgs)
+        {
+            //todo: proccessing newMessages.
+
+            foreach (var message in msgs)
+            {
+                var dialog = Dialogs.SingleOrDefault(d => d.ChatId == message.ChatId);
+
+                if (dialog is null)
+                {
+                    //todo: добавляем новый чат в список.
+                }
+                else
+                {
+                    Dialogs.Remove(dialog);
+                    dialog.LastMessageText = message.Text;
+                    dialog.Time = message.Time;
+                    Dialogs.Add(dialog);
+                    var index = Dialogs.IndexOf(dialog);
+                    Dialogs.Move(index, 0);
+                    Changed("Dialogs");
+                }
+            }
         }
 
         public void OpenDialog()

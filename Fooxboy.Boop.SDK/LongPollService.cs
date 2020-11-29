@@ -46,5 +46,10 @@ namespace Fooxboy.Boop.SDK
             });
 
         }
+
+        public void StopService()
+        {
+            _isRun = false;
+        }
     }
 }

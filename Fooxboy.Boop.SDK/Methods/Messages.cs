@@ -77,10 +77,14 @@ namespace Fooxboy.Boop.SDK.Methods
             else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
 
+
+        private static LongPollService _longPollService;
+
         public LongPollService GetLongPollService()
         {
-            var service = new LongPollService(_httpHelper);
-            return service;
+            if (!(_longPollService is null)) return _longPollService;
+            _longPollService = new LongPollService(_httpHelper);
+            return _longPollService;
         }
 
         public Send Send(string text, long chatId)

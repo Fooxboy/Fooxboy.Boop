@@ -18,5 +18,6 @@ namespace Fooxboy.Boop.BackendServer.Database
         public string NameSender { get; set; } 
         public long Time { get; set; }
         public string UsersReaded { get; set; }
+        public long TestField { get; set; }
     }
 }
