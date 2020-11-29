@@ -29,11 +29,18 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 var result = await api.Register.StartAsync(Nickname, Password, FirstName, LastName, Number);
                 MessageBox.Show($"Ваш Id: {result.UserId}, Token: {result.Token}");
-                
+                ApiService.ChangeToken(result.Token);
+                Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
+
             }
             catch (BoopRootException e)
             {
                 MessageBox.Show($"{e.Code}. {e.Message}");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}", "Ошибка");
+
             }
         }
 

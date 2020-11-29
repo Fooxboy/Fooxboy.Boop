@@ -27,11 +27,11 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
         // GET
         public Result Index(string token)
         {
-            //проверка на пользоватлея
-            _logger.Debug($"msg.GetUpdates?token={token}");
+            //Проверка пользователя.
+            _logger.Debug($"msg.getUpdates?token={token}");
             
             var result = new Result();
-            var user = Helpers.CheckerTokenHelper.GetUser(token);
+            var user = CheckerTokenHelper.GetUser(token);
             if (user is null)
             {
                 var error = new Error();
@@ -44,47 +44,63 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                 return result;
             }
 
-            int i = 10;
-            //сама обработка событий
+
             using (var db = new DatabaseContext())
             {
-                select:
-                var userMessages = db.UnreadMessages.SingleOrDefault(u => u.UserId == user.UserId);
-
-                var msgs = userMessages?.Messages.Split(",");
-                
-                var data = new Shared.Models.Messages.GetUpdates();
-                data.Messages = new List<Message>();
-                foreach (var msgIdStr in msgs)
+                for (int i = 10; i > 0; i++)
                 {
-                    try
+                    var usersChats = db.UnreadMessages.SingleOrDefault(u => u.UserId == user.UserId);
+
+                    if (usersChats is null)
                     {
-                        var msgId = long.Parse(msgIdStr);
+                        var error = new Error();
+                        error.Code = 102;
+                        error.Message = "Пользователя нет в бд.";
 
-                        var msg = db.Messages.SingleOrDefault(m => m.MsgId == msgId);
-                        data.Messages.Add(msg.ConvertToMessage());
+                        result.Data = error;
+                        result.Status = false;
 
-                        userMessages.Messages = "";
-                        db.SaveChanges();
-                        
+                        return result;
                     }
-                    catch (Exception e)
+
+                    if (usersChats.Messages != "")
                     {
-                        _logger.Error("GetUpdates", e);
+                        var ids = usersChats.Messages.Split(",");
+                        List<Database.Message> messages = new List<Database.Message>();
+
+                        foreach (var id in ids)
+                        {
+                            try
+                            {
+                                var idLong = long.Parse(id);
+                                var msg = db.Messages.SingleOrDefault(m => m.MsgId == idLong);
+                                
+                                messages.Add(msg);
+                            }
+                            catch (Exception e)
+                            {
+                                _logger.Debug($"id = {id}");
+                                _logger.Error("GetUpdates", e);
+                            }
+                        }
+                        result.Data = messages;
+                        result.Status = true;
+                        return result;
+
                     }
+                    else
+                    {
+                        i -= 1;
+                        Thread.Sleep(1000);
+                    }
+                    
                 }
-
-                if (data.Messages.Count == 0 && i > 0)
-                {
-                    i -= 1;
-                    Thread.Sleep(1000);
-                    goto select;
-                }
-
-                result.Data = data;
-                result.Status = true;
             }
+            
+            
+            
 
+            
             return result;
         }
     }

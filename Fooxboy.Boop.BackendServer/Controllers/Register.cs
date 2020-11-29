@@ -62,6 +62,8 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     user.Token = user.PasswordHash.GetSHA256() + new Random().Next(1, 999999999) ;
 
                     db.Users.Add(user);
+
+                    db.UnreadMessages.Add(new UnreadMessages() {Messages = "", UserId = user.UserId});
                     db.SaveChanges();
 
 

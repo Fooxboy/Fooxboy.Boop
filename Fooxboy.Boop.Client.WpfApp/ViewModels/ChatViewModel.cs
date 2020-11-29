@@ -50,13 +50,17 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             }
             catch (BoopRootException e)
             {
-                if(e.Code == 9) return;
+                if (e.Code == 9) return;
                 MessageBox.Show($"Код ошибки: {e.Code}. Сообщение: {e.Message}");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}", "Ошибка");
             }
 
 
 
-            
+
         }
 
 

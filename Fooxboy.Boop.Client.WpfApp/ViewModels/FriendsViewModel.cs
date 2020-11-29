@@ -24,6 +24,11 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 MessageBox.Show($"Код ошибки: {e.Code}. Сообщение: {e.Message}");
             }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}", "Ошибка");
+
+            }
         }
     }
 }

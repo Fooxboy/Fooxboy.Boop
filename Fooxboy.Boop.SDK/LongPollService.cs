@@ -32,8 +32,7 @@ namespace Fooxboy.Boop.SDK
                     var data = (JObject) result.Data;
 
                     GetUpdates updates;
-
-
+                    
                     if (result.Status) updates = data.ToObject<GetUpdates>();
                     else throw new BoopRootException(data?.ToObject<Error>()?.Message, (data?.ToObject<Error>()).Code);
 
@@ -41,7 +40,6 @@ namespace Fooxboy.Boop.SDK
                     {
                         NewMessageEvent?.Invoke(updates.Messages);
                     }
-
                 }
             });
 

@@ -21,26 +21,35 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
         public async Task GetDialogs()
         {
-            NoChats = Visibility.Hidden;
-            Changed("NoChats");
-            var api = ApiService.Get();
-            var dialogs = await api.Messages.GetAsync(10);
-
-            Dialogs = new ObservableCollection<GetResponse>();
-
-            if (dialogs.Chats.Count == 0)
+            try
             {
-                NoChats = Visibility.Visible;
+                NoChats = Visibility.Hidden;
                 Changed("NoChats");
-                return;
-            }
+                var api = ApiService.Get();
+                var dialogs = await api.Messages.GetAsync(10);
 
-            foreach (var dialog in dialogs.Chats)
+                Dialogs = new ObservableCollection<GetResponse>();
+
+                if (dialogs.Chats.Count == 0)
+                {
+                    NoChats = Visibility.Visible;
+                    Changed("NoChats");
+                    return;
+                }
+
+                foreach (var dialog in dialogs.Chats)
+                {
+                    Dialogs.Add(dialog);
+                }
+
+                Changed("Dialogs");
+
+
+            }
+            catch (Exception e)
             {
-               Dialogs.Add(dialog); 
+                MessageBox.Show($"{e.Message}", "Ошибка");
             }
-
-            Changed("Dialogs");
 
 
             StartLongPoll();

@@ -63,14 +63,26 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                     var msgResponse = new GetResponse();
                     msgResponse.ChatId = chat.ChatId;
 
-                    if (msgResponse.ChatId > 0)
+                  
+
+                    if (chat.Messages != "" && msgResponse.ChatId > 0)
                     {
+
                         var usr = db.Users.Single(u => u.UserId == msgResponse.ChatId);
                         msgResponse.ChatTitle = usr.FirstName + " " + usr.LastName;
                         
                         _logger.Debug($"Chat Title: {msgResponse.ChatTitle}");
+                        long id = 0;
+                        try
+                        {
+                            id = long.Parse(chat.Messages.Split(",").Last());
+                        }
+                        catch
+                        {
+                            
+                        }
 
-                        var lastMsgId = long.Parse(chat.Messages.Split(",").Last());
+                        var lastMsgId = id;
                         var msg = db.Messages.Single(m => m.MsgId == lastMsgId);
 
                         msgResponse.LastMessageText = msg.Text;
