@@ -10,11 +10,10 @@
     Title="SelectServer"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    Loaded="SelectServer_OnLoaded"
     mc:Ignorable="d">
 
     <Grid>
-
-
         <StackPanel Margin="0,0,0,0" HorizontalAlignment="Center">
 
             <TextBlock
@@ -50,7 +49,54 @@
                 Text="Сервера, к которым вы подлючались недавно" />
 
 
-            <controls:ServerControl Width="900" Height="120" />
+
+            <ListBox
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0"
+                Focusable="False"
+                ItemsSource="{Binding Servers}"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                SelectionMode="Single">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <controls:ServerControl
+                            Width="900"
+                            Height="120"
+                            Server="{Binding}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
         </StackPanel>
+
+
+        <Grid x:Name="GridConnect" Visibility="Collapsed">
+            <Rectangle
+                Width="400"
+                Height="50"
+                Fill="White"
+                RadiusX="10"
+                RadiusY="10">
+                <Rectangle.Effect>
+                    <DropShadowEffect
+                        BlurRadius="50"
+                        Direction="180"
+                        Opacity="0.4"
+                        RenderingBias="Quality"
+                        Color="Black" />
+                </Rectangle.Effect>
+            </Rectangle>
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource GoogleSansBold}"
+                FontSize="20"
+                Text="Подключение к серверу..." />
+        </Grid>
     </Grid>
 </Page>

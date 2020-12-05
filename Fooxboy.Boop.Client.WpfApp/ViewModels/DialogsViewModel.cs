@@ -61,7 +61,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
         public void StartLongPoll()
         {
-            var longPollService = ApiService.Get().Messages.GetLongPollService($"https://{AppGlobalConfig.Address}", AppGlobalConfig.Token);
+            var longPollService = ApiService.Get().Messages.GetLongPollService($"https://{ApiService.Get().Address}", ApiService.Get().Token);
 
             longPollService.StartService();
 

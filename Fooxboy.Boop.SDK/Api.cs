@@ -14,6 +14,7 @@ namespace Fooxboy.Boop.SDK
         public Users Users { get; }
         public Login Login { get; }
         public Messages Messages { get; }
+        public Server Server { get; }
 
         public Api(string address, string token = "")
         {
@@ -22,9 +23,19 @@ namespace Fooxboy.Boop.SDK
             this.Users = new Users(_httpHelper);
             this.Login = new Login(_httpHelper);
             this.Messages =new Messages(_httpHelper);
+            this.Server = new Server(_httpHelper);
         }
 
-        public void ChangeAddress(string address) => _httpHelper.ChangeAddress(address);
-        public void ChangeToken(string token) => _httpHelper.ChangeToken(token);
+        public void ChangeAddress(string address)
+        {
+            Address = address;
+            _httpHelper.ChangeAddress("https://" +address);
+        }
+
+        public void ChangeToken(string token)
+        {
+            Token = token;
+            _httpHelper.ChangeToken(token);
+        }
     }
 }

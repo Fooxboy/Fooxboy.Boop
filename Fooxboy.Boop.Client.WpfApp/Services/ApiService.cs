@@ -23,7 +23,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Services
         public static void ChangeAddress(string address)
         {
             AppGlobalConfig.Address = address;
-            _api.ChangeToken(address);
+            _api.ChangeAddress(address);
         }
         public static Api Get() => _api;
     }

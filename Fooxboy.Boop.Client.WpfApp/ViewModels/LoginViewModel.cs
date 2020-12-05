@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
@@ -40,6 +41,22 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 var result = await api.Login.StartAsync(Login, Password);
                 ApiService.ChangeToken(result.Token);
+
+                var configService = AppGlobalConfig.ConfigSerivce;
+                var config = configService.GetConfig();
+                var server = config.Servers.SingleOrDefault(s => s.Address + ":2020" == ApiService.Get().Address );
+                if (server != null)
+                {
+                    config.Servers.Remove(server);
+                    server.Token = result.Token;
+
+                    var user = await api.Users.GetInfoAsync(0);
+                    server.NameUser = user.FirstName + " " + user.LastName;
+
+                    config.Servers.Add(server);
+                    configService.EditConfig(config);
+                }
+
                 Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
             }
             catch (BoopRootException e)

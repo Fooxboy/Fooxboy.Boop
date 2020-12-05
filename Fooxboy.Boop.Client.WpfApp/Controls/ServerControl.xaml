@@ -5,8 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="150"
-    d:DesignWidth="500"
+    d:DesignHeight="120"
+    d:DesignWidth="900"
+    Loaded="ServerControl_OnLoaded"
     mc:Ignorable="d">
     <Grid>
         <Grid Margin="20" HorizontalAlignment="Center">

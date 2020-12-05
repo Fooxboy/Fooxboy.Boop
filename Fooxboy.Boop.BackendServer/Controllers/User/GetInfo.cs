@@ -14,8 +14,9 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
         public Result Get(long userId, string token)
         {
             var result = new Result();
-            
-            if (Helpers.CheckerTokenHelper.GetUser(token) is null)
+
+            var usrRequest = Helpers.CheckerTokenHelper.GetUser(token);
+            if (usrRequest is null)
             {
                 var error = new Error();
                 error.Code = 2;
@@ -24,6 +25,21 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
                 result.Data = error;
                 result.Status = false;
 
+                return result;
+            }
+
+            if (userId == 0)
+            {
+                var usr = new Shared.Models.Users.User();
+                usr.Nickname = usrRequest.Nickname;
+                usr.Number = usrRequest.Number;
+                usr.FirstName = usrRequest.FirstName;
+                usr.LastName = usrRequest.LastName;
+                usr.UserId = userId;
+                usr.PathProfilePic = usrRequest.PathProfilePic;
+
+                result.Data = usr;
+                result.Status = true;
                 return result;
             }
 
@@ -46,7 +62,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
                 var usr = new Shared.Models.Users.User();
                 usr.Nickname = user.Nickname;
                 usr.Number = "";
-                usr.FirstName = user.Nickname;
+                usr.FirstName = user.FirstName;
                 usr.LastName = user.LastName;
                 usr.UserId = userId;
                 usr.PathProfilePic = user.PathProfilePic;

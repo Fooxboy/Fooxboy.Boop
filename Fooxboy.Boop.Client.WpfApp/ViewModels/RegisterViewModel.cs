@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using Fooxboy.Boop.Client.WpfApp.Services;
@@ -30,6 +31,21 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 var result = await api.Register.StartAsync(Nickname, Password, FirstName, LastName, Number);
                 MessageBox.Show($"Ваш Id: {result.UserId}, Token: {result.Token}");
                 ApiService.ChangeToken(result.Token);
+                var configService = AppGlobalConfig.ConfigSerivce;
+                var config = configService.GetConfig();
+
+                var server = config.Servers.SingleOrDefault(s => s.Address == ApiService.Get().Address);
+                if (server != null)
+                {
+                    config.Servers.Remove(server);
+                    server.Token = result.Token;
+                    server.NameUser = FirstName + " " + LastName;
+                    config.Servers.Add(server);
+                    configService.EditConfig(config);
+                }
+                
+
+               
                 Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
 
             }

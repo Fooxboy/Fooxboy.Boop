@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Shared.Models;
 
 namespace Fooxboy.Boop.Client.WpfApp.Controls
 {
@@ -21,6 +22,22 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         public ServerControl()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty ServerProperty = DependencyProperty.Register("Server", typeof(ServerInfo), typeof(ServerControl));
+
+        public ServerInfo Server
+        {
+            get => (ServerInfo) GetValue(ServerProperty);
+            set => SetValue(ServerProperty, value);
+        }
+
+        private void ServerControl_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            NameServer.Text = Server.NameServer;
+            Address.Text = Server.Address;
+            NameUser.Text = Server.NameUser;
+            
         }
     }
 }
