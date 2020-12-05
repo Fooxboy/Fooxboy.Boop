@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Fooxboy.Boop.Client.WpfApp.Models;
+using Fooxboy.Boop.Shared.Models;
 using Newtonsoft.Json;
 
 namespace Fooxboy.Boop.Client.WpfApp.Services

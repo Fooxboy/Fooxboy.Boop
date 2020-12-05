@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Fooxboy.Boop.Shared.Models;
 
 namespace Fooxboy.Boop.Client.WpfApp.Models
 {
@@ -8,10 +9,5 @@ namespace Fooxboy.Boop.Client.WpfApp.Models
         public List<ServerInfo> Servers { get; set; }
     }
 
-    public class ServerInfo
-    {
-        public string Address { get; set; }
-        public string Token { get; set; }
-        public string NameUser { get; set; }
-    }
+   
 }

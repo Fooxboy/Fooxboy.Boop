@@ -36,6 +36,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     error.Message = "Этот никнейм уже занят.";
                     result.Data = error;
                     result.Status = false;
+                    return result;
                 }
 
 
@@ -46,6 +47,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     error.Message = "Такой номер телефона уже используется.";
                     result.Data = error;
                     result.Status = false;
+                    return result;
                 }
                 
                 //Регистрация

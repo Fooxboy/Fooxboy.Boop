@@ -64,7 +64,10 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         {
             VisibilityGrid = Visibility.Collapsed;
             VisibilityPanel = Visibility.Visible;
+            Changed("VisibilityGrid");
+            Changed("VisibilityPanel");
             MessageBox.Show(message, "Ошибка авторизации");
+            
         }
 
         public void EditPassword(string password)

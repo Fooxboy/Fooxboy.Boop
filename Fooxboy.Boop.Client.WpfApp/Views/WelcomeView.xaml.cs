@@ -27,6 +27,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         {
             var config = AppGlobalConfig.ConfigSerivce.GetConfig();
             config.ShowWelcomePage = false;
+            AppGlobalConfig.ConfigSerivce.EditConfig(config);
             Services.NavigationService.GetService().GoTo("Views/SelectServer.xaml");
         }
     }
