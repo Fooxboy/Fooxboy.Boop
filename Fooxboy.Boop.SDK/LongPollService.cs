@@ -14,13 +14,14 @@ namespace Fooxboy.Boop.SDK
         private HttpHelper _httpHelper;
         public event Delegates.NewMessagesDelegate NewMessageEvent;
         
-        public LongPollService(HttpHelper helper)
+        public LongPollService(string address, string token)
         {
-            this._httpHelper = helper;
+            _httpHelper = new HttpHelper(address, token);
         }
         
         public void StartService()
         {
+            if (_isRun) return;
             Task.Run(() =>
             {
                 _isRun = true;
@@ -42,7 +43,6 @@ namespace Fooxboy.Boop.SDK
                     }
                 }
             });
-
         }
 
         public void StopService()

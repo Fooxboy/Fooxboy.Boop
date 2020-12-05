@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Client.WpfApp.Views;
@@ -18,9 +19,11 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public Visibility NoChats { get; set; }
 
         public GetResponse SelectItem { get; set; }
+        public Dispatcher dispatcher;
 
         public async Task GetDialogs()
         {
+            dispatcher = Application.Current.MainWindow.Dispatcher;
             try
             {
                 NoChats = Visibility.Hidden;
@@ -58,7 +61,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
         public void StartLongPoll()
         {
-            var longPollService = ApiService.Get().Messages.GetLongPollService();
+            var longPollService = ApiService.Get().Messages.GetLongPollService($"https://{AppGlobalConfig.Address}", AppGlobalConfig.Token);
 
             longPollService.StartService();
 
@@ -71,34 +74,52 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
             foreach (var message in msgs)
             {
-                var dialog = Dialogs.SingleOrDefault(d => d.ChatId == message.ChatId);
+                if (message.ChatId == 0)
+                {
+                    //личный диалог
+                    var dialog = Dialogs.SingleOrDefault(d => d.ChatId == message.SenderId);
 
-                if (dialog is null)
-                {
-                    //todo: добавляем новый чат в список.
+                    if (dialog is null)
+                    {
+                        //todo: добавляем новый чат в список.
+                    }
+                    else
+                    {
+                        dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            var index = Dialogs.IndexOf(dialog);
+                            Dialogs.Remove(dialog);
+                            dialog.LastMessageText = message.Text;
+                            dialog.Time = message.Time;
+                            Dialogs.Add(dialog);
+                            Dialogs.Move(index, 0);
+                            Changed("Dialogs");
+                        }));
+                    }
                 }
-                else
-                {
-                    Dialogs.Remove(dialog);
-                    dialog.LastMessageText = message.Text;
-                    dialog.Time = message.Time;
-                    Dialogs.Add(dialog);
-                    var index = Dialogs.IndexOf(dialog);
-                    Dialogs.Move(index, 0);
-                    Changed("Dialogs");
-                }
+                
+                //todo: групповой чат
+                
             }
         }
 
         public void OpenDialog()
         {
-            var info = new ChatInfo();
-            info.Image = "null";
-            info.Title = SelectItem.ChatTitle;
+            try
+            {
+                var info = new ChatInfo();
+                info.Image = "null";
+                info.Title = SelectItem.ChatTitle;
 
-            var navigation = Services.NavigationService.GetService();
+                var navigation = Services.NavigationService.GetService();
 
-            navigation.GoToChat(new ChatView(info, SelectItem.ChatId));
+                navigation.GoToChat(new ChatView(info, SelectItem.ChatId));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка");
+            }
+            
         }
     }
 }

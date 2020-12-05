@@ -80,10 +80,10 @@ namespace Fooxboy.Boop.SDK.Methods
 
         private static LongPollService _longPollService;
 
-        public LongPollService GetLongPollService()
+        public LongPollService GetLongPollService(string address, string token)
         {
             if (!(_longPollService is null)) return _longPollService;
-            _longPollService = new LongPollService(_httpHelper);
+            _longPollService = new LongPollService(address, token);
             return _longPollService;
         }
 

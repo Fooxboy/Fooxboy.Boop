@@ -20,11 +20,13 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
     public partial class DialogsView : Page
     {
         private DialogsViewModel _vm;
+        private bool isOpen;
         public DialogsView()
         {
             InitializeComponent();
             _vm = new DialogsViewModel();
             DataContext = _vm;
+            isOpen = false;
         }
 
         private async void DialogsView_OnLoaded(object sender, RoutedEventArgs e)
@@ -34,7 +36,9 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private void Selector_OnSelected(object sender, RoutedEventArgs e)
         {
+            if(isOpen) return;
             _vm.OpenDialog();
+            isOpen = true;
         }
     }
 }

@@ -14,8 +14,17 @@ namespace Fooxboy.Boop.Client.WpfApp.Services
             _api = new Api(address, token);
         }
 
-        public static void ChangeToken(string token) => _api.ChangeToken(token);
-        public static void ChangeAddress(string address) => _api.ChangeToken(address);
+        public static void ChangeToken(string token)
+        {
+            AppGlobalConfig.Token = token;
+            _api.ChangeToken(token);
+        }
+
+        public static void ChangeAddress(string address)
+        {
+            AppGlobalConfig.Address = address;
+            _api.ChangeToken(address);
+        }
         public static Api Get() => _api;
     }
 }

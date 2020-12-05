@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Threading;
 using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.SDK.Exceptions;
@@ -19,15 +20,17 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public Visibility NoMessages1 { get; set; } 
         public ChatInfo Info { get; set; }
         public string TextMessage { get; set; }
+        public Dispatcher dispatcher;
 
         public ChatViewModel(long chatId, ChatInfo info)
         {
+            dispatcher = Application.Current.MainWindow.Dispatcher;
             _chatId = chatId;
             Messages = new ObservableCollection<Message>();
             NoMessages1 = Visibility.Visible;
             Info = info;
         }
-        public async Task GetDialogs(long count=20, long offset=0)
+        public async Task GetDialogs(long count=9999, long offset=0)
         {
             var api = Services.ApiService.Get();
 
@@ -47,6 +50,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 }
 
                 Changed("Messages");
+
+                StartCheckerMessages();
             }
             catch (BoopRootException e)
             {
@@ -57,17 +62,12 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 MessageBox.Show($"{e.Message}", "Ошибка");
             }
-
-
-
-
         }
-
-
+        
         public void StartCheckerMessages()
         {
             var api = ApiService.Get();
-            var serivce = api.Messages.GetLongPollService();
+            var serivce = api.Messages.GetLongPollService($"https://{AppGlobalConfig.Address}", AppGlobalConfig.Token);
 
             serivce.NewMessageEvent += Serivce_NewMessageEvent;
         }
@@ -76,16 +76,26 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         {
             foreach (var message in msgs)
             {
-                if (message.ChatId == _chatId)
+                if (message.ChatId == 0)
                 {
-                    Messages.Add(message);
-                    Changed("Messages");
+                    //личный диалог
+                    if (message.SenderId == _chatId)
+                    {
+                        dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            Messages.Add(message);
+                            Changed("Messages");
+                        }));
+                    }
                 }
+                //todo: групповой чат
+               
             }
         }
 
         public async Task SendMessage()
         {
+            
             var api = Services.ApiService.Get();
 
             if (TextMessage != null || TextMessage != string.Empty)

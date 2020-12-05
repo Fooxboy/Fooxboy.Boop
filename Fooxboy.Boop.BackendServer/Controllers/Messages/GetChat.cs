@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fooxboy.Boop.BackendServer.Database;
+using Fooxboy.Boop.BackendServer.Helpers;
 using Fooxboy.Boop.BackendServer.Services;
 using Fooxboy.Boop.Shared.Models;
 using Fooxboy.Boop.Shared.Models.Messages;
@@ -70,26 +71,16 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         _logger.Debug($"db id msg: {msgId}");
                         if (msgId == "")
                         {
+                            _logger.Debug("Пропуск числа.");
                             goto blep;
                         }
                         var id = long.Parse(msgId);
                         var msgDb = db.Messages.SingleOrDefault(m => m.MsgId == id);
-                        var msg = new Shared.Models.Messages.Message();
-                        msg.Text = msgDb.Text;
-                        msg.Time = msgDb.Time;
-                        msg.ChatId = msgDb.ChatId;
-                        msg.MsgId = msgDb.MsgId;
-                        msg.RecieverId = msgDb.RecieverId;
-                        msg.SenderId = msgDb.SenderId;
-                        msg.ImageSender = msgDb.ImageSender;
-                        msg.NameSender = msgDb.NameSender;
-                        msg.UsersReaded = msgDb.UsersReaded;
-
-                        chatModel.Messages.Add(msg);
+                        chatModel.Messages.Add(msgDb.ConvertToMessage());
                         
                         blep:
-                        _logger.Debug("Пропуск числа.");
-                        
+                        int i2 = 0;
+
                     }
                 }
                 catch (Exception e)

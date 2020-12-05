@@ -7,6 +7,7 @@ namespace Fooxboy.Boop.SDK
     public class Api
     {
         public string Token { get; set; }
+        public string Address { get; set; }
         private HttpHelper _httpHelper;
         
         public Methods.Register Register { get; set; }

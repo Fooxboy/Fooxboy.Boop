@@ -27,81 +27,106 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
         // GET
         public Result Index(string token)
         {
-            //Проверка пользователя.
-            _logger.Debug($"msg.getUpdates?token={token}");
-            
-            var result = new Result();
-            var user = CheckerTokenHelper.GetUser(token);
-            if (user is null)
+            try
             {
-                var error = new Error();
-                error.Code = 2;
-                error.Message = "Неверный токен.";
+                //Проверка пользователя.
+                _logger.Debug($"msg.getUpdates?token={token}");
 
-                result.Data = error;
-                result.Status = false;
+                var result = new Result();
+                var user = CheckerTokenHelper.GetUser(token);
+                if (user is null)
+                {
+                    var error = new Error();
+                    error.Code = 2;
+                    error.Message = "Неверный токен.";
 
+                    result.Data = error;
+                    result.Status = false;
+
+                    return result;
+                }
+                
+                var updatesResult = new Shared.Models.Messages.GetUpdates();
+                updatesResult.Messages = new List<Message>();
+                
+
+                using (var db = new DatabaseContext())
+                {
+                    for (int i = 10; i > 0; )
+                    {
+                        var usersChats = db.UnreadMessages.SingleOrDefault(u => u.UserId == user.UserId);
+
+                        if (usersChats is null)
+                        {
+                            var error = new Error();
+                            error.Code = 102;
+                            error.Message = "Пользователя нет в бд.";
+
+                            result.Data = error;
+                            result.Status = false;
+
+                            return result;
+                        }
+
+                        if (usersChats.Messages != "")
+                        {
+                            var ids = usersChats.Messages.Split(",");
+                            List<Database.Message> messages = new List<Database.Message>();
+
+                            foreach (var id in ids)
+                            {
+                                try
+                                {
+                                    if (id != "")
+                                    {
+                                        var idLong = long.Parse(id);
+                                        var msg = db.Messages.SingleOrDefault(m => m.MsgId == idLong);
+                                        messages.Add(msg);
+                                    }
+                                    
+                                }
+                                catch (Exception e)
+                                {
+                                    _logger.Debug($"id = {id}");
+                                    _logger.Error("GetUpdates", e);
+                                }
+                            }
+                            
+
+                            foreach (var msg in messages)
+                            {
+                                updatesResult.Messages.Add(msg.ConvertToMessage());
+                            }
+                            result.Data = updatesResult;
+                            result.Status = true;
+
+                            usersChats.Messages = "";
+                            db.SaveChanges();
+                            
+                            return result;
+                            
+                        }
+                        else
+                        {
+                            i -= 1;
+                            Thread.Sleep(1000);
+                        }
+                        
+                        
+
+                    }
+                }
+
+                result.Data = updatesResult;
+                result.Status = true;
+                
                 return result;
             }
-
-
-            using (var db = new DatabaseContext())
+            catch (Exception e)
             {
-                for (int i = 10; i > 0; i++)
-                {
-                    var usersChats = db.UnreadMessages.SingleOrDefault(u => u.UserId == user.UserId);
-
-                    if (usersChats is null)
-                    {
-                        var error = new Error();
-                        error.Code = 102;
-                        error.Message = "Пользователя нет в бд.";
-
-                        result.Data = error;
-                        result.Status = false;
-
-                        return result;
-                    }
-
-                    if (usersChats.Messages != "")
-                    {
-                        var ids = usersChats.Messages.Split(",");
-                        List<Database.Message> messages = new List<Database.Message>();
-
-                        foreach (var id in ids)
-                        {
-                            try
-                            {
-                                var idLong = long.Parse(id);
-                                var msg = db.Messages.SingleOrDefault(m => m.MsgId == idLong);
-                                
-                                messages.Add(msg);
-                            }
-                            catch (Exception e)
-                            {
-                                _logger.Debug($"id = {id}");
-                                _logger.Error("GetUpdates", e);
-                            }
-                        }
-                        result.Data = messages;
-                        result.Status = true;
-                        return result;
-
-                    }
-                    else
-                    {
-                        i -= 1;
-                        Thread.Sleep(1000);
-                    }
-                    
-                }
+                _logger.Error("GetUpdates", e);
+                throw e;
             }
-            
-            
-            
-
-            
-            return result;
         }
     }
 }
