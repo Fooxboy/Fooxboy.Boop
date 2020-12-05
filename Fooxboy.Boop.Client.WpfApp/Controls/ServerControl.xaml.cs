@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Shared.Models;
 
 namespace Fooxboy.Boop.Client.WpfApp.Controls
@@ -38,6 +40,26 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             Address.Text = Server.Address;
             NameUser.Text = Server.NameUser;
             
+        }
+
+        private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            Shadow.Opacity = 0.6;
+            Shadow.BlurRadius = 35;
+        }
+
+        private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            Shadow.Opacity = 0.4;
+            Shadow.BlurRadius = 30;
+        }
+
+        private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Services.ApiService.ChangeAddress(Server.Address + ":2020");
+
+            ApiService.ChangeToken(Server.Token);
+            Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
         }
     }
 }

@@ -13,6 +13,27 @@
     Loaded="SelectServer_OnLoaded"
     mc:Ignorable="d">
 
+
+    <Page.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="border">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
     <Grid>
         <StackPanel Margin="0,0,0,0" HorizontalAlignment="Center">
 
@@ -68,6 +89,7 @@
                             Server="{Binding}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+
             </ListBox>
 
 
