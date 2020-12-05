@@ -57,12 +57,11 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         private void Error(int code)
         {
             if(code == 6) ErrorAuth("Не найден пользователь с таким никнеймом");
-            else if(code == 7) ErrorAuth("Пароли не совпадают");
+            else if(code == 7) ErrorAuth("Вы указали неверный пароль");
         }
 
         public void ErrorAuth(string message)
         {
-            VisibilityError = Visibility.Visible;
             VisibilityGrid = Visibility.Collapsed;
             VisibilityPanel = Visibility.Visible;
             MessageBox.Show(message, "Ошибка авторизации");

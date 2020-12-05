@@ -29,5 +29,10 @@ namespace Fooxboy.Boop.Client.WpfApp.Views.LoginsView
         {
             RegisterViewModel.GetViewModel().Register();
         }
+
+        private void ButtonBase2_OnClick(object sender, RoutedEventArgs e)
+        {
+            Services.NavigationService.GetService().GoTo(new SelectView());
+        }
     }
 }

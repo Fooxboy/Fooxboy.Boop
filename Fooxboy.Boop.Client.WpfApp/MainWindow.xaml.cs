@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Views.LoginsView;
 
 namespace Fooxboy.Boop.Client.WpfApp
 {
@@ -23,8 +24,9 @@ namespace Fooxboy.Boop.Client.WpfApp
         public MainWindow()
         {
             InitializeComponent();
-
-            Services.NavigationService.GetService(MainFrame).GoTo("Views/WelcomeView.xaml");
+            var config = AppGlobalConfig.ConfigSerivce.GetConfig();
+            if(config.ShowWelcomePage) Services.NavigationService.GetService(MainFrame).GoTo("Views/WelcomeView.xaml");
+            else Services.NavigationService.GetService(MainFrame).GoTo(new SelectView());
 
             //todo: проверка есть ли уже авторизация.
             Services.ApiService.Init("https://localhost:2020", "token");

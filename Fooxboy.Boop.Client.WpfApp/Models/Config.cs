@@ -12,5 +12,6 @@ namespace Fooxboy.Boop.Client.WpfApp.Models
     {
         public string Address { get; set; }
         public string Token { get; set; }
+        public string NameUser { get; set; }
     }
 }
