@@ -5,11 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.Shared.Models.Messages;
+using Application = System.Windows.Application;
+using Message = Fooxboy.Boop.Shared.Models.Messages.Message;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 {
@@ -70,7 +74,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
         private void LongPollServiceOnNewMessageEvent(List<Message> msgs)
         {
-            //todo: proccessing newMessages.
+            
 
             foreach (var message in msgs)
             {
@@ -94,6 +98,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                             Dialogs.Add(dialog);
                             Dialogs.Move(index, 0);
                             Changed("Dialogs");
+
+                            AppGlobalConfig.NotifyIcon.ShowBalloonTip(500, dialog.ChatTitle, dialog.LastMessageText, ToolTipIcon.Info);
                         }));
                     }
                 }

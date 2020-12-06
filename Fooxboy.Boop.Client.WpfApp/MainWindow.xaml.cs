@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -33,6 +34,11 @@ namespace Fooxboy.Boop.Client.WpfApp
 
             //todo: проверка есть ли уже авторизация.
             Services.ApiService.Init("https://localhost:2020", "token");
+
+            var notifyIcon = new NotifyIcon();
+            notifyIcon.Text = "Boop Messanger";
+            notifyIcon.Visible = false;
+            AppGlobalConfig.NotifyIcon = notifyIcon;
         }
     }
 }

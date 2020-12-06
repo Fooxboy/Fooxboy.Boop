@@ -1,43 +1,78 @@
-﻿<UserControl x:Class="Fooxboy.Boop.Client.WpfApp.Controls.MessageControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
-             mc:Ignorable="d" 
-             Loaded="MessageControl_OnLoaded"
-             d:DesignHeight="200" d:DesignWidth="500">
-    <Grid Margin="0 4 0 4">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+﻿<UserControl
+    x:Class="Fooxboy.Boop.Client.WpfApp.Controls.MessageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="200"
+    d:DesignWidth="500"
+    Loaded="MessageControl_OnLoaded"
+    mc:Ignorable="d">
 
-        <Grid VerticalAlignment="Top">
-            <Ellipse Width="50" Height="50">
-                <Ellipse.Fill>
-                    <ImageBrush x:Name="photoUser" ImageSource="/Controls/user.jpg" Stretch="UniformToFill"/>
-                </Ellipse.Fill>
-            </Ellipse>
+    <Grid x:Name="MainControlGrid">
+
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid VerticalAlignment="Top">
+                <Ellipse Width="50" Height="50">
+                    <Ellipse.Fill>
+                        <ImageBrush
+                            x:Name="photoUser"
+                            ImageSource="/Controls/user.jpg"
+                            Stretch="UniformToFill" />
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        x:Name="NameUser"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource GoogleSansBold}"
+                        FontSize="16"
+                        Text="Имя пользователя" />
+                    <TextBlock
+                        x:Name="Time"
+                        Margin="5,2,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource GoogleSansRegular}"
+                        FontSize="10"
+                        Foreground="#404040"
+                        Text="4:20" />
+                </StackPanel>
+
+                <TextBlock
+                    x:Name="TextMessage"
+                    Grid.Row="1"
+                    Margin="10,0,0,0"
+                    FontFamily="{StaticResource GoogleSansRegular}"
+                    FontSize="14"
+                    Text="Текст сообщения"
+                    TextWrapping="Wrap" />
+            </Grid>
+
         </Grid>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            <StackPanel Margin="5 0 0 0"  Orientation="Horizontal">
-                <TextBlock x:Name="NameUser"  VerticalAlignment="Center" FontSize="16" FontFamily="{StaticResource GoogleSansBold}" Text="Имя пользователя"/>
-                <TextBlock x:Name="Time" VerticalAlignment="Center" FontSize="10" FontFamily="{StaticResource GoogleSansRegular}" Margin="5 2 0 0" Foreground="#404040" Text="4:20"/>
-            </StackPanel>
-
-            <TextBlock Grid.Row="1" Margin="5 0 0 0" 
-                       TextWrapping="Wrap" 
-                       FontSize="14"
-                       x:Name="TextMessage"
-                       FontFamily="{StaticResource GoogleSansRegular}"
-                       Text="Текст сообщения типа ну и такое все ну вы поняли да пидорасы!"/>
-        </Grid>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=MainControlGrid, Path=IsMouseOver}" Value="True">
+                        <Setter Property="Background" Value="#f5f5f5" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
     </Grid>
 </UserControl>

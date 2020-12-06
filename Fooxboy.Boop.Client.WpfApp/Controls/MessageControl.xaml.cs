@@ -39,5 +39,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             Time.Text = TimeSpan.FromSeconds(Message.Time).ToString(@"hh\:mm");
             NameUser.Text = Message.NameSender;
         }
+
+        
     }
 }
