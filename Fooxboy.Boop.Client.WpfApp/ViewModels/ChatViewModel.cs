@@ -98,7 +98,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             
             var api = Services.ApiService.Get();
 
-            if (TextMessage != null || TextMessage != string.Empty)
+            if (!string.IsNullOrEmpty(TextMessage))
             {
                 try
                 {
@@ -106,9 +106,9 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                     Messages.Add(new Message()
                     {
                         ChatId = _chatId,
-                        ImageSender =  "null",
+                        ImageSender =  AppGlobalConfig.CurrentConnectUser.PathProfilePic,
                         MsgId =  result.MsgId,
-                        NameSender = "Вы",
+                        NameSender = $"{AppGlobalConfig.CurrentConnectUser.FirstName} {AppGlobalConfig.CurrentConnectUser.LastName}",
                         RecieverId = _chatId,
                         SenderId = 1,
                         Text = TextMessage,

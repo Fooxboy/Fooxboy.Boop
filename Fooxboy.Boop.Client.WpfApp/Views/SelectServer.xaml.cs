@@ -45,8 +45,8 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
                     var serverinfo = config.Servers.Single(s => s.Address == AddressServer.Text);
                     if (serverinfo.Token != "")
                     {
-                        AppGlobalConfig.CurrentConnectUser = await api.Users.GetInfoAsync(0);
                         ApiService.ChangeToken(serverinfo.Token);
+                        AppGlobalConfig.CurrentConnectUser = await api.Users.GetInfoAsync(0);
                         Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
                     }
                     else

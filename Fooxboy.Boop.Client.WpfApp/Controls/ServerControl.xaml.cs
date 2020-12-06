@@ -56,10 +56,17 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
 
         private async void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Services.ApiService.ChangeAddress(Server.Address);
-            AppGlobalConfig.CurrentConnectUser = await ApiService.Get().Users.GetInfoAsync(0);
-            ApiService.ChangeToken(Server.Token);
-            Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
+            try
+            {
+                ApiService.ChangeAddress(Server.Address);
+                ApiService.ChangeToken(Server.Token);
+                Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка подключения к серверу.");
+            }
+            
         }
     }
 }
