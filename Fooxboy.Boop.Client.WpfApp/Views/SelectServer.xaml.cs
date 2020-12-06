@@ -45,6 +45,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
                     var serverinfo = config.Servers.Single(s => s.Address == AddressServer.Text);
                     if (serverinfo.Token != "")
                     {
+                        AppGlobalConfig.CurrentConnectUser = await api.Users.GetInfoAsync(0);
                         ApiService.ChangeToken(serverinfo.Token);
                         Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
                     }
@@ -66,6 +67,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
             }
             catch (Exception ex)
             {
+                GridConnect.Visibility = Visibility.Collapsed;
                 MessageBox.Show(ex.Message, "Ошибка подключения к серверу");
             }
             

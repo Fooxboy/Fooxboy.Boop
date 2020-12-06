@@ -99,7 +99,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                             Dialogs.Move(index, 0);
                             Changed("Dialogs");
 
-                            AppGlobalConfig.NotifyIcon.ShowBalloonTip(500, dialog.ChatTitle, dialog.LastMessageText, ToolTipIcon.Info);
+                           // AppGlobalConfig.NotifyIcon.ShowBalloonTip(500, dialog.ChatTitle, dialog.LastMessageText, ToolTipIcon.Info);
                         }));
                     }
                 }

@@ -12,10 +12,10 @@
     <Grid>
         <Grid
             Margin="25"
-            MouseUp="UIElement_OnMouseUp"
             HorizontalAlignment="Center"
+            MouseEnter="UIElement_OnMouseEnter"
             MouseLeave="UIElement_OnMouseLeave"
-            MouseEnter="UIElement_OnMouseEnter">
+            MouseUp="UIElement_OnMouseUp">
             <Rectangle
                 Width="800"
                 HorizontalAlignment="Stretch"

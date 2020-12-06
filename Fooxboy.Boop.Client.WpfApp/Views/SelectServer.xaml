@@ -56,20 +56,20 @@
                 <Button
                     Width="70"
                     Margin="5,0,0,0"
-                    Foreground="Black"
                     fluentWpf:RevealElement.BorderRadius="2"
                     Click="ButtonBase_OnClick"
                     Content="Поехали"
                     FontFamily="{StaticResource GoogleSansRegular}"
+                    Foreground="Black"
                     Style="{StaticResource ButtonAccentRevealStyle}" />
             </StackPanel>
 
             <TextBlock
                 Margin="0,50,0,0"
                 HorizontalAlignment="Center"
-                Foreground="Black"
                 FontFamily="{StaticResource GoogleSansRegular}"
                 FontSize="15"
+                Foreground="Black"
                 Text="Сервера, к которым вы подлючались недавно" />
 
 

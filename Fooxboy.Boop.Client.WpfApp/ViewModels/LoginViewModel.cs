@@ -51,6 +51,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                     server.Token = result.Token;
 
                     var user = await api.Users.GetInfoAsync(0);
+                    AppGlobalConfig.CurrentConnectUser = user;
                     server.NameUser = user.FirstName + " " + user.LastName;
 
                     config.Servers.Add(server);

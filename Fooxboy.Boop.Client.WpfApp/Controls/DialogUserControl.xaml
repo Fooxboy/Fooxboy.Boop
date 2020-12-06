@@ -9,9 +9,21 @@
     d:DesignWidth="500"
     Loaded="DialogUserControl_OnLoaded"
     mc:Ignorable="d">
-    <Grid>
+    <Grid x:Name="ControlGrid">
+
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=ControlGrid, Path=IsMouseOver}" Value="True">
+                        <Setter Property="Background" Value="#f5f5f5" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+
         <StackPanel
             Height="66"
+            Margin="5,2,5,2"
             VerticalAlignment="Center"
             Orientation="Horizontal">
             <Grid>
@@ -51,7 +63,7 @@
                 </Grid>
             </StackPanel>
         </StackPanel>
-        <Grid Margin="280,0,0,0" HorizontalAlignment="Right">
+        <Grid Margin="0,0,5,0" HorizontalAlignment="Right">
             <TextBlock
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"

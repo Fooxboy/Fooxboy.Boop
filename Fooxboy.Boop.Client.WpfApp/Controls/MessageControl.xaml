@@ -19,7 +19,12 @@
             </Grid.ColumnDefinitions>
 
             <Grid VerticalAlignment="Top">
-                <Ellipse Width="50" Height="50">
+                <Ellipse
+                    Width="50"
+                    Height="50"
+                    MouseEnter="UIElement_OnMouseEnter"
+                    MouseLeave="UIElement_OnMouseLeave"
+                    MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
                     <Ellipse.Fill>
                         <ImageBrush x:Name="photoUser" Stretch="UniformToFill">
                             <ImageBrush.ImageSource>
@@ -30,6 +35,15 @@
                             </ImageBrush.ImageSource>
                         </ImageBrush>
                     </Ellipse.Fill>
+
+                    <Ellipse.Effect>
+                        <DropShadowEffect
+                            x:Name="ShadowPhoto"
+                            BlurRadius="15"
+                            Direction="270"
+                            Opacity="0.0"
+                            Color="Black" />
+                    </Ellipse.Effect>
                 </Ellipse>
             </Grid>
 

@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Views;
+using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Client.WpfApp.Controls
@@ -40,6 +42,34 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             NameUser.Text = Message.NameSender;
         }
 
-        
+
+        private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            ShadowPhoto.Opacity = 0.4;
+        }
+
+        private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            ShadowPhoto.Opacity = 0.0;
+        }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var api = Services.ApiService.Get();
+            try
+            {
+                var idUser = Message.SenderId;
+                Services.NavigationService.GetService().GoToChat(new UserView(idUser), idUser);
+            }
+            catch (BoopRootException ee)
+            {
+                MessageBox.Show($"Код ошибки: {ee.Code}. Сообщение: {ee.Message}");
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show($"{ee.Message}", "Ошибка");
+
+            }
+        }
     }
 }

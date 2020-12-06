@@ -54,10 +54,10 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             Shadow.BlurRadius = 30;
         }
 
-        private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
+        private async void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
             Services.ApiService.ChangeAddress(Server.Address);
-
+            AppGlobalConfig.CurrentConnectUser = await ApiService.Get().Users.GetInfoAsync(0);
             ApiService.ChangeToken(Server.Token);
             Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
         }

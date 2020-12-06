@@ -45,7 +45,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 }
                 
 
-               
+                AppGlobalConfig.CurrentConnectUser = await api.Users.GetInfoAsync(0);
+
                 Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
 
             }
