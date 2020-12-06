@@ -33,7 +33,7 @@ namespace Fooxboy.Boop.Client.WpfApp
             else Services.NavigationService.GetService(MainFrame).GoTo(new SelectServer());
 
             //todo: проверка есть ли уже авторизация.
-            Services.ApiService.Init("https://localhost:2020", "token");
+            Services.ApiService.Init("http://localhost:2020", "token");
 
             var notifyIcon = new NotifyIcon();
             notifyIcon.Text = "Boop Messanger";

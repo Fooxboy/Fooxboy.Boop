@@ -2,6 +2,7 @@
     x:Class="Fooxboy.Boop.Client.WpfApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp"
     StartupUri="MainWindow.xaml">
     <Application.Resources>

@@ -31,7 +31,7 @@ namespace Fooxboy.Boop.SDK
         {
             Address = address;
             if (!(address.Any(c => c == ':'))) address += ":2020";
-            _httpHelper.ChangeAddress("https://" +address);
+            _httpHelper.ChangeAddress("http://" +address);
         }
 
         public void ChangeToken(string token)

@@ -86,7 +86,7 @@ namespace Fooxboy.Boop.SDK.Methods
 
             if (!(address.Any(c => c == ':'))) address += ":2020";
 
-            address = $"https://{address}";
+            address = $"http://{address}";
 
             if (!(_longPollService is null)) return _longPollService;
             _longPollService = new LongPollService(address, token);

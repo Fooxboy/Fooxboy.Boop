@@ -44,7 +44,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
                 var configService = AppGlobalConfig.ConfigSerivce;
                 var config = configService.GetConfig();
-                var server = config.Servers.SingleOrDefault(s => s.Address + ":2020" == ApiService.Get().Address );
+                var server = config.Servers.SingleOrDefault(s => s.Address == ApiService.Get().Address );
                 if (server != null)
                 {
                     config.Servers.Remove(server);

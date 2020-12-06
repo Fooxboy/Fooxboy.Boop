@@ -27,8 +27,11 @@ namespace Fooxboy.Boop.BackendServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+           // services.AddLettuceEncrypt();
             services.AddSingleton(new Logger());
         }
+        
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,9 +40,10 @@ namespace Fooxboy.Boop.BackendServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthorization();
+            //app.UseAuthorization();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

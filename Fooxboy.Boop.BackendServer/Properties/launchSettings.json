@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/users.getInfo",
-      "applicationUrl": "https://localhost:2020;http://localhost:2021",
+      "applicationUrl": "https://192.168.1.107:2021;http://192.168.1.107:2020",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

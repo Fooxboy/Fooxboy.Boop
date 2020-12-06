@@ -34,14 +34,14 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid Margin="0,0,0,0" Background="#e0e0e0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="45" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="*" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="0,36,0,0">
             <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
                 <Ellipse Width="34" Height="34">
                     <Ellipse.Fill>
