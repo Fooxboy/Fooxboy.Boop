@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.SDK.Helpers;
@@ -82,6 +83,11 @@ namespace Fooxboy.Boop.SDK.Methods
 
         public LongPollService GetLongPollService(string address, string token)
         {
+
+            if (!(address.Any(c => c == ':'))) address += ":2020";
+
+            address = $"https://{address}";
+
             if (!(_longPollService is null)) return _longPollService;
             _longPollService = new LongPollService(address, token);
             return _longPollService;

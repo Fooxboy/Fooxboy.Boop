@@ -1,4 +1,5 @@
-﻿using Fooxboy.Boop.SDK.Helpers;
+﻿using System.Linq;
+using Fooxboy.Boop.SDK.Helpers;
 using Fooxboy.Boop.SDK.Methods;
 using Register = Fooxboy.Boop.Shared.Models.Register;
 
@@ -29,6 +30,7 @@ namespace Fooxboy.Boop.SDK
         public void ChangeAddress(string address)
         {
             Address = address;
+            if (!(address.Any(c => c == ':'))) address += ":2020";
             _httpHelper.ChangeAddress("https://" +address);
         }
 

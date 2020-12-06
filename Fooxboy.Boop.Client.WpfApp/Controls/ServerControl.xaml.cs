@@ -56,7 +56,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
 
         private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Services.ApiService.ChangeAddress(Server.Address + ":2020");
+            Services.ApiService.ChangeAddress(Server.Address);
 
             ApiService.ChangeToken(Server.Token);
             Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");

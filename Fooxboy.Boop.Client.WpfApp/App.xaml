@@ -9,6 +9,7 @@
             <FontFamily x:Key="GoogleSansBold">./Resources/Fonts/GoogleSans-Bold.ttf#Google Sans Bold</FontFamily>
             <FontFamily x:Key="GoogleSansRegular">./Resources/Fonts/GoogleSans-Regular.ttf#Google Sans Regular</FontFamily>
             <FontFamily x:Key="GoogleSansMedium">./Resources/Fonts/GoogleSans-Medium.ttf#Google Sans Medium</FontFamily>
+            <FontFamily x:Key="RobotoRegular">./Resources/Fonts/Roboto-Regular.ttf#Roboto Regular</FontFamily>
 
             <ResourceDictionary.MergedDictionaries>
                 <!--  FluentWPF Controls  -->

@@ -1,38 +1,63 @@
-﻿<UserControl x:Class="Fooxboy.Boop.Client.WpfApp.Controls.DialogUserControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
-             mc:Ignorable="d" 
-             Loaded="DialogUserControl_OnLoaded"
-             d:DesignHeight="200" d:DesignWidth="500">
+﻿<UserControl
+    x:Class="Fooxboy.Boop.Client.WpfApp.Controls.DialogUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="200"
+    d:DesignWidth="500"
+    Loaded="DialogUserControl_OnLoaded"
+    mc:Ignorable="d">
     <Grid>
-        <StackPanel Height="66" VerticalAlignment="Center" Orientation="Horizontal">
+        <StackPanel
+            Height="66"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
             <Grid>
                 <Ellipse Width="60" Height="60">
                     <Ellipse.Fill>
-                        <ImageBrush x:Name="photoUser" ImageSource="/Controls/user.jpg" Stretch="UniformToFill"/>
+                        <ImageBrush x:Name="photoUser" Stretch="UniformToFill">
+                            <ImageBrush.ImageSource>
+                                <BitmapImage
+                                    DecodePixelHeight="60"
+                                    DecodePixelWidth="60"
+                                    UriSource="/Controls/user.jpg" />
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
                     </Ellipse.Fill>
                 </Ellipse>
             </Grid>
-            <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
-                <Grid VerticalAlignment="Center" Height="50">
+            <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                <Grid Height="50" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock FontSize="15" x:Name="TitleChat"
-                               FontFamily="{StaticResource GoogleSansBold}" 
-                               Grid.Row="0" VerticalAlignment="Center"
-                               Text="Имя пользователя"/>
-                    <TextBlock Foreground="#4f4f4f" 
-                               x:Name="LastMessage" FontFamily="{StaticResource GoogleSansRegular}" Grid.Row="1" VerticalAlignment="Center" Text="Последнее сообщения блять нахуя"/>
+                    <TextBlock
+                        x:Name="TitleChat"
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource GoogleSansBold}"
+                        FontSize="15"
+                        Text="Имя пользователя" />
+                    <TextBlock
+                        x:Name="LastMessage"
+                        Grid.Row="1"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource GoogleSansRegular}"
+                        Foreground="#4f4f4f"
+                        Text="Последнее сообщения блять нахуя" />
                 </Grid>
             </StackPanel>
         </StackPanel>
-        <Grid Margin="280 0 0 0"  HorizontalAlignment="Right">
-            <TextBlock Foreground="#4f4f4f" FontFamily="{StaticResource GoogleSansRegular}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="4:20"/>
+        <Grid Margin="280,0,0,0" HorizontalAlignment="Right">
+            <TextBlock
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource GoogleSansRegular}"
+                Foreground="#4f4f4f"
+                Text="4:20" />
         </Grid>
     </Grid>
 </UserControl>

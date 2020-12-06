@@ -34,7 +34,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
             GridConnect.Visibility = Visibility.Visible;
             try
             {
-                Services.ApiService.ChangeAddress(AddressServer.Text + ":2020");
+                Services.ApiService.ChangeAddress(AddressServer.Text);
                 var api = ApiService.Get();
                 var info = await api.Server.InfoAsync();
                 info.Address = AddressServer.Text;

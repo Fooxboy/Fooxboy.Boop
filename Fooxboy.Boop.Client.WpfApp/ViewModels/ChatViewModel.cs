@@ -67,7 +67,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public void StartCheckerMessages()
         {
             var api = ApiService.Get();
-            var serivce = api.Messages.GetLongPollService($"{ApiService.Get().Address}", ApiService.Get().Token);
+            var serivce = api.Messages.GetLongPollService(ApiService.Get().Address, ApiService.Get().Token);
 
             serivce.NewMessageEvent += Serivce_NewMessageEvent;
         }

@@ -12,7 +12,7 @@
 
     <Grid x:Name="MainControlGrid">
 
-        <Grid Margin="5">
+        <Grid Margin="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
@@ -21,33 +21,37 @@
             <Grid VerticalAlignment="Top">
                 <Ellipse Width="50" Height="50">
                     <Ellipse.Fill>
-                        <ImageBrush
-                            x:Name="photoUser"
-                            ImageSource="/Controls/user.jpg"
-                            Stretch="UniformToFill" />
+                        <ImageBrush x:Name="photoUser" Stretch="UniformToFill">
+                            <ImageBrush.ImageSource>
+                                <BitmapImage
+                                    DecodePixelHeight="50"
+                                    DecodePixelWidth="50"
+                                    UriSource="/Controls/user.jpg" />
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
                     </Ellipse.Fill>
                 </Ellipse>
             </Grid>
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                <StackPanel Margin="12,0,0,0" Orientation="Horizontal">
                     <TextBlock
                         x:Name="NameUser"
                         VerticalAlignment="Center"
-                        FontFamily="{StaticResource GoogleSansBold}"
-                        FontSize="16"
+                        FontFamily="{StaticResource GoogleSansMedium}"
+                        FontSize="15"
                         Text="Имя пользователя" />
                     <TextBlock
                         x:Name="Time"
                         Margin="5,2,0,0"
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource GoogleSansRegular}"
-                        FontSize="10"
+                        FontSize="11"
                         Foreground="#404040"
                         Text="4:20" />
                 </StackPanel>
@@ -55,8 +59,8 @@
                 <TextBlock
                     x:Name="TextMessage"
                     Grid.Row="1"
-                    Margin="10,0,0,0"
-                    FontFamily="{StaticResource GoogleSansRegular}"
+                    Margin="13,0,0,0"
+                    FontFamily="{StaticResource RobotoRegular}"
                     FontSize="14"
                     Text="Текст сообщения"
                     TextWrapping="Wrap" />
