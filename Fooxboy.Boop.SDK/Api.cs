@@ -16,6 +16,7 @@ namespace Fooxboy.Boop.SDK
         public Login Login { get; }
         public Messages Messages { get; }
         public Server Server { get; }
+        public Friends Friends { get; }
 
         public Api(string address, string token = "")
         {
@@ -25,6 +26,7 @@ namespace Fooxboy.Boop.SDK
             this.Login = new Login(_httpHelper);
             this.Messages =new Messages(_httpHelper);
             this.Server = new Server(_httpHelper);
+            this.Friends = new Friends(_httpHelper);
         }
 
         public void ChangeAddress(string address)
