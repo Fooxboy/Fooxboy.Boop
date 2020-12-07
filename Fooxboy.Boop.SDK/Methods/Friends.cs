@@ -95,6 +95,56 @@ namespace Fooxboy.Boop.SDK.Methods
             var data = result.Data as JObject;
             if (!result.Status) throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
+
+        public long GetCountRequests()
+        {
+            var result =  _httpHelper.GetRequest("friends.getCountRequests", new Dictionary<string,string>());
+
+            if (result.Status)
+            {
+                return (long) result.Data;
+            }
+            else
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
+        
+        public async Task<long> GetCountRequestsAsync()
+        {
+            var result = await _httpHelper.GetRequestAsync("friends.getCountRequests", new Dictionary<string,string>());
+
+            if (result.Status)
+            {
+                return (long) result.Data;
+            }
+            else
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
+
+        public Shared.Models.Friends.Get GetRequests()
+        {
+            var result =  _httpHelper.GetRequest("friends.getRequests", new Dictionary<string,string>());
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Friends.Get>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+        }
+        
+        public async Task<Shared.Models.Friends.Get> GetRequestsAsync()
+        {
+            var result =  await _httpHelper.GetRequestAsync("friends.getRequests", new Dictionary<string,string>());
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Friends.Get>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+        }
        
     }
 }
