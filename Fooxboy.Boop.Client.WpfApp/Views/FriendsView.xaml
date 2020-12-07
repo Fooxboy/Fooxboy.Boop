@@ -9,9 +9,10 @@
     Title="FriendsView"
     d:DesignHeight="500"
     d:DesignWidth="320"
+    Loaded="FriendsView_OnLoaded"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Margin="0,36,0,0">
         <StackPanel>
             <TextBlock
                 Margin="0,5,0,0"
@@ -58,9 +59,55 @@
                 </Button>
             </StackPanel>
 
+            <Grid
+                Height="60"
+                MouseEnter="UIElement_OnMouseEnter"
+                MouseLeave="UIElement_OnMouseLeave">
+                <Rectangle
+                    Height="50"
+                    Margin="5,5,5,0"
+                    Fill="#d4d4d4"
+                    RadiusX="5"
+                    RadiusY="5">
+                    <Rectangle.Effect>
+                        <DropShadowEffect
+                            x:Name="ShadowBlock"
+                            BlurRadius="10"
+                            Direction="280"
+                            Opacity="0.0"
+                            ShadowDepth="5"
+                            Color="Gray" />
+                    </Rectangle.Effect>
+                </Rectangle>
 
+                <TextBlock
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource GoogleSansMedium}"
+                    FontSize="15"
+                    Text="Заявки в друзья" />
 
-
+                <Grid
+                    x:Name="CountRequestsBlock"
+                    Margin="0,0,15,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                    <Rectangle
+                        Width="20"
+                        Height="20"
+                        Fill="Red"
+                        RadiusX="999"
+                        RadiusY="999" />
+                    <TextBlock
+                        x:Name="CountRequests"
+                        Margin="2,1,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource GoogleSansBold}"
+                        Text="9" />
+                </Grid>
+            </Grid>
 
 
             <TextBlock

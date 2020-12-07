@@ -78,7 +78,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Friends
                     try
                     {
                         friendsRemoveUser.Add(long.Parse(friendIdString));
-                    }catch(InvalidCastException) {}
+                    }catch(FormatException) {}
                 }
 
 

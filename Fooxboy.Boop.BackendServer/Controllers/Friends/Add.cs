@@ -60,7 +60,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Friends
                     try
                     {
                         requests.Add(long.Parse(idString));
-                    }catch(InvalidCastException) {}
+                    }catch(FormatException) {}
                 }
 
                 if (requests.Any(idU => idU == id))

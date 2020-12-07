@@ -49,7 +49,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Friends
                     try
                     {
                         friendsIds.Add(long.Parse(idString));
-                    }catch(InvalidCastException) {}
+                    }catch(FormatException) {}
                 }
                 result.Status = true;
                 result.Data = friendsIds.Count;

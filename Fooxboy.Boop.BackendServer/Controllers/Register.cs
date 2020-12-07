@@ -62,6 +62,10 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     user.PasswordHash = password.GetSHA256();
                     user.UserId = db.Users.Count() + 1;
                     user.Token = user.PasswordHash.GetSHA256() + new Random().Next(1, 999999999) ;
+                    user.Friends = "";
+                    user.FirendsRequests = "";
+                    user.FriendsRequested = "";
+                    user.Status = "online";
 
                     db.Users.Add(user);
 

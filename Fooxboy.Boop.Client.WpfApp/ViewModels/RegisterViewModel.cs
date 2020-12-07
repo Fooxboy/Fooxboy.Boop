@@ -29,7 +29,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             try
             {
                 var result = await api.Register.StartAsync(Nickname, Password, FirstName, LastName, Number);
-                MessageBox.Show($"Ваш Id: {result.UserId}, Token: {result.Token}");
+                //MessageBox.Show($"Ваш Id: {result.UserId}, Token: {result.Token}");
                 ApiService.ChangeToken(result.Token);
                 var configService = AppGlobalConfig.ConfigSerivce;
                 var config = configService.GetConfig();

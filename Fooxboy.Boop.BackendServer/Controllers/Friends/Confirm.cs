@@ -58,7 +58,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Friends
                 foreach (var idString in user.FirendsRequests.Split(","))
                 {
                     try { userRequests.Add(long.Parse(idString));} 
-                    catch(InvalidCastException) {}
+                    catch(FormatException) {}
                 }
 
                 if (userRequests.All(r => r != id))
@@ -75,7 +75,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Friends
                 foreach (var idString in userRequest.FriendsRequested.Split(","))
                 {
                     try { userRequested.Add(long.Parse(idString));} 
-                    catch(InvalidCastException) {}
+                    catch(FormatException) {}
                 }
 
                 try
