@@ -35,13 +35,25 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private async void UserView_OnLoaded(object sender, RoutedEventArgs e)
         {
-           
+            IsFriend = await ApiService.Get().Users.IsFriendAsync(_userId); 
             await _vm.LoadUserInfo(_userId);
+
+            if (IsFriend) FriendButton.Content = "Удалить из друзей";
+            else FriendButton.Content = "Добавить в друзья";
         }
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             await _vm.GoToChatUser();
+        }
+
+        private async void FriendButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (IsFriend)
+            {
+                await _vm.RemoveFromFriendsList();
+            }
+            else await _vm.AddToFriend();
         }
     }
 }
