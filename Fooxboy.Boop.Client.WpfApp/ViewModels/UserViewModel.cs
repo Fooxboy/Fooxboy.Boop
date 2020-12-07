@@ -49,5 +49,17 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
             nav.GoToChat(new ChatView(chatInfo, User.UserId));
         }
+
+        public async Task AddToFriend()
+        {
+            var api = ApiService.Get();
+            await api.Friends.AddAsync(User.UserId);
+        }
+
+        public async Task RemoveFromFriendsList()
+        {
+            var api = ApiService.Get();
+            await api.Friends.RemoveAsync(User.UserId);
+        }
     }
 }

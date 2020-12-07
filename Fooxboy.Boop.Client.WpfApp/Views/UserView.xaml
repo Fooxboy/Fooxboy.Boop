@@ -81,7 +81,9 @@
                         FontFamily="{StaticResource GoogleSansMedium}"
                         Foreground="Black"
                         Style="{StaticResource ButtonRevealStyle}" />
+
                     <Button
+                        x:Name="FriendButton"
                         Width="250"
                         Height="30"
                         Margin="50,0,0,0"
@@ -101,7 +103,7 @@
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Text="Блять а че нахуй тут делать" />
+                Text="Тут будет разная информация о текущем пользователе" />
         </Grid>
 
     </Grid>
