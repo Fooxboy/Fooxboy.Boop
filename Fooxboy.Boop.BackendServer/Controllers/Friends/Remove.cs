@@ -84,6 +84,22 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Friends
 
                 friendsUser.Remove(id);
                 friendsRemoveUser.Remove(user.UserId);
+
+                var stringFriendsUser = string.Empty;
+                foreach (var friend in friendsUser)
+                {
+                    stringFriendsUser += $"{friend},";
+                }
+
+                var stringRemoveFriendsUser = string.Empty;
+                foreach (var friend in friendsRemoveUser)
+                {
+                    stringRemoveFriendsUser += $"{friend},";
+                }
+
+                user.Friends = stringFriendsUser;
+                removeUser.Friends = stringRemoveFriendsUser;
+                
                 db.SaveChanges();
 
                 result.Status = true;
