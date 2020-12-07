@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Fooxboy.Boop.Client.WpfApp.Models;
+using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Client.WpfApp.ViewModels;
 
 namespace Fooxboy.Boop.Client.WpfApp.Views
@@ -22,6 +23,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
     {
         private long _userId;
         private UserViewModel _vm;
+        private bool IsFriend;
         public UserView(long userId)
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private async void UserView_OnLoaded(object sender, RoutedEventArgs e)
         {
-            
+           
             await _vm.LoadUserInfo(_userId);
         }
 

@@ -61,5 +61,39 @@ namespace Fooxboy.Boop.SDK.Methods
             }
         }
         
+        public bool IsFriend(long userId) 
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("id", userId.ToString());
+
+            var result = _httpHelper.GetRequest("users.isFriend", parameters);
+            try
+            {
+                var data = (bool)result.Data;
+                return data;
+            }catch
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
+        
+        public async Task<bool> IsFriendAsync(long userId) 
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("id", userId.ToString());
+
+            var result = await _httpHelper.GetRequestAsync("users.isFriend", parameters);
+            try
+            {
+                var data = (bool)result.Data;
+                return data;
+            }catch
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
+        
     }
 }
