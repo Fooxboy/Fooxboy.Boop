@@ -60,6 +60,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             {
                 ApiService.ChangeAddress(Server.Address);
                 ApiService.ChangeToken(Server.Token);
+                AppGlobalConfig.CurrentConnectUser = await ApiService.Get().Users.GetInfoAsync(0);
                 Services.NavigationService.GetService().GoTo("Views/DialogsMainPage.xaml");
             }
             catch (Exception ex)

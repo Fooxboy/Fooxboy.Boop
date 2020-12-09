@@ -19,6 +19,8 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
     /// </summary>
     public partial class DialogsView : Page
     {
+
+        public static DialogsViewModel StaticViewModel;
         private DialogsViewModel _vm;
         private bool isOpen;
         public DialogsView()
@@ -27,6 +29,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
             _vm = new DialogsViewModel();
             DataContext = _vm;
             isOpen = false;
+            StaticViewModel = _vm;
         }
 
         private async void DialogsView_OnLoaded(object sender, RoutedEventArgs e)

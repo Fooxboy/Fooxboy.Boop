@@ -8,6 +8,7 @@ using System.Windows.Interop;
 using System.Windows.Threading;
 using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
+using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Messages;
 
@@ -103,19 +104,23 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 try
                 {
                     var result = await api.Messages.SendAsync(TextMessage, _chatId);
-                    Messages.Add(new Message()
+                    var msg = new Message()
                     {
-                        ChatId = _chatId,
-                        ImageSender =  AppGlobalConfig.CurrentConnectUser.PathProfilePic,
-                        MsgId =  result.MsgId,
-                        NameSender = $"{AppGlobalConfig.CurrentConnectUser.FirstName} {AppGlobalConfig.CurrentConnectUser.LastName}",
+                        ChatId = 0,
+                        ImageSender = AppGlobalConfig.CurrentConnectUser.PathProfilePic,
+                        MsgId = result.MsgId,
+                        NameSender =
+                            $"{AppGlobalConfig.CurrentConnectUser.FirstName} {AppGlobalConfig.CurrentConnectUser.LastName}",
                         RecieverId = _chatId,
-                        SenderId = 1,
+                        SenderId = AppGlobalConfig.CurrentConnectUser.UserId,
                         Text = TextMessage,
-                        Time = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds,
+                        Time = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds,
                         UsersReaded = ""
 
-                    });
+                    };
+                    Messages.Add(msg);
+
+                    DialogsView.StaticViewModel.UpdateMessage(msg);
 
                     Changed("Messages");
 

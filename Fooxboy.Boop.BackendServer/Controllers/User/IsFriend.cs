@@ -48,7 +48,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
                     try
                     {
                         friendsIds.Add(long.Parse(idString));
-                    }catch(InvalidCastException) {}
+                    }catch(FormatException) {}
                 }
 
                 result.Status = true;
