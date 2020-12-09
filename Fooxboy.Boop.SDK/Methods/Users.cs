@@ -94,6 +94,22 @@ namespace Fooxboy.Boop.SDK.Methods
                 throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
             }
         }
+
+        public async Task<string> GetUploadAvatarUrl()
+        {
+            var parameters = new Dictionary<string,string>();
+
+            var result = await _httpHelper.GetRequestAsync("users.getUploadAvatarUrl", parameters);
+            try
+            {
+                var data = (string)result.Data;
+                return data;
+            }catch
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
         
     }
 }
