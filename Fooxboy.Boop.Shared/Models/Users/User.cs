@@ -9,5 +9,8 @@ namespace Fooxboy.Boop.Shared.Models.Users
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PathProfilePic { get; set; }
+        public string LastSeenText { get; set; }
+        public long LastSeen { get; set; }
+        public string Status { get; set; }
     }
 }

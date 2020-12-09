@@ -11,6 +11,7 @@
       <None Remove="Resources\Fonts\GoogleSans-Bold.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Medium.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Regular.ttf" />
+      <None Remove="Resources\Images\check.png" />
       <None Remove="Resources\Images\friends.png" />
       <None Remove="Resources\Images\Icons\go.png" />
       <None Remove="Resources\Images\message.png" />
@@ -22,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Resource Include="Resources\Images\check.png" />
       <Resource Include="Resources\Images\friends.png" />
     </ItemGroup>
 

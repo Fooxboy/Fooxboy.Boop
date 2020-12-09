@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Fooxboy.Boop.BackendServer.Database;
 using Fooxboy.Boop.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,9 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
                 usr.LastName = usrRequest.LastName;
                 usr.UserId = userId;
                 usr.PathProfilePic = usrRequest.PathProfilePic;
-
+                usr.LastSeen = usrRequest.LastSeen;
+                var time = "Был в сети " + TimeSpan.FromSeconds(usr.LastSeen).ToString(@"hh\:mm");
+                usr.LastSeenText = time;
                 result.Data = usr;
                 result.Status = true;
                 return result;

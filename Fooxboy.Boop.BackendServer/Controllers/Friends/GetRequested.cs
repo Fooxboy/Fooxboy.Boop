@@ -63,6 +63,9 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Friends
                     friend.LastName = f.LastName;
                     friend.UserId = f.UserId;
                     friend.PathProfilePic = f.PathProfilePic;
+                    friend.LastSeen = f.LastSeen;
+                    var time = "Был в сети " + TimeSpan.FromSeconds(f.LastSeen).ToString(@"hh\:mm");
+                    friend.LastSeenText = time;
                     data.Friends.Add(friend);
                 }
 

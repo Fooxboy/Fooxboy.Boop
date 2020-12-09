@@ -22,5 +22,6 @@ namespace Fooxboy.Boop.BackendServer.Database
         public string FriendsRequested { get; set; }
         public string Status { get; set; }
         public long LastSeen { get; set; }
+        public string LastSeenText { get; set; }
     }
 }

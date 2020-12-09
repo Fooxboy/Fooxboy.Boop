@@ -12,6 +12,7 @@
     mc:Ignorable="d">
     <Grid
         x:Name="MainControlGrid"
+        Height="70"
         MouseEnter="UIElement_OnMouseEnter"
         MouseLeave="UIElement_OnMouseLeave"
         MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp">
@@ -64,7 +65,7 @@
             <StackPanel Margin="300,0,0,0" Orientation="Horizontal">
                 <Button
                     x:Name="ButtonConf"
-                    Width="80"
+                    Width="100"
                     Height="30"
                     fluentWpf:RevealElement.BorderRadius="2"
                     BorderThickness="0"
@@ -77,15 +78,21 @@
                             <Image
                                 Width="13"
                                 Height="13"
-                                Margin="5,1,0,0"
-                                Source="/Resources/Images/check.png" />
+                                Margin="5,1,0,0">
+                                <Image.Source>
+                                    <BitmapImage
+                                        DecodePixelHeight="13"
+                                        DecodePixelWidth="13"
+                                        UriSource="../Resources/Images/check.png" />
+                                </Image.Source>
+                            </Image>
                         </StackPanel>
                     </Button.Content>
                 </Button>
 
                 <Button
                     x:Name="MessageButton"
-                    Width="150"
+                    Width="170"
                     Height="30"
                     Margin="10,0,0,0"
                     fluentWpf:RevealElement.BorderRadius="2"
@@ -99,8 +106,14 @@
                             <Image
                                 Width="13"
                                 Height="13"
-                                Margin="5,1,0,0"
-                                Source="/././Resources/Images/message.png" />
+                                Margin="5,1,0,0">
+                                <Image.Source>
+                                    <BitmapImage
+                                        DecodePixelHeight="13"
+                                        DecodePixelWidth="13"
+                                        UriSource="../Resources/Images/message.png" />
+                                </Image.Source>
+                            </Image>
                         </StackPanel>
                     </Button.Content>
                 </Button>

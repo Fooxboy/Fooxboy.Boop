@@ -123,9 +123,10 @@
                         RadiusY="999" />
                     <TextBlock
                         x:Name="CountRequests"
-                        Margin="2,1,0,0"
+                        Margin="0,1,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
+                        Foreground="White"
                         FontFamily="{StaticResource GoogleSansBold}"
                         Text="9" />
                 </Grid>
