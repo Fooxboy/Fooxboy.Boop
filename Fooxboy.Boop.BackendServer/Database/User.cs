@@ -23,5 +23,6 @@ namespace Fooxboy.Boop.BackendServer.Database
         public string Status { get; set; }
         public long LastSeen { get; set; }
         public string LastSeenText { get; set; }
+        public string KeyUploadAvatar { get; set; }
     }
 }

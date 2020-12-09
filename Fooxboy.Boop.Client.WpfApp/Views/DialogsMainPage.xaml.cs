@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.SDK.Exceptions;
 
 namespace Fooxboy.Boop.Client.WpfApp.Views
 {
@@ -57,6 +58,20 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
             TextFriends.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
             TextSettings.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
             TextUser.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4169E1"));
+
+            try
+            {
+                Services.NavigationService.GetService().GoToChat(new UserView(AppGlobalConfig.CurrentConnectUser.UserId), AppGlobalConfig.CurrentConnectUser.UserId);
+            }
+            catch (BoopRootException ex)
+            {
+                MessageBox.Show($"Код ошибки: {ex.Code}. Сообщение: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Ошибка");
+
+            }
         }
 
         private void Settings_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

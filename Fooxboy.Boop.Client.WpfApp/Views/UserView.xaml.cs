@@ -58,6 +58,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private async void FriendButton_OnClick(object sender, RoutedEventArgs e)
         {
+            FriendButton.Visibility = Visibility.Collapsed;
             if (IsFriend)
             {
                 await _vm.RemoveFromFriendsList();
