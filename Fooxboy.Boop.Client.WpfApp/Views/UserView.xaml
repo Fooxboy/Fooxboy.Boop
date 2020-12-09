@@ -75,6 +75,7 @@
                     <Button
                         Width="250"
                         Height="30"
+                        x:Name ="MessageButton"
                         fluentWpf:RevealElement.BorderRadius="5"
                         Click="ButtonBase_OnClick"
                         Content="Написать сообщение"

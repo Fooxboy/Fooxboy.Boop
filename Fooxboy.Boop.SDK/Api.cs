@@ -32,7 +32,7 @@ namespace Fooxboy.Boop.SDK
         public void ChangeAddress(string address)
         {
             Address = address;
-            if (!(address.Any(c => c == ':'))) address += ":2020";
+            //if (!(address.Any(c => c == ':'))) address += ":2020";
             _httpHelper.ChangeAddress("http://" +address);
         }
 

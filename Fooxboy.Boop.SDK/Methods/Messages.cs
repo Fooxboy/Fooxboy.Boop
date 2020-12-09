@@ -84,7 +84,7 @@ namespace Fooxboy.Boop.SDK.Methods
         public LongPollService GetLongPollService(string address, string token)
         {
 
-            if (!(address.Any(c => c == ':'))) address += ":2020";
+            //if (!(address.Any(c => c == ':'))) address += ":2020";
 
             address = $"http://{address}";
 

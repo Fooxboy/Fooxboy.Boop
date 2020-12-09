@@ -36,7 +36,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
                 usr.Number = usrRequest.Number;
                 usr.FirstName = usrRequest.FirstName;
                 usr.LastName = usrRequest.LastName;
-                usr.UserId = userId;
+                usr.UserId = usrRequest.UserId;
                 usr.PathProfilePic = usrRequest.PathProfilePic;
                 usr.LastSeen = usrRequest.LastSeen;
                 var time = "Был в сети " + TimeSpan.FromSeconds(usr.LastSeen).ToString(@"hh\:mm");
