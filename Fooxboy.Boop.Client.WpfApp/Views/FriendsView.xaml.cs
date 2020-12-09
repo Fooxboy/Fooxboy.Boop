@@ -46,6 +46,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private async void FriendsView_OnLoaded(object sender, RoutedEventArgs e)
         {
+            await _vm.GetFriends();
             var requests = await ApiService.Get().Friends.GetCountRequestsAsync();
 
             if (requests == 0)
