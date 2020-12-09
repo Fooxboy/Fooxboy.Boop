@@ -46,6 +46,11 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
                 }
 
                 var pathFile = $"/avatars/{user.UserId}/{file.FileName}";
+
+                if (!System.IO.Directory.Exists(_appEnvironment.WebRootPath + $"/avatars/{user.UserId}"))
+                {
+                    System.IO.Directory.CreateDirectory(_appEnvironment.WebRootPath + $"/avatars/{user.UserId}");
+                }
                 
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathFile, FileMode.Create))
                 {

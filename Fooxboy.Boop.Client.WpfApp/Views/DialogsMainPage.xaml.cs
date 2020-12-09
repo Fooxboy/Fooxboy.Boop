@@ -80,6 +80,9 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
             TextFriends.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
             TextSettings.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4169E1"));
             TextUser.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6b6b6b"));
+
+            Services.NavigationService.GetService().GoToChat(new SettingsView());
+
         }
     }
 }
