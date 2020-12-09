@@ -58,5 +58,10 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
                 CountRequests.Text = requests.ToString();
             }
         }
+
+        private void UIElement_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Services.NavigationService.GetService().GoToChat(new FriendsRequestsView());
+        }
     }
 }

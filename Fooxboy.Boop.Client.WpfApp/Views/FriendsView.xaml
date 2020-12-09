@@ -83,7 +83,8 @@
             <Grid
                 Height="60"
                 MouseEnter="UIElement_OnMouseEnter"
-                MouseLeave="UIElement_OnMouseLeave">
+                MouseLeave="UIElement_OnMouseLeave"
+                MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp">
                 <Rectangle
                     Height="50"
                     Margin="5,5,5,0"
