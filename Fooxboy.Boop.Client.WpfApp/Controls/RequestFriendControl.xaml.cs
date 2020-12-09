@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Models;
+using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Users;
@@ -56,6 +58,30 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         {
             NameUser.Text = Friend.FirstName + " " + Friend.LastName;
             LastSeen.Text = "15 минут назад";
+        }
+
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await ApiService.Get().Friends.ConfirmAsync(Friend.UserId);
+                ButtonConf.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Произошла ошибка");
+            }
+           
+        }
+
+        private void MessageButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var nav = Services.NavigationService.GetService();
+            var chatInfo = new ChatInfo();
+            chatInfo.Image = Friend.PathProfilePic;
+            chatInfo.Title = Friend.FirstName + " " + Friend.LastName;
+
+            nav.GoToChat(new ChatView(chatInfo, Friend.UserId));
         }
     }
 }

@@ -63,10 +63,12 @@
 
             <StackPanel Margin="300,0,0,0" Orientation="Horizontal">
                 <Button
+                    x:Name="ButtonConf"
                     Width="80"
                     Height="30"
                     fluentWpf:RevealElement.BorderRadius="2"
                     BorderThickness="0"
+                    Click="ButtonBase_OnClick"
                     Foreground="Black"
                     Style="{StaticResource ButtonRevealStyle}">
                     <Button.Content>
@@ -82,11 +84,13 @@
                 </Button>
 
                 <Button
+                    x:Name="MessageButton"
                     Width="150"
                     Height="30"
                     Margin="10,0,0,0"
                     fluentWpf:RevealElement.BorderRadius="2"
                     BorderThickness="0"
+                    Click="MessageButton_OnClick"
                     Foreground="Black"
                     Style="{StaticResource ButtonRevealStyle}">
                     <Button.Content>
