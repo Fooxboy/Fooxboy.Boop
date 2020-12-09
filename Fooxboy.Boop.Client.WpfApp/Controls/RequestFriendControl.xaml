@@ -73,7 +73,7 @@
                                 Width="13"
                                 Height="13"
                                 Margin="5,1,0,0"
-                                Source="/././Resources/Images/Icons/go.png" />
+                                Source="/Resources/Images/check.png" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
@@ -93,7 +93,7 @@
                                 Width="13"
                                 Height="13"
                                 Margin="5,1,0,0"
-                                Source="/././Resources/Images/Icons/go.png" />
+                                Source="/././Resources/Images/message.png" />
                         </StackPanel>
                     </Button.Content>
                 </Button>
