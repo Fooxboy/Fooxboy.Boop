@@ -91,6 +91,9 @@ namespace Fooxboy.Boop.BackendServer.Migrations
                     b.Property<long>("LastSeen")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("LastSeenText")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Nickname")
                         .HasColumnType("TEXT");
 

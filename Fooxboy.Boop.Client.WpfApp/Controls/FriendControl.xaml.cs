@@ -66,7 +66,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         private void FriendControl_OnLoaded(object sender, RoutedEventArgs e)
         {
             NameUser.Text = Friend.FirstName + " " + Friend.LastName;
-            LastSeen.Text = "Был в сети 15 минут назад";
+            LastSeen.Text = Friend.LastSeenText;
         }
     }
 }
