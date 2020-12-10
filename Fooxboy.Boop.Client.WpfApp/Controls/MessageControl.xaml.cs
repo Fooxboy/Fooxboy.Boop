@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Helpers;
 using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Messages;
@@ -35,11 +36,12 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             set => SetValue(MessageProperty, value);
         }
 
-        private void MessageControl_OnLoaded(object sender, RoutedEventArgs e)
+        private async void MessageControl_OnLoaded(object sender, RoutedEventArgs e)
         {
             TextMessage.Text = Message.Text;
             Time.Text = TimeSpan.FromSeconds(Message.Time).ToString(@"hh\:mm");
             NameUser.Text = Message.NameSender;
+            ImageUser.UriSource = new Uri(await ImageHelper.GetImage(Message.ImageSender));
         }
 
 

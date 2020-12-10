@@ -32,6 +32,7 @@
                         <ImageBrush x:Name="photoUser" Stretch="UniformToFill">
                             <ImageBrush.ImageSource>
                                 <BitmapImage
+                                    x:Name="ImageUser"
                                     DecodePixelHeight="60"
                                     DecodePixelWidth="60"
                                     UriSource="/Controls/user.jpg" />

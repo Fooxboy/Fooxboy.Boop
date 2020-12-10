@@ -64,6 +64,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
                     user.Token = user.PasswordHash.GetSHA256() + new Random().Next(1, 999999999) ;
                     user.Friends = "";
                     user.FirendsRequests = "";
+                    user.PathProfilePic = "avatars/Stock/usr.jpg";
                     user.FriendsRequested = "";
                     user.Status = "online";
 

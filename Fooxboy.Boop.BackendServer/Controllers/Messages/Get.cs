@@ -70,6 +70,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
 
                         var usr = db.Users.Single(u => u.UserId == msgResponse.ChatId);
                         msgResponse.ChatTitle = usr.FirstName + " " + usr.LastName;
+                        msgResponse.CoverChat = usr.PathProfilePic;
                         
                         _logger.Debug($"Chat Title: {msgResponse.ChatTitle}");
                         long id = 0;

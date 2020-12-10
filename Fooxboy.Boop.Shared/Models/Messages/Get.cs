@@ -14,5 +14,6 @@ namespace Fooxboy.Boop.Shared.Models.Messages
         public long CountUnreadMessages { get; set; }
         public string LastMessageText { get; set; }
         public long Time { get; set; }
+        public string CoverChat { get; set; }
     }
 }

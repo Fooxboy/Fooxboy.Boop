@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Controls\user.jpg" />
       <None Remove="Resources\Fonts\GoogleSans-Bold.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Medium.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Regular.ttf" />
@@ -37,7 +36,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Controls\user.jpg" />
       <Resource Include="Resources\Fonts\GoogleSans-Bold.ttf">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>

@@ -40,7 +40,7 @@
             Text="Ваши заявки в друзья" />
 
         <ListBox
-            Margin="10 50 0 0"
+            Margin="10,50,0,0"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="Transparent"

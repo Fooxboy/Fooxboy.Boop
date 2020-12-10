@@ -126,8 +126,8 @@
                         Margin="0,1,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Foreground="White"
                         FontFamily="{StaticResource GoogleSansBold}"
+                        Foreground="White"
                         Text="9" />
                 </Grid>
             </Grid>

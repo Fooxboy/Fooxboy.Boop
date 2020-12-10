@@ -24,6 +24,7 @@
                     <ImageBrush>
                         <ImageBrush.ImageSource>
                             <BitmapImage
+                                x:Name="ImageFriend"
                                 DecodePixelHeight="50"
                                 DecodePixelWidth="50"
                                 UriSource="user.jpg" />

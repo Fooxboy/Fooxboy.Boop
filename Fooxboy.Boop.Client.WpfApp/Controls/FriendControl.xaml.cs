@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Helpers;
 using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.SDK.Exceptions;
 using Fooxboy.Boop.Shared.Models.Users;
@@ -63,10 +64,11 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             }
         }
 
-        private void FriendControl_OnLoaded(object sender, RoutedEventArgs e)
+        private async void FriendControl_OnLoaded(object sender, RoutedEventArgs e)
         {
             NameUser.Text = Friend.FirstName + " " + Friend.LastName;
             LastSeen.Text = Friend.LastSeenText;
+            ImageFriend.UriSource = new Uri(await ImageHelper.GetImage(Friend.PathProfilePic));
         }
     }
 }

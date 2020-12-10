@@ -19,9 +19,5 @@
     <ProjectReference Include="..\Fooxboy.Boop.Shared\Fooxboy.Boop.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\avatars" />
-  </ItemGroup>
-
 
 </Project>

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fooxboy.Boop.Client.WpfApp.Helpers;
 using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Client.WpfApp.Controls
@@ -33,10 +34,11 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             set => SetValue(DialogProperty, value);
         }
 
-        private void DialogUserControl_OnLoaded(object sender, RoutedEventArgs e)
+        private async void DialogUserControl_OnLoaded(object sender, RoutedEventArgs e)
         {
             TitleChat.Text = Dialog.ChatTitle;
             LastMessage.Text = Dialog.LastMessageText;
+            ImageUser.UriSource = new Uri($"{await ImageHelper.GetImage(Dialog.CoverChat)}");
         }
     }
 }

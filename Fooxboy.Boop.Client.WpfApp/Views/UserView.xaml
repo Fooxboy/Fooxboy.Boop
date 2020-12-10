@@ -73,9 +73,9 @@
             <Grid Margin="0,190,20,0" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
                     <Button
+                        x:Name="MessageButton"
                         Width="250"
                         Height="30"
-                        x:Name ="MessageButton"
                         fluentWpf:RevealElement.BorderRadius="5"
                         Click="ButtonBase_OnClick"
                         Content="Написать сообщение"
