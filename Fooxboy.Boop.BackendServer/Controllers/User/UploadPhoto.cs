@@ -58,6 +58,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.User
                 }
 
                 user.PathProfilePic = pathFile;
+                db.SaveChanges();
                 result.Data = pathFile;
                 result.Status = true;
                 return result;

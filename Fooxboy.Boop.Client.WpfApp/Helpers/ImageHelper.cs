@@ -29,7 +29,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Helpers
             if (File.Exists(localUrl))
             {
                 var file = new FileInfo(localUrl);
-                var fullPatch = file.DirectoryName + file.FullName;
+                var fullPatch = file.FullName;
                 return fullPatch;
             }
 
