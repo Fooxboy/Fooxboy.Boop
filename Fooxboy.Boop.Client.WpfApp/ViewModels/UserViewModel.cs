@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Fooxboy.Boop.Client.WpfApp.Helpers;
 using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Client.WpfApp.Views;
@@ -16,6 +18,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
 
         public User User { get; set; }
         public string Name { get; set; }
+        public string Photo { get; set; }
 
         public async Task LoadUserInfo(long userId)
         {
@@ -27,6 +30,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 Name = $"{user.FirstName} {user.LastName}";
                 Changed("Name");
                 Changed("User");
+                Photo = await ImageHelper.GetImage(user.PathProfilePic);
+                Changed("Photo");
 
             }
             catch (BoopRootException e)

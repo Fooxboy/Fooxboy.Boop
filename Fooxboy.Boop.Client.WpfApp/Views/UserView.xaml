@@ -22,7 +22,7 @@
             <Image
                 Height="300"
                 HorizontalAlignment="Stretch"
-                Source="../Resources/Images/user.jpg"
+                Source="{Binding Photo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Stretch="UniformToFill"
                 StretchDirection="UpOnly">
                 <Image.Effect>
@@ -38,7 +38,7 @@
                     <Ellipse.Fill>
                         <ImageBrush
                             x:Name="photoUser"
-                            ImageSource="../Resources/Images/user.jpg"
+                            ImageSource="{Binding Photo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Stretch="UniformToFill" />
                     </Ellipse.Fill>
 
