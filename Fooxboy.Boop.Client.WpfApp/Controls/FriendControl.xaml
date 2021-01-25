@@ -21,14 +21,7 @@
                 RadiusX="999"
                 RadiusY="999">
                 <Rectangle.Fill>
-                    <ImageBrush>
-                        <ImageBrush.ImageSource>
-                            <BitmapImage
-                                x:Name="ImageFriend"
-                                DecodePixelHeight="50"
-                                DecodePixelWidth="50"
-                                UriSource="user.jpg" />
-                        </ImageBrush.ImageSource>
+                    <ImageBrush x:Name="ImageFriend">
                     </ImageBrush>
                 </Rectangle.Fill>
 

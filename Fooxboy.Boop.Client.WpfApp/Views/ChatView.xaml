@@ -38,7 +38,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="45" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,36,0,0">
@@ -47,7 +47,7 @@
                     <Ellipse.Fill>
                         <ImageBrush
                             x:Name="photoUser"
-                            ImageSource="../Resources/Images/user.jpg"
+                            ImageSource="{Binding PhotoChat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Stretch="UniformToFill" />
                     </Ellipse.Fill>
                 </Ellipse>
@@ -115,12 +115,16 @@
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="35" />
+                <ColumnDefinition Width="45" />
             </Grid.ColumnDefinitions>
 
             <TextBox
                 x:Name="TextFieldBox"
+                Height="45"
+                VerticalContentAlignment="Center"
                 fluentWpf:RevealElement.BorderRadius="5"
+                Background="#ededed"
+                BorderThickness="0"
                 FontFamily="{StaticResource GoogleSansRegular}"
                 MaxLines="1"
                 Style="{StaticResource TextBoxRevealStyle}"
@@ -129,10 +133,12 @@
             <Button
                 x:Name="SendButton"
                 Grid.Column="1"
-                Width="35"
-                Height="35"
-                Background="Transparent"
-                Click="ButtonBase_OnClick">
+                Width="45"
+                Height="45"
+                Background="#ededed"
+                BorderThickness="0"
+                Click="ButtonBase_OnClick"
+                IsTabStop="True">
                 <Button.Content>
                     <Image Width="20" Height="20">
                         <Image.Source>

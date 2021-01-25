@@ -41,7 +41,16 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             TextMessage.Text = Message.Text;
             Time.Text = TimeSpan.FromSeconds(Message.Time).ToString(@"hh\:mm");
             NameUser.Text = Message.NameSender;
-            ImageUser.UriSource = new Uri(await ImageHelper.GetImage(Message.ImageSender));
+
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.DecodePixelHeight = 50;
+            bitmap.DecodePixelWidth = 50;
+            bitmap.UriSource = new Uri(await ImageHelper.GetImage(Message.ImageSender));
+
+            bitmap.EndInit();
+
+            photoUser.ImageSource = bitmap;
         }
 
 

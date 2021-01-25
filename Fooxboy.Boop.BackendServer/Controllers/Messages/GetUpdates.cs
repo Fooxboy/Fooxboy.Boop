@@ -109,7 +109,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         else
                         {
                             i -= 1;
-                            Thread.Sleep(1000);
+                            Thread.Sleep(300);
                         }
                         
                         

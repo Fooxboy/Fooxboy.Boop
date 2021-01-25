@@ -23,6 +23,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         public DialogUserControl()
         {
             InitializeComponent();
+            
         }
 
         public static readonly DependencyProperty DialogProperty =
@@ -38,7 +39,17 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         {
             TitleChat.Text = Dialog.ChatTitle;
             LastMessage.Text = Dialog.LastMessageText;
-            ImageUser.UriSource = new Uri($"{await ImageHelper.GetImage(Dialog.CoverChat)}");
+            var uri = await ImageHelper.GetImage(Dialog.CoverChat);
+            var urii = new Uri(uri);
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.DecodePixelHeight = 60;
+            bitmap.DecodePixelWidth = 60;
+            bitmap.UriSource = urii;
+            bitmap.EndInit();
+            photoUser.ImageSource = bitmap;
+
+            var a = 0;
         }
     }
 }

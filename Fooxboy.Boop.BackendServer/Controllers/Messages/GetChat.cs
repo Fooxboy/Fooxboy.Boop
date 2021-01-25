@@ -76,7 +76,10 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         }
                         var id = long.Parse(msgId);
                         var msgDb = db.Messages.SingleOrDefault(m => m.MsgId == id);
-                        chatModel.Messages.Add(msgDb.ConvertToMessage());
+                        var itm = msgDb.ConvertToMessage();
+                        var sender = db.Users.SingleOrDefault(u => u.UserId == itm.SenderId);
+                        itm.ImageSender = sender.PathProfilePic;
+                        chatModel.Messages.Add(itm);
                         
                         blep:
                         int i2 = 0;

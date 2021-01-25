@@ -68,7 +68,13 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         {
             NameUser.Text = Friend.FirstName + " " + Friend.LastName;
             LastSeen.Text = Friend.LastSeenText;
-            ImageFriend.UriSource = new Uri(await ImageHelper.GetImage(Friend.PathProfilePic));
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.DecodePixelHeight = 50;
+            bitmap.DecodePixelWidth = 50;
+            bitmap.UriSource = new Uri(await ImageHelper.GetImage(Friend.PathProfilePic));
+            bitmap.EndInit();
+            ImageFriend.ImageSource = bitmap;
         }
     }
 }

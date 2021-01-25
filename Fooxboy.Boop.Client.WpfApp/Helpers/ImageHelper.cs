@@ -20,7 +20,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Helpers
                 Directory.CreateDirectory("cache");
             }
 
-            var fileName = url.GetHashCode();
+            var fileName = Path.GetFileName(new Uri(url).LocalPath);
             
             string ext=url.Substring(url.LastIndexOf('.'));
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
+using Fooxboy.Boop.Client.WpfApp.Helpers;
 using Fooxboy.Boop.Client.WpfApp.Models;
 using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Client.WpfApp.Views;
@@ -21,6 +22,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public Visibility NoMessages1 { get; set; } 
         public ChatInfo Info { get; set; }
         public string TextMessage { get; set; }
+        public string PhotoChat { get; set; }
         public Dispatcher dispatcher;
 
         public ChatViewModel(long chatId, ChatInfo info)
@@ -33,6 +35,9 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         }
         public async Task GetDialogs(long count=9999, long offset=0)
         {
+            PhotoChat = await ImageHelper.GetImage(Info.Image);
+
+            Changed("PhotoChat");
             var api = Services.ApiService.Get();
 
             try

@@ -27,13 +27,6 @@
                     MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
                     <Ellipse.Fill>
                         <ImageBrush x:Name="photoUser" Stretch="UniformToFill">
-                            <ImageBrush.ImageSource>
-                                <BitmapImage
-                                    x:Name="ImageUser"
-                                    DecodePixelHeight="50"
-                                    DecodePixelWidth="50"
-                                    UriSource="/Controls/user.jpg" />
-                            </ImageBrush.ImageSource>
                         </ImageBrush>
                     </Ellipse.Fill>
 
