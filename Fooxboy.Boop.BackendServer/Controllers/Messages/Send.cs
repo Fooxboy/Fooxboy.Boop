@@ -19,9 +19,9 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
             _logger = logger;
         }
         [HttpGet]
-        public Result Get(string text, long chatId, string token)
+        public Result Get(string text, long chatId, string token, long attach = 0)
         {
-            _logger.Debug($"msg.send?text={text}&chatId={chatId}&token={token}");
+            _logger.Debug($"msg.send?text={text}&chatId={chatId}&token={token}&attach={attach}");
             var result = new Result();
             var user = Helpers.CheckerTokenHelper.GetUser(token);
             if (user is null)
@@ -89,6 +89,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                                 ImageSender = user.PathProfilePic,
                                 NameSender =  user.FirstName + " " + user.LastName,
                                 Text = text,
+                                Attach = attach,
                                 Time = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                             };
 

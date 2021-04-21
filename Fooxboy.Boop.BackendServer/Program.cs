@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +20,15 @@ namespace Fooxboy.Boop.BackendServer
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .UseUrls("http://0.0.0.0:2020")
+                .Build();
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

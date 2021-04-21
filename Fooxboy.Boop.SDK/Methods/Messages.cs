@@ -118,5 +118,23 @@ namespace Fooxboy.Boop.SDK.Methods
             if (result.Status) return data.ToObject<Send>();
             else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
+
+        public string GetUploadServer(long chatId, long typeAttach)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("chatId", chatId.ToString());
+            parameters.Add("typeAttach", typeAttach.ToString());
+            var result =  _httpHelper.GetRequest("msg.GetUploadAttachUrl", parameters);
+            
+            try
+            {
+                var data = (string)result.Data;
+                return data;
+            }catch
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
     }
 }

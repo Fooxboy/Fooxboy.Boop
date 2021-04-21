@@ -19,5 +19,6 @@ namespace Fooxboy.Boop.BackendServer.Database
         public long Time { get; set; }
         public string UsersReaded { get; set; }
         public long TestField { get; set; }
+        public long Attach { get; set; }
     }
 }

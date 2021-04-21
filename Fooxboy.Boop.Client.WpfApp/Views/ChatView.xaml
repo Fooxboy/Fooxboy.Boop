@@ -114,13 +114,77 @@
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="45" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="45" />
             </Grid.ColumnDefinitions>
 
+            <Grid Width="45"
+                  Grid.Column="0"
+                Height="45">
+
+                <Button 
+                    x:Name="fileButton"
+                    Background="#ededed"
+                    Width="45"
+                Height="45"
+                BorderThickness="0">
+                    <Button.Content>
+                        <Image Width="20" Height="20">
+                            <Image.Source>
+                                <BitmapImage
+                                DecodePixelHeight="25"
+                                DecodePixelWidth="25"
+                                UriSource="../Resources/Images/attach.png" />
+                            </Image.Source>
+                        </Image>
+                    </Button.Content>
+                </Button>
+                <Rectangle HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 5 5 0" RadiusX="100" RadiusY="100" Height="10" Fill="Blue" Width="10"/>
+
+            </Grid>
+
+
+            <Grid Width="45"
+                  Grid.Column="1"
+                Height="45">
+                <Button Grid.Column="1" 
+                    x:Name="photoButton"
+                    Background="#ededed"
+                    Width="45"
+                Height="45"
+                BorderThickness="0" VerticalAlignment="Bottom">
+                    <Button.Content>
+                        <Image Width="20" Height="20">
+                            <Image.Source>
+                                <BitmapImage
+                                DecodePixelHeight="25"
+                                DecodePixelWidth="25"
+                                UriSource="../Resources/Images/photo.png" />
+                            </Image.Source>
+                        </Image>
+                    </Button.Content>
+                </Button>
+
+                <Rectangle HorizontalAlignment="Right" 
+                           VerticalAlignment="Top" 
+                           Margin="0 5 5 0"
+                           RadiusX="100" 
+                           RadiusY="100" 
+                           Height="10"
+                           Fill="GreenYellow" 
+                           Width="10"/>
+
+            </Grid>
+            
+
+            
+            
             <TextBox
                 x:Name="TextFieldBox"
                 Height="45"
+                Grid.Column="2"
                 VerticalContentAlignment="Center"
                 fluentWpf:RevealElement.BorderRadius="5"
                 Background="#ededed"
@@ -132,7 +196,7 @@
 
             <Button
                 x:Name="SendButton"
-                Grid.Column="1"
+                Grid.Column="3"
                 Width="45"
                 Height="45"
                 Background="#ededed"

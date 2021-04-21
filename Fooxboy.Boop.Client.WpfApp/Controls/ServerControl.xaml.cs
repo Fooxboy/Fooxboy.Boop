@@ -69,5 +69,20 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             }
             
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var configService = AppGlobalConfig.ConfigSerivce;
+            var config = configService.GetConfig();
+
+            var server = config.Servers.SingleOrDefault(s => s.Address == Server.Address);
+            if (server != null)
+            {
+                config.Servers.Remove(server);
+                configService.EditConfig(config);
+                MainGrid.Visibility = Visibility.Hidden;
+            }
+            
+        }
     }
 }

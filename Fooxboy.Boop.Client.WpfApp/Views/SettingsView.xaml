@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid>
+        <Grid Margin="0 30 0 0 ">
             <StackPanel>
                 <TextBlock
                     Margin="10,0,0,0"
@@ -26,7 +26,7 @@
                     Text="Тестирование" />
 
                 <Grid>
-                    <Button Click="ButtonBase_OnClick" Content="Загрузить аватар" />
+                    <Button Width="200" HorizontalAlignment="Left" Click="ButtonBase_OnClick" Content="Загрузить аватар" />
                 </Grid>
             </StackPanel>
 
