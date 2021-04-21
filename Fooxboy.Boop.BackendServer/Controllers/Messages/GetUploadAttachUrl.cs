@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Fooxboy.Boop.BackendServer.Database;
 using Fooxboy.Boop.Shared.Models;
+using Fooxboy.Boop.Shared.Models.Messages;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fooxboy.Boop.BackendServer.Controllers.Messages
@@ -37,9 +38,17 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                 upa.AttachmentKey = new Random().Next(0, 999999999);
 
                 db.UploadAttachments.Add(upa);
+
+                db.SaveChanges();
                 
                 result.Status = true;
-                result.Data = upa.AttachmentKey.ToString();
+
+                var rsp = new GetUploadServer();
+                rsp.Id = upa.AttachmentId;
+                rsp.Key = upa.AttachmentKey;
+                result.Data = rsp;
+
+
             }
 
             return result;

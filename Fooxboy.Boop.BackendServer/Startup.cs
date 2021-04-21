@@ -39,6 +39,7 @@ namespace Fooxboy.Boop.BackendServer
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
            // app.UseHttpsRedirection();
             app.UseRouting();

@@ -99,7 +99,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             }
         }
 
-        public async Task SendMessage()
+        public async Task SendMessage(long key)
         {
             
             var api = Services.ApiService.Get();
@@ -108,7 +108,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 try
                 {
-                    var result = await api.Messages.SendAsync(TextMessage, _chatId);
+                    var result = await api.Messages.SendAsync(TextMessage, _chatId, key);
                     var msg = new Message()
                     {
                         ChatId = 0,
@@ -120,7 +120,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                         SenderId = AppGlobalConfig.CurrentConnectUser.UserId,
                         Text = TextMessage,
                         Time = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds,
-                        UsersReaded = ""
+                        UsersReaded = "",
+                        Attach = key
 
                     };
                     Messages.Add(msg);

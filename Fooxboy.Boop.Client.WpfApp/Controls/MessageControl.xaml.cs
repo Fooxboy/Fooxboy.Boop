@@ -11,8 +11,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Fooxboy.Boop.Client.WpfApp.Helpers;
+using Fooxboy.Boop.Client.WpfApp.Services;
 using Fooxboy.Boop.Client.WpfApp.Views;
 using Fooxboy.Boop.SDK.Exceptions;
+using Fooxboy.Boop.Shared.Models;
 using Fooxboy.Boop.Shared.Models.Messages;
 
 namespace Fooxboy.Boop.Client.WpfApp.Controls
@@ -36,6 +38,8 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             set => SetValue(MessageProperty, value);
         }
 
+        private Attach _attach;
+
         private async void MessageControl_OnLoaded(object sender, RoutedEventArgs e)
         {
             TextMessage.Text = Message.Text;
@@ -51,6 +55,55 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             bitmap.EndInit();
 
             photoUser.ImageSource = bitmap;
+
+            if(Message.Attach != 0)
+            {
+                var api = ApiService.Get();
+               
+                var attach = await api.Messages.GetAttachmentAsync(Message.Attach);
+                if(attach.File is null)
+                {
+                    FileName.Text = "NULL";
+                }else
+                {
+                    _attach = attach;
+                    if (attach.TypeAttach == 2)
+                    {
+                        AttachFile.Visibility = Visibility.Visible;
+                        var fileName = attach.File.Split("/")[^1].Split("--")[1];
+                        FileName.Text = fileName;
+                    }
+                    else if (attach.TypeAttach == 1)
+                    {
+                        AttachImage.Visibility = Visibility.Visible;
+                        var bitmap1 = new BitmapImage();
+                        bitmap1.BeginInit();
+                        //bitmap1.DecodePixelHeight = 400;
+                        //bitmap1.DecodePixelWidth = 300;
+                        var fileName = attach.File.Split("/")[^1].Split("--")[1];
+                        var file = await ImageHelper.GetImage(attach.File, fileName);
+                        bitmap1.UriSource = new Uri(file);
+                        bitmap1.EndInit();
+
+                        if(bitmap1.PixelWidth > bitmap1.PixelHeight)
+                        {
+                            RectImg.Width = 400;
+                            RectImg.Height = 300;
+                        }else if(bitmap1.PixelHeight > bitmap1.PixelWidth)
+                        {
+                            RectImg.Width = 300;
+                            RectImg.Height = 400;
+                        }else
+                        {
+                            RectImg.Width = 400;
+                            RectImg.Height = 400;
+                        }
+
+                        ImageAttach.ImageSource = bitmap1;
+
+                    }
+                } 
+            }
         }
 
 

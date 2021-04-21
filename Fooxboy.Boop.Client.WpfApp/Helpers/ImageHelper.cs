@@ -11,20 +11,34 @@ namespace Fooxboy.Boop.Client.WpfApp.Helpers
     public static class ImageHelper
     {
 
-        public async static Task<string> GetImage(string url, string filename= null)
+        public async static Task<string> GetImage(string url, string fileName= null)
         {
-            url = $"http://{ApiService.Get().Address}/" + url;
+            if(url[0] == '/')
+            {
+                url = $"http://{ApiService.Get().Address}" + url;
+
+            }else
+            {
+                url = $"http://{ApiService.Get().Address}/" + url;
+
+            }
             var client = new WebClient();
             if (!Directory.Exists("cache"))
             {
                 Directory.CreateDirectory("cache");
             }
+            var localUrl = string.Empty;
 
-            var fileName = Path.GetFileName(new Uri(url).LocalPath);
-            
-            string ext=url.Substring(url.LastIndexOf('.'));
+            if(fileName == null)
+            {
+                fileName = Path.GetFileName(new Uri(url).LocalPath);
 
-            var localUrl = $"cache/{fileName}{ext}";
+                localUrl = $"cache/{fileName}";
+
+            }else
+            {
+                localUrl = $"cache/{fileName}";
+            }
 
             if (File.Exists(localUrl))
             {

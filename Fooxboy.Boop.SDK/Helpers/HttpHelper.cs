@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -27,7 +28,16 @@ namespace Fooxboy.Boop.SDK.Helpers
             string parametersString = "";
             foreach (var parameter in parameters) { parametersString += $"{parameter.Key}={parameter.Value}&";}
             var path = $"{_address}/{root}/{method}?{parametersString}token={_token}";
-            var response =_client.DownloadString(path);
+            string response = string.Empty;
+            try
+            {
+                response = _client.DownloadString(path);
+
+            }
+            catch (NotSupportedException e)
+            {
+                response = new WebClient().DownloadString(path);
+            }
 
             var result = JsonConvert.DeserializeObject<Result>(response);
             return result;
@@ -38,7 +48,17 @@ namespace Fooxboy.Boop.SDK.Helpers
             string parametersString = "";
             foreach (var parameter in parameters) { parametersString += $"{parameter.Key}={parameter.Value}&";}
             var path = $"{_address}/{root}/{method}?{parametersString}token={_token}";
-            var response = await _client.DownloadStringTaskAsync(path);
+            string response = string.Empty;
+            try
+            {
+                response = await _client.DownloadStringTaskAsync(path);
+
+            }
+            catch (NotSupportedException e)
+            {
+                response = await new WebClient().DownloadStringTaskAsync(path);
+            }
+
 
             var result = JsonConvert.DeserializeObject<Result>(response);
             return result;

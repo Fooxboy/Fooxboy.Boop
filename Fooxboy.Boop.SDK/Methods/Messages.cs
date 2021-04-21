@@ -93,7 +93,7 @@ namespace Fooxboy.Boop.SDK.Methods
             return _longPollService;
         }
 
-        public Send Send(string text, long chatId)
+        public Send Send(string text, long chatId, long attach)
         {
             var parameters = new Dictionary<string,string>();
             parameters.Add("text", text);
@@ -106,11 +106,12 @@ namespace Fooxboy.Boop.SDK.Methods
             else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
         
-        public async Task<Send> SendAsync(string text, long chatId)
+        public async Task<Send> SendAsync(string text, long chatId, long attach)
         {
             var parameters = new Dictionary<string,string>();
             parameters.Add("text", text);
             parameters.Add("chatId", chatId.ToString());
+            parameters.Add("attach", attach.ToString());
             var result = await _httpHelper.GetRequestAsync("msg.send", parameters);
 
             var data = (JObject)result.Data;
@@ -118,41 +119,19 @@ namespace Fooxboy.Boop.SDK.Methods
             if (result.Status) return data.ToObject<Send>();
             else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
-
-        public string GetUploadServer(long chatId, long typeAttach)
-        {
-            var parameters = new Dictionary<string,string>();
-            parameters.Add("chatId", chatId.ToString());
-            parameters.Add("typeAttach", typeAttach.ToString());
-            var result =  _httpHelper.GetRequest("msg.GetUploadAttachUrl", parameters);
-            
-            try
-            {
-                var data = (string)result.Data;
-                return data;
-            }catch
-            {
-                var data = (JObject) result.Data;
-                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
-            }
-        }
         
-        public async Task<string> GetUploadServerAsync(long chatId, long typeAttach)
+        public async Task<GetUploadServer> GetUploadServerAsync(long chatId, long typeAttach)
         {
             var parameters = new Dictionary<string,string>();
             parameters.Add("chatId", chatId.ToString());
             parameters.Add("typeAttach", typeAttach.ToString());
             var result =  await _httpHelper.GetRequestAsync("msg.GetUploadAttachUrl", parameters);
             
-            try
-            {
-                var data = (string)result.Data;
-                return data;
-            }catch
-            {
-                var data = (JObject) result.Data;
-                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
-            }
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<GetUploadServer>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            
         }
 
 

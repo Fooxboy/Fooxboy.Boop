@@ -27,31 +27,42 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
         [HttpPost("{key}"), DisableRequestSizeLimit]
         public async Task<Result> Index(long key, IFormFile file)
         {
-            var result = new Result();
-            _logger.Debug($"msg.uploadAttach?&key={key}");
-            using (var db = new DatabaseContext())
+            try
             {
-                var attach = db.UploadAttachments.SingleOrDefault(k => k.AttachmentKey == key);
-                
-                var pathFile = $"/attachments/{attach.User}_{attach.ChatId}/{file.FileName}||{new Random().Next(0, 99999999)}";
-
-                if (!System.IO.Directory.Exists(_appEnvironment.WebRootPath + $"/attachments/{attach.User}_{attach.ChatId}/"))
+                var result = new Result();
+                _logger.Debug($"msg.uploadAttach?&key={key}");
+                using (var db = new DatabaseContext())
                 {
-                    System.IO.Directory.CreateDirectory(_appEnvironment.WebRootPath + $"/attachments/{attach.User}_{attach.ChatId}/");
-                }
-                
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathFile, FileMode.Create))
-                {
-                    await file.CopyToAsync(fileStream);
-                }
+                    var attach = db.UploadAttachments.SingleOrDefault(k => k.AttachmentKey == key);
 
-                attach.File = pathFile;
-                
-                db.SaveChanges();
-                result.Data = attach.AttachmentId;
-                result.Status = true;
-                return result;
+                    var pathFile =
+                        $"/attachments/{attach.User}_{attach.ChatId}/{new Random().Next(0, 99999999)}--{file.FileName.Replace(" ", "_")}";
+
+                    if (!System.IO.Directory.Exists(_appEnvironment.WebRootPath +
+                                                    $"/attachments/{attach.User}_{attach.ChatId}/"))
+                    {
+                        System.IO.Directory.CreateDirectory(_appEnvironment.WebRootPath +
+                                                            $"/attachments/{attach.User}_{attach.ChatId}/");
+                    }
+
+                    using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathFile, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+
+                    attach.File = pathFile;
+
+                    db.SaveChanges();
+                    result.Data = attach.AttachmentId;
+                    result.Status = true;
+                    return result;
+                }
             }
+            catch (Exception e)
+            {
+                throw e;
+            }
+           
 
         }
     }
