@@ -136,5 +136,48 @@ namespace Fooxboy.Boop.SDK.Methods
                 throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
             }
         }
+        
+        public async Task<string> GetUploadServerAsync(long chatId, long typeAttach)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("chatId", chatId.ToString());
+            parameters.Add("typeAttach", typeAttach.ToString());
+            var result =  await _httpHelper.GetRequestAsync("msg.GetUploadAttachUrl", parameters);
+            
+            try
+            {
+                var data = (string)result.Data;
+                return data;
+            }catch
+            {
+                var data = (JObject) result.Data;
+                throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            }
+        }
+
+
+        public Attach GetAttachment(long attachId)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("attachId", attachId.ToString());
+            var result =  _httpHelper.GetRequest("msg.getAttachment", parameters);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Attach>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+        }
+        
+        public async Task<Attach> GetAttachmentAsync(long attachId)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("attachId", attachId.ToString());
+            var result = await _httpHelper.GetRequestAsync("msg.getAttachment", parameters);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Attach>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+        }
     }
 }

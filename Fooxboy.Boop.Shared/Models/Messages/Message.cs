@@ -10,6 +10,7 @@
         public long ChatId { get; set; }
         public string Text { get; set; }
         public long Time { get; set; }
+        public long Attach { get; set; }
         public string UsersReaded { get; set; }
     }
 }
