@@ -10,6 +10,7 @@ namespace Fooxboy.Boop.BackendServer.Database
         public string Title { get; set; }
         public long Admin { get; set; }
         public string Messanges { get; set; }
+        public string Cover { get; set; }
         
     }
 }

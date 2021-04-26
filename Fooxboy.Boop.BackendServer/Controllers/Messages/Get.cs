@@ -90,7 +90,25 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                     }
                     else
                     {
-                        //todo: работа с беседами
+                        var chatGroup = db.GroupChats.SingleOrDefault(c => c.ChatId == chat.ChatId * -1);
+                        msgResponse.ChatTitle = chatGroup.Title;
+                        msgResponse.CoverChat = chatGroup.Cover;
+                        long id = 0;
+                        try
+                        {
+                            id = long.Parse(chat.Messages.Split(",").Last());
+                        }
+                        catch
+                        {
+                            
+                        }
+
+                        var lastMsgId = id;
+                        var msg = db.Messages.Single(m => m.MsgId == lastMsgId);
+                        
+                        msgResponse.LastMessageText = msg.Text;
+                        msgResponse.Time = msg.Time;
+                        msgResponse.CountUnreadMessages = 0; //todo: добавть проверку на непрочитанные сообщения.
                     }
                     
                     response.Chats.Add(msgResponse);
