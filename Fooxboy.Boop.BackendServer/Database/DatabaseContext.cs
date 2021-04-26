@@ -13,6 +13,7 @@ namespace Fooxboy.Boop.BackendServer.Database
         public DbSet<UsersChat> UsersChats { get; set; }
         public DbSet<UnreadMessages> UnreadMessages { get; set; }
         public DbSet<UploadAttachment> UploadAttachments { get; set; }
+        public DbSet<GroupChat> GroupChats { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

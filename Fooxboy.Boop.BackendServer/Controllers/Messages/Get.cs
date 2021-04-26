@@ -62,9 +62,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                     var chat = chats[i];
                     var msgResponse = new GetResponse();
                     msgResponse.ChatId = chat.ChatId;
-
-                  
-
+                    
                     if (chat.Messages != "" && msgResponse.ChatId > 0)
                     {
 

@@ -158,5 +158,25 @@ namespace Fooxboy.Boop.SDK.Methods
             if (result.Status) return data.ToObject<Attach>();
             else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
         }
+        
+        public async Task<Chat> CreateChat(string name)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("name", name);
+            var result = await _httpHelper.GetRequestAsync("msg.createChat", parameters);
+
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Chat>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+        }
+        
+        public async Task AddToChat(long chatId, long userId)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("chatId", chatId.ToString());
+            parameters.Add("userId", userId.ToString());
+            var result = await _httpHelper.GetRequestAsync("msg.addToChat", parameters);
+        }
     }
 }
