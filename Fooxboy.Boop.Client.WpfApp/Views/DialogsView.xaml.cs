@@ -22,13 +22,12 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         public static DialogsViewModel StaticViewModel;
         private DialogsViewModel _vm;
-        private bool isOpen;
+        //private bool isOpen;
         public DialogsView()
         {
             InitializeComponent();
             _vm = new DialogsViewModel();
             DataContext = _vm;
-            isOpen = false;
             StaticViewModel = _vm;
         }
 
@@ -39,9 +38,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private void Selector_OnSelected(object sender, RoutedEventArgs e)
         {
-            if(isOpen) return;
             _vm.OpenDialog();
-            isOpen = true;
         }
     }
 }

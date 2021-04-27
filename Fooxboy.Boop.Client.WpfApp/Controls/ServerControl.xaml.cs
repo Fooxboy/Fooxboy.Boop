@@ -58,6 +58,8 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
         {
             try
             {
+                LoadingPanel.Visibility = Visibility.Visible;
+                infoGrid.Visibility = Visibility.Collapsed;
                 ApiService.ChangeAddress(Server.Address);
                 ApiService.ChangeToken(Server.Token);
                 AppGlobalConfig.CurrentConnectUser = await ApiService.Get().Users.GetInfoAsync(0);
@@ -65,6 +67,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Controls
             }
             catch (Exception ex)
             {
+                LoadingPanel.Visibility = Visibility.Collapsed;
                 MessageBox.Show(ex.Message, "Ошибка подключения к серверу.");
             }
             

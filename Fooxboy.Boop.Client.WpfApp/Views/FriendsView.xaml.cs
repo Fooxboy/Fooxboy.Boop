@@ -46,6 +46,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private async void FriendsView_OnLoaded(object sender, RoutedEventArgs e)
         {
+            LoadingMessage.Visibility = Visibility.Visible;
             await _vm.GetFriends();
             var requests = await ApiService.Get().Friends.GetCountRequestsAsync();
 
@@ -55,8 +56,12 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
             }
             else
             {
+                CountRequestsBlock.Visibility = Visibility.Visible;
                 CountRequests.Text = requests.ToString();
             }
+
+            LoadingMessage.Visibility = Visibility.Collapsed;
+
         }
 
         private void UIElement_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

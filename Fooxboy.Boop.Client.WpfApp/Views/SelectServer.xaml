@@ -75,6 +75,7 @@
 
 
             <ListBox
+                MouseLeftButtonDown="ListBox_MouseLeftButtonDown"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Background="Transparent"

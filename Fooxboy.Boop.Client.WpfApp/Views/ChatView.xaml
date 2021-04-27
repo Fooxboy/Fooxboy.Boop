@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="http://schemas.fontawesome.io/icons/"
     Title="ChatView"
     d:DesignHeight="750"
     d:DesignWidth="800"
@@ -88,6 +88,8 @@
                 Text="Сообщений пока что нет. Попробуйте написать первым!"
                 Visibility="{Binding NoMessages1, Mode=TwoWay}" />
 
+           
+
             <ListBox
                 x:Name="MessagesListBox"
                 HorizontalAlignment="Stretch"
@@ -111,6 +113,10 @@
 
             </ListBox>
 
+            <StackPanel Visibility="{Binding Loading, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingMessage">
+                <fa:ImageAwesome Width="70"  Icon="CircleOutlineNotch" Foreground="#0984e4" Spin="True" SpinDuration="0.3" />
+                <TextBlock Margin="0 10 0 0" VerticalAlignment="Center" Text="Загружаю чат..." FontSize="15" Foreground="#636e72" FontFamily="{StaticResource GoogleSansRegular}"/>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

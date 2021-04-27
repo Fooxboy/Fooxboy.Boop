@@ -20,8 +20,15 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         public string Name { get; set; }
         public string Photo { get; set; }
 
+        public Visibility Loading { get; set; }
+        public Visibility Info { get; set; }
+
         public async Task LoadUserInfo(long userId)
         {
+            Loading = Visibility.Visible;
+            Changed("Loading");
+            Info = Visibility.Collapsed;
+            Changed("Info");
             var api = ApiService.Get();
             try
             {
@@ -43,6 +50,11 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
                 MessageBox.Show($"{e.Message}", "Ошибка");
 
             }
+
+            Loading = Visibility.Collapsed;
+            Changed("Loading");
+            Info = Visibility.Visible;
+            Changed("Info");
         }
 
         public async Task GoToChatUser()

@@ -52,6 +52,8 @@
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource GoogleSansRegular}"
                         Foreground="#4f4f4f"
+                        MaxWidth="220"
+                        TextTrimming="CharacterEllipsis"
                         Text="Последнее сообщения блять нахуя" />
                 </Grid>
             </StackPanel>

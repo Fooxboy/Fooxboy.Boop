@@ -21,6 +21,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
     {
         public ObservableCollection<GetResponse> Dialogs { get; set; }
         public Visibility NoChats { get; set; }
+        public Visibility Loading { get; set; }
 
         public GetResponse SelectItem { get; set; }
         public Dispatcher dispatcher;
@@ -30,12 +31,17 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             dispatcher = Application.Current.MainWindow.Dispatcher;
             try
             {
+                Loading = Visibility.Visible;
+                Changed("Loading");
                 NoChats = Visibility.Hidden;
                 Changed("NoChats");
                 var api = ApiService.Get();
                 var dialogs = await api.Messages.GetAsync(10);
 
                 Dialogs = new ObservableCollection<GetResponse>();
+
+                Loading = Visibility.Collapsed;
+                Changed("Loading");
 
                 if (dialogs.Chats.Count == 0)
                 {

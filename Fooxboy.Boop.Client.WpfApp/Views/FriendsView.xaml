@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="http://schemas.fontawesome.io/icons/"
     Title="FriendsView"
     d:DesignHeight="500"
     d:DesignWidth="320"
@@ -113,6 +113,7 @@
                 <Grid
                     x:Name="CountRequestsBlock"
                     Margin="0,0,15,0"
+                    Visibility="Collapsed"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center">
                     <Rectangle
@@ -128,7 +129,7 @@
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource GoogleSansBold}"
                         Foreground="White"
-                        Text="9" />
+                        Text="0" />
                 </Grid>
             </Grid>
 
@@ -159,5 +160,9 @@
 
         </StackPanel>
 
+        <StackPanel Visibility="{Binding Loading, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingMessage">
+            <fa:ImageAwesome Width="50"  Icon="CircleOutlineNotch" Foreground="#0984e4" Spin="True" SpinDuration="0.3" />
+            <TextBlock Margin="0 10 0 0" VerticalAlignment="Center" Text="Загружаю список друзей..." FontSize="14" Foreground="#636e72" FontFamily="{StaticResource GoogleSansRegular}"/>
+        </StackPanel>
     </Grid>
 </Page>

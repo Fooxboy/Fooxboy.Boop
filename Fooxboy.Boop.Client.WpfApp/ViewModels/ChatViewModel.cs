@@ -20,6 +20,7 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         private long _chatId;
         public ObservableCollection<Message> Messages { get; set; }
         public Visibility NoMessages1 { get; set; } 
+        public Visibility Loading { get; set; }
         public ChatInfo Info { get; set; }
         public string TextMessage { get; set; }
         public string PhotoChat { get; set; }
@@ -35,6 +36,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         }
         public async Task GetDialogs(long count=9999, long offset=0)
         {
+            Loading = Visibility.Visible;
+            Changed("Loading");
             PhotoChat = await ImageHelper.GetImage(Info.Image);
 
             Changed("PhotoChat");
@@ -68,6 +71,10 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 MessageBox.Show($"{e.Message}", "Ошибка");
             }
+
+            Loading = Visibility.Collapsed;
+
+            Changed("Loading");
         }
         
         public void StartCheckerMessages()

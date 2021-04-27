@@ -5,7 +5,7 @@
     xmlns:controls="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="http://schemas.fontawesome.io/icons/"
     Title="DialogsView"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -33,6 +33,7 @@
 
 
     <Grid Margin="0,36,0,0">
+        
         <Grid
             x:Name="NoDialogs"
             HorizontalAlignment="Center"
@@ -69,5 +70,10 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingDialogs" Visibility="{Binding Loading, Mode=TwoWay}">
+            <fa:ImageAwesome Width="50"  Icon="CircleOutlineNotch" Foreground="#0984e4" Spin="True" SpinDuration="0.3" />
+            <TextBlock Margin="0 5 0 0" Text="Загружаем диалоги..." Foreground="#636e72" FontFamily="{StaticResource GoogleSansRegular}"/>
+        </StackPanel>
     </Grid>
 </Page>

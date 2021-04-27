@@ -78,5 +78,10 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         {
            _vm.LoadServers();
         }
+
+        private void ListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            GridConnect.Visibility = Visibility.Visible;
+        }
     }
 }

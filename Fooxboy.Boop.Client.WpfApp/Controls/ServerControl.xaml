@@ -4,13 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Controls"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:fa="http://schemas.fontawesome.io/icons/"
     d:DesignHeight="120"
     d:DesignWidth="900"
     Loaded="ServerControl_OnLoaded"
     mc:Ignorable="d">
     <Grid x:Name="MainGrid">
         <Grid
+            x:Name="infoGrid"
             Margin="25"
             HorizontalAlignment="Center"
             MouseEnter="UIElement_OnMouseEnter"
@@ -80,6 +81,10 @@
             </StackPanel>
 
         </Grid>
+        <StackPanel Margin="70 0 0 0" Visibility="Collapsed" x:Name="LoadingPanel" Orientation="Horizontal">
+            <fa:ImageAwesome Width="50"  Icon="CircleOutlineNotch" Foreground="#0984e4" Spin="True" SpinDuration="0.3" />
+            <TextBlock Margin="10 0 0 0" VerticalAlignment="Center" Text="Подключаюсь..." FontSize="20" Foreground="Black" FontFamily="{StaticResource GoogleSansBold}"/>
+        </StackPanel>
         <Button
             Width="70"
             Height="30"

@@ -84,6 +84,8 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
             var navigation = Services.NavigationService.GetService();
 
             navigation.GoToChat(new ChatView(infoChatOpen, info.ChatId * -1));
+            navigation.GoToDialogsFrame(new DialogsView());
+
         }
     }
 }
