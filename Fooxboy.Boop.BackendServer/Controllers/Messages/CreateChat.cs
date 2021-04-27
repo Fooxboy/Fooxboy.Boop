@@ -43,7 +43,9 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                 
                 chat.Messanges = $"{msg.MsgId},";
                 chat.Title = name;
-
+                chat.ChatId = db.GroupChats.Count() + 1;
+                db.GroupChats.Add(chat);
+                
                 var userchat = new UsersChat();
                 userchat.Messages = chat.Messanges;
                 userchat.Owner = usr.UserId;
@@ -51,7 +53,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                 userchat.ChatId = chat.ChatId * -1;
                 db.UsersChats.Add(userchat);
 
-                db.GroupChats.Add(chat);
+                
 
                 db.SaveChanges();
 

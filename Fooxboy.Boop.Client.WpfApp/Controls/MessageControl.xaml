@@ -12,7 +12,11 @@
 
     <Grid x:Name="MainControlGrid">
 
-        <Grid Margin="8">
+        <StackPanel x:Name="StackPanelServiceMessage" Visibility="Collapsed" Margin="13,0,0,0" Grid.Row="1">
+            <TextBlock HorizontalAlignment="Center" FontFamily="{StaticResource GoogleSansRegular}" Margin="0 10 0 10" x:Name="TextServiceMessage" Text="Это сервсиное сообщение"/>
+        </StackPanel>
+
+        <Grid Margin="8" x:Name="StackPanelMessage" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
@@ -121,7 +125,9 @@
                         
                        
                     </Grid>
-                </StackPanel>
+                </StackPanel >
+
+                
             </Grid>
 
         </Grid>

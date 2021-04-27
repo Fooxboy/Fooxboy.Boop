@@ -96,7 +96,17 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         long id = 0;
                         try
                         {
-                            id = long.Parse(chat.Messages.Split(",").Last());
+                            var array = chat.Messages.Split(",");
+
+                            if (array.Last() == "")
+                            {
+                                id = long.Parse(array[^2]);
+                            }
+                            else
+                            {
+                                id = long.Parse(array.Last());
+                            }
+     
                         }
                         catch
                         {

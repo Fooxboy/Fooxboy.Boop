@@ -22,5 +22,11 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Открытие окна с созданием чата
+            Services.NavigationService.GetService().GoToChat(new CreateChatView());
+        }
     }
 }

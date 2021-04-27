@@ -18,6 +18,7 @@ namespace Fooxboy.Boop.BackendServer.Helpers
             msgModel.SenderId = msg.SenderId;
             msgModel.UsersReaded = msg.UsersReaded;
             msgModel.Attach = msg.Attach;
+            msgModel.ServiceMessage = msg.ServiceMessage;
 
             return msgModel;
         }

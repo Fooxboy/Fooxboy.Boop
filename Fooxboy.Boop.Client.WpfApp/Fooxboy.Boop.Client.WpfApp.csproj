@@ -11,6 +11,7 @@
       <None Remove="Resources\Fonts\GoogleSans-Bold.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Medium.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Regular.ttf" />
+      <None Remove="Resources\Images\add.png" />
       <None Remove="Resources\Images\attach.png" />
       <None Remove="Resources\Images\check.png" />
       <None Remove="Resources\Images\download.png" />
@@ -27,6 +28,7 @@
 
     <ItemGroup>
       <Resource Include="Controls\user.jpg" />
+      <Resource Include="Resources\Images\add.png" />
       <Resource Include="Resources\Images\attach.png" />
       <Resource Include="Resources\Images\check.png" />
       <Resource Include="Resources\Images\download.png" />
@@ -35,7 +37,9 @@
 
     <ItemGroup>
       <PackageReference Include="FluentWPF" Version="0.8.0" />
+      <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
       <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore" Version="1.0.14" />
+      <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     </ItemGroup>
 
     <ItemGroup>

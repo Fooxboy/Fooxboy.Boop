@@ -178,5 +178,18 @@ namespace Fooxboy.Boop.SDK.Methods
             parameters.Add("userId", userId.ToString());
             var result = await _httpHelper.GetRequestAsync("msg.addToChat", parameters);
         }
+        
+        public async Task<GetUploadServer> GetUploadPhotoChatUrl(long chatId)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("chatId", chatId.ToString());
+            var result =  await _httpHelper.GetRequestAsync("msg.GetUploadPhotoChatUrl", parameters);
+            
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<GetUploadServer>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            
+        }
     }
 }

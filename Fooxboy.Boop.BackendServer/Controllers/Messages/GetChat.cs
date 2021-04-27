@@ -44,7 +44,9 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
             _logger.Debug("Обращение к бд.");
             using (var db = new DatabaseContext())
             {
-                var chat = db.UsersChats.SingleOrDefault(c => c.Owner == usr.UserId && c.ChatId == chatId);
+                UsersChat chat = null;
+                chat = db.UsersChats.SingleOrDefault(c => c.Owner == usr.UserId && c.ChatId == chatId);
+                
 
                 if (chat is null)
                 {
@@ -77,8 +79,11 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                         var id = long.Parse(msgId);
                         var msgDb = db.Messages.SingleOrDefault(m => m.MsgId == id);
                         var itm = msgDb.ConvertToMessage();
-                        var sender = db.Users.SingleOrDefault(u => u.UserId == itm.SenderId);
-                        itm.ImageSender = sender.PathProfilePic;
+                        if (itm.SenderId != 0)
+                        {
+                            var sender = db.Users.SingleOrDefault(u => u.UserId == itm.SenderId);
+                            itm.ImageSender = sender.PathProfilePic;
+                        }
                         chatModel.Messages.Add(itm);
                         
                         blep:

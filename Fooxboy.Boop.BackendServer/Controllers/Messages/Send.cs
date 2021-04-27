@@ -135,6 +135,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers.Messages
                     msg.SenderId = user.UserId;
                     msg.ServiceMessage = false;
                     msg.UsersReaded = "";
+                    msg.MsgId = db.Messages.Count() + 1;
 
                     db.Messages.Add(msg);
 

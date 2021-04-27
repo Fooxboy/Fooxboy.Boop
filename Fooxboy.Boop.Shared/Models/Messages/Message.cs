@@ -12,5 +12,6 @@
         public long Time { get; set; }
         public long Attach { get; set; }
         public string UsersReaded { get; set; }
+        public bool ServiceMessage { get; set; }
     }
 }

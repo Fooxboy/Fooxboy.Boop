@@ -23,7 +23,6 @@ namespace Fooxboy.Boop.BackendServer
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseUrls("http://0.0.0.0:2020")
                 .Build();
