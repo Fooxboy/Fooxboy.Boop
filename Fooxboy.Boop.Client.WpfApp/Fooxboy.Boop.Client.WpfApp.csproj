@@ -12,11 +12,13 @@
       <None Remove="Resources\Fonts\GoogleSans-Medium.ttf" />
       <None Remove="Resources\Fonts\GoogleSans-Regular.ttf" />
       <None Remove="Resources\Images\add.png" />
+      <None Remove="Resources\Images\adduser.png" />
       <None Remove="Resources\Images\attach.png" />
       <None Remove="Resources\Images\check.png" />
       <None Remove="Resources\Images\download.png" />
       <None Remove="Resources\Images\friends.png" />
       <None Remove="Resources\Images\Icons\go.png" />
+      <None Remove="Resources\Images\info.png" />
       <None Remove="Resources\Images\message.png" />
       <None Remove="Resources\Images\more.png" />
       <None Remove="Resources\Images\photo.png" />
@@ -29,6 +31,7 @@
     <ItemGroup>
       <Resource Include="Controls\user.jpg" />
       <Resource Include="Resources\Images\add.png" />
+      <Resource Include="Resources\Images\adduser.png" />
       <Resource Include="Resources\Images\attach.png" />
       <Resource Include="Resources\Images\check.png" />
       <Resource Include="Resources\Images\download.png" />
@@ -59,6 +62,7 @@
       <Resource Include="Resources\Images\Icons\go.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="Resources\Images\info.png" />
       <Resource Include="Resources\Images\message.png" />
       <Resource Include="Resources\Images\more.png" />
       <Resource Include="Resources\Images\photo.png" />

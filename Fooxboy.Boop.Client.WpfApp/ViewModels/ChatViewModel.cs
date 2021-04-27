@@ -31,7 +31,8 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             dispatcher = Application.Current.MainWindow.Dispatcher;
             _chatId = chatId;
             Messages = new ObservableCollection<Message>();
-            NoMessages1 = Visibility.Visible;
+            NoMessages1 = Visibility.Collapsed;
+            Loading = Visibility.Collapsed;
             Info = info;
         }
         public async Task GetDialogs(long count=9999, long offset=0)
@@ -47,9 +48,9 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
             {
                 var dialogs = await api.Messages.GetChatAsync(_chatId, count, offset);
 
-                if (dialogs.Messages.Count > 0)
+                if (dialogs.Messages.Count < 0)
                 {
-                    NoMessages1 = Visibility.Hidden;
+                    NoMessages1 = Visibility.Visible;
                     Changed("NoMessages1");
                 }
 

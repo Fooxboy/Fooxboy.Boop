@@ -148,13 +148,17 @@ namespace Fooxboy.Boop.Client.WpfApp.ViewModels
         {
             try
             {
-                var info = new ChatInfo();
-                info.Image = SelectItem.CoverChat;
-                info.Title = SelectItem.ChatTitle;
+                if(SelectItem != null)
+                {
+                    var info = new ChatInfo();
+                    info.Image = SelectItem.CoverChat;
+                    info.Title = SelectItem.ChatTitle;
 
-                var navigation = Services.NavigationService.GetService();
+                    var navigation = Services.NavigationService.GetService();
 
-                navigation.GoToChat(new ChatView(info, SelectItem.ChatId));
+                    navigation.GoToChat(new ChatView(info, SelectItem.ChatId));
+                }
+              
             }
             catch (Exception e)
             {

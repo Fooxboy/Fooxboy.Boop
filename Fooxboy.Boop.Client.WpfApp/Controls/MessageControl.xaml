@@ -133,7 +133,7 @@
         </Grid>
 
 
-        <Grid.Style>
+        <!--<Grid.Style>
             <Style TargetType="Grid">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding ElementName=MainControlGrid, Path=IsMouseOver}" Value="True">
@@ -141,6 +141,6 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-        </Grid.Style>
+        </Grid.Style>-->
     </Grid>
 </UserControl>
