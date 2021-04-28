@@ -191,5 +191,18 @@ namespace Fooxboy.Boop.SDK.Methods
             else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
             
         }
+        
+        public async Task<Chat> GetChatInfo(long chatId)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("chatId", chatId.ToString());
+            var result =  await _httpHelper.GetRequestAsync("msg.getChatInfo", parameters);
+            
+            var data = (JObject)result.Data;
+
+            if (result.Status) return data.ToObject<Chat>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message, (data?.ToObject<Error>()).Code);
+            
+        }
     }
 }

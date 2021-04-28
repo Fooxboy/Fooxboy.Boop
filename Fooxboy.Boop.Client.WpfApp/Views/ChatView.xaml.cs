@@ -39,6 +39,11 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
         private async void ChatView_OnLoaded(object sender, RoutedEventArgs e)
         {
+            if(chatId > 0)
+            {
+                Chat.Visibility = Visibility.Visible;
+                GroupChat.Visibility = Visibility.Collapsed;
+            }
             Scroll.ToBottom(MessagesListBox);
             await _vm.GetDialogs();
         }
@@ -106,6 +111,11 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
                 IndicatorFile.Fill = new SolidColorBrush(Colors.GreenYellow);
 
             }
+        }
+
+        private void InfoGroup_Click(object sender, RoutedEventArgs e)
+        {
+            Services.NavigationService.GetService().GoToChat(new GroupChatInfoView(chatId * -1));
         }
     }
 }

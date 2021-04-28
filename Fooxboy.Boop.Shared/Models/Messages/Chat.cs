@@ -7,5 +7,7 @@ namespace Fooxboy.Boop.Shared.Models.Messages
         public string Title { get; set; }
         public long Admin { get; set; }
         public string Messanges { get; set; }
+        public string Cover { get; set; }
+
     }
 }

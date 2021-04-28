@@ -83,11 +83,36 @@
                         </Image>
                     </Button.Content>
                 </Button>
-                <Button Margin="5 0 0 0" BorderBrush="#ededed" Height="45" Padding="0 0 0 0" Width="45" Background="#ededed">
+                <Button Margin="5 0 0 0" x:Name="InfoGroup" Click="InfoGroup_Click"  BorderBrush="#ededed" Height="45" Padding="0 0 0 0" Width="45" Background="#ededed">
                     <Button.Content>
                         <Image Height="20" Width="20">
                             <Image.Source>
                                 <BitmapImage DecodePixelWidth="25" DecodePixelHeight="25" UriSource="../Resources/Images/info.png"/>
+                            </Image.Source>
+                        </Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="Chat" HorizontalAlignment="Right">
+                <Button Height="45" 
+                        BorderBrush="#ededed"
+                        Padding="0 0 0 0"
+                        Width="45"
+                        Background="#ededed">
+                    <Button.Content>
+                        <Image Height="20" Width="20">
+                            <Image.Source>
+                                <BitmapImage DecodePixelWidth="25" DecodePixelHeight="25" UriSource="../Resources/Images/adduser.png"/>
+                            </Image.Source>
+                        </Image>
+                    </Button.Content>
+                </Button>
+                <Button Margin="5 0 0 0" BorderBrush="#ededed" Height="45" Padding="0 0 0 0" Width="45" Background="#ededed">
+                    <Button.Content>
+                        <Image Height="20" Width="20">
+                            <Image.Source>
+                                <BitmapImage DecodePixelWidth="25" DecodePixelHeight="25" UriSource="../Resources/Images/phone.png"/>
                             </Image.Source>
                         </Image>
                     </Button.Content>

@@ -14,6 +14,7 @@
       <None Remove="Resources\Images\add.png" />
       <None Remove="Resources\Images\adduser.png" />
       <None Remove="Resources\Images\attach.png" />
+      <None Remove="Resources\Images\back.png" />
       <None Remove="Resources\Images\check.png" />
       <None Remove="Resources\Images\download.png" />
       <None Remove="Resources\Images\friends.png" />
@@ -21,6 +22,7 @@
       <None Remove="Resources\Images\info.png" />
       <None Remove="Resources\Images\message.png" />
       <None Remove="Resources\Images\more.png" />
+      <None Remove="Resources\Images\phone.png" />
       <None Remove="Resources\Images\photo.png" />
       <None Remove="Resources\Images\send.png" />
       <None Remove="Resources\Images\settings.png" />
@@ -33,6 +35,7 @@
       <Resource Include="Resources\Images\add.png" />
       <Resource Include="Resources\Images\adduser.png" />
       <Resource Include="Resources\Images\attach.png" />
+      <Resource Include="Resources\Images\back.png" />
       <Resource Include="Resources\Images\check.png" />
       <Resource Include="Resources\Images\download.png" />
       <Resource Include="Resources\Images\friends.png" />
@@ -65,6 +68,7 @@
       <Resource Include="Resources\Images\info.png" />
       <Resource Include="Resources\Images\message.png" />
       <Resource Include="Resources\Images\more.png" />
+      <Resource Include="Resources\Images\phone.png" />
       <Resource Include="Resources\Images\photo.png" />
       <Resource Include="Resources\Images\send.png" />
       <Resource Include="Resources\Images\settings.png" />
