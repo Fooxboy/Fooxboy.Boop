@@ -13,22 +13,30 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <Style TargetType="ListBoxItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="border">
-                            <ContentPresenter />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="Transparent" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border x:Name="border">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
 
 
@@ -44,6 +52,23 @@
                     FontFamily="{StaticResource GoogleSansBold}"
                     FontSize="17"
                     Text="Кажется, тут ничего нет :с" />
+                <Button Foreground="Black" BorderThickness="0" 
+                    Margin="0 20 0 0"
+                    Click="Button_Click"
+                    Height="30" Width="220"
+                    Background="#74b9ff">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="15" Width="15">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="15" DecodePixelHeight="15" UriSource="../Resources/Images/add.png"/>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Margin="10 0 0 2" Text="Создать груповой чат"/>
+                        </StackPanel>
+
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Grid>
 
@@ -65,7 +90,7 @@
                 SelectionChanged="Selector_OnSelected">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <controls:DialogUserControl HorizontalAlignment="Stretch" Dialog="{Binding}" />
+                        <controls:DialogUserControl Width="300" HorizontalAlignment="Stretch" Dialog="{Binding}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

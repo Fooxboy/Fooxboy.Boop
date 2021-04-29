@@ -131,6 +131,12 @@ namespace Fooxboy.Boop.BackendServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<long>("AccessLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("EMail")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FirendsRequests")
                         .HasColumnType("TEXT");
 
@@ -141,6 +147,9 @@ namespace Fooxboy.Boop.BackendServer.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FriendsRequested")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Group")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("KeyUploadAvatar")
@@ -165,6 +174,12 @@ namespace Fooxboy.Boop.BackendServer.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PathProfilePic")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Specialty")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Status")

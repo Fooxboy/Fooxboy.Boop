@@ -50,5 +50,10 @@ namespace Fooxboy.Boop.Client.WpfApp.Views
 
             
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Services.NavigationService.GetService().BackDialogs();
+        }
     }
 }

@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views"
       mc:Ignorable="d" 
       xmlns:fa="http://schemas.fontawesome.io/icons/"
+      Background="White"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CreateChatView">
 

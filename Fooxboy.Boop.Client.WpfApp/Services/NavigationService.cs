@@ -46,6 +46,11 @@ namespace Fooxboy.Boop.Client.WpfApp.Services
 
         }
 
+        public void BackDialogs()
+        {
+            _frame.GoBack();
+        }
+
         public void GoToDialogsFrame(string path, object data = null)
         {
             _dialogsFrame.Navigate(new Uri(path, UriKind.Relative), data);
