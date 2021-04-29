@@ -20,6 +20,13 @@ namespace Fooxboy.Boop.BackendServer
     {
         public static void Main(string[] args)
         {
+            //Генерация кода регистрации.
+            var code = new Random().Next(111111, 999999);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"КОД РЕГИСТРАЦИИ АДМИНИСТРАТОРА: {code}");
+            Console.ResetColor();
+            StaticData.Code = code;
+            
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -36,5 +43,10 @@ namespace Fooxboy.Boop.BackendServer
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+    }
+
+    public static class StaticData
+    {
+        public static long Code { get; set; }
     }
 }

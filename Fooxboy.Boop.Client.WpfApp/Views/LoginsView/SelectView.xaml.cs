@@ -30,7 +30,7 @@ namespace Fooxboy.Boop.Client.WpfApp.Views.LoginsView
 
         private void ButtonBase1_OnClick(object sender, RoutedEventArgs e)
         {
-            Services.NavigationService.GetService().GoTo("Views/LoginsView/RegisterView.xaml");
+            Services.NavigationService.GetService().GoTo("Views/LoginsView/CheckCodeView.xaml");
 
         }
     }

@@ -11,6 +11,33 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border x:Name="border">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid fluentWpf:PointerTracker.Enabled="True">
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -18,7 +45,7 @@
                 FontFamily="{StaticResource GoogleSansBold}"
                 FontSize="40"
                 Foreground="Black"
-                Text="Добро пожаловать в Boop!" />
+                Text="Добро пожаловать!" />
 
             <Button
                 Width="200"
@@ -26,8 +53,9 @@
                 Margin="0,20,0,0"
                 fluentWpf:RevealElement.BorderRadius="5"
                 Click="ButtonBase_OnClick"
-                FontFamily="{StaticResource GoogleSansMedium}"
-                Style="{StaticResource ButtonRevealStyle}">
+                Background="#ededed"
+                BorderBrush="#ededed"
+                FontFamily="{StaticResource GoogleSansMedium}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock

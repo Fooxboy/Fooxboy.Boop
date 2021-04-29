@@ -1,0 +1,54 @@
+﻿<Page x:Class="Fooxboy.Boop.Client.WpfApp.Views.LoginsView.CheckCodeView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fooxboy.Boop.Client.WpfApp.Views.LoginsView" xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" 
+      Background="White"
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="CheckCodeView">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border x:Name="border">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid Margin="20 30 0 0" x:Name="ContentGrid">
+            <TextBlock FontSize="30" FontFamily="{StaticResource GoogleSansBold}" Text="Введите код регистрации"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox x:Name="CodeText" Width="200"/>
+                <Button Margin="0 20 0 0" Content="Далее" Click="Button_Click" Background="#ededed" Foreground="Black" BorderBrush="#ededed"/>
+                <TextBlock x:Name="InvalidCode" Visibility="Collapsed" Foreground="Red" FontFamily="{StaticResource GoogleSansRegular}" Margin="0 5 0 0" Text="Неверный код регистрации. Возможно, он устарел."/>
+            </StackPanel> 
+        </Grid>
+
+        <StackPanel Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Loading">
+            <fa:ImageAwesome Width="70"  Icon="CircleOutlineNotch" Foreground="#0984e4" Spin="True" SpinDuration="0.3" />
+            <TextBlock Margin="0 10 0 0" VerticalAlignment="Center" Text="Проверяю код доступа..." FontSize="15" Foreground="#636e72" FontFamily="{StaticResource GoogleSansRegular}"/>
+        </StackPanel>
+    </Grid>
+</Page>

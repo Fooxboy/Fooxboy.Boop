@@ -48,5 +48,62 @@ namespace Fooxboy.Boop.SDK.Methods
             if (result.Status) return data.ToObject<Shared.Models.Register>();
             else throw new BoopRootException(data?.ToObject<Error>().Message,(data?.ToObject<Error>()).Code);
         }
+        
+        public async Task<Shared.Models.Register> Admin(string nickname, string number, string email, string firstName, string lastName, string position, string password, long code)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("nickname", nickname);
+            parameters.Add("number", number);
+            parameters.Add("email", email);
+            parameters.Add("firstName", firstName);
+            parameters.Add("lastName", lastName);
+            parameters.Add("position", position);
+            parameters.Add("password", password);
+            parameters.Add("code", code.ToString());
+
+
+            var result = await _httpHelper.GetRequestAsync("registerAdmin", parameters);
+
+            var data = (JObject) result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Register>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message,(data?.ToObject<Error>()).Code);
+        }
+        
+        public async Task<Shared.Models.Register> User(string nickname, string number, string email, string firstName, string lastName, string position, string password, string specialty, string group)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("nickname", nickname);
+            parameters.Add("number", number);
+            parameters.Add("email", email);
+            parameters.Add("firstName", firstName);
+            parameters.Add("lastName", lastName);
+            parameters.Add("position", position);
+            parameters.Add("password", password);
+            parameters.Add("specialty", specialty);
+            parameters.Add("group", specialty);
+
+
+            var result = await _httpHelper.GetRequestAsync("registerUser", parameters);
+
+            var data = (JObject) result.Data;
+
+            if (result.Status) return data.ToObject<Shared.Models.Register>();
+            else throw new BoopRootException(data?.ToObject<Error>().Message,(data?.ToObject<Error>()).Code);
+        }
+        
+        public async Task<bool> CheckCode(long code)
+        {
+            var parameters = new Dictionary<string,string>();
+            parameters.Add("code", code.ToString());
+
+            var result = await _httpHelper.GetRequestAsync("checkCode", parameters);
+
+            var data = (bool) result.Data;
+
+            return data;
+        }
+        
+        
     }
 }
