@@ -22,17 +22,29 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Height="150" Width="150" Source="/Resources/Images/check.png"/>
             <TextBlock Text="Аккаунт студента успешно создан!" FontSize="26" FontFamily="{StaticResource GoogleSansBold}"/>
-            <TextBlock Text="Сообщите следующие данные студенту:" FontSize="20" FontFamily="{StaticResource GoogleSansMedium}"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontFamily="{StaticResource GoogleSansMedium}" Text="Логин:"/>
-                <TextBlock Margin="5 0 0 0" FontFamily="{StaticResource GoogleSansRegular}" Text="login"/>
+            <TextBlock Margin="0 20 0 0" Text="Сообщите следующие данные студенту:" FontSize="20" FontFamily="{StaticResource GoogleSansMedium}"/>
+            
+            <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                <TextBlock FontSize="17" FontFamily="{StaticResource GoogleSansMedium}" Text="Логин:"/>
+                <TextBlock FontSize="17"  Margin="5 0 0 0" FontFamily="{StaticResource GoogleSansRegular}" Text="login"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock FontFamily="{StaticResource GoogleSansMedium}" Text="Пароль:"/>
-                <TextBlock Margin="5 0 0 0" FontFamily="{StaticResource GoogleSansRegular}" Text="password"/>
+                <TextBlock FontSize="17"  FontFamily="{StaticResource GoogleSansMedium}" Text="Пароль:"/>
+                <TextBlock FontSize="17"  Margin="5 0 0 0" FontFamily="{StaticResource GoogleSansRegular}" Text="password"/>
             </StackPanel>
+
+            <Grid HorizontalAlignment="Left" Margin="0 20 0 0 ">
+                <Button HorizontalAlignment="Left" Width="200"
+                        Foreground="Black" BorderBrush="#ededed"
+                        Content="Создать ещё" Background="#ededed"/>
+                
+                <Button HorizontalAlignment="Left" Margin="260 0 0 0 "
+                        Foreground="Black" Width="200" BorderBrush="#ededed" 
+                        Content="Назад" Background="#ededed"/>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>
