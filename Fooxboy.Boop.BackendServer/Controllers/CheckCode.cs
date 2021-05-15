@@ -11,7 +11,7 @@ namespace Fooxboy.Boop.BackendServer.Controllers
         [HttpGet]
         public Result Index(long code)
         {
-            var result = new Result();
+            var result = new Result(); 
 
             result.Data = code == StaticData.Code;
             result.Status = true;
